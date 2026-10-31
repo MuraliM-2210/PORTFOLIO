@@ -25,3 +25,8 @@ Choose Deploy from a branch, select the main branch and / (root), then Save.
 
 NOTES
 This is a complete static multi-page starter portfolio. It does not require a database, build tools or paid hosting.
+
+VISUAL UPDATE
+- The home page now features a lightweight CSS 3D camera illustration.
+- The visual treatment has been refined with a quieter, minimal editorial style.
+- The camera is built with CSS, so no external image or 3D library is required.
