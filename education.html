@@ -1,10 +1,259 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Murali M — DOP, video producer, visual storyteller and research aspirant."><meta name="theme-color" content="#f4f5f7"><title>Education</title><link rel="stylesheet" href="assets/css/murali-custom.css"></head><body><header class="site-header"><div class="wrap nav-wrap"><a class="brand" href="index.html">M<span>.</span><small>MURALI M</small></a><button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button><nav><a href="index.html">Home</a><a href="education.html" class="active">Education</a><a href="photography.html">Photography</a><a href="research.html">Research</a><a href="books.html">Books</a><a href="quotes.html">Quotes</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a></nav></div></header><main class="wrap page"><p class="eyebrow">01 / ACADEMIC JOURNEY</p><h1>Education<span class="accent">.</span></h1><p class="page-lead">The academic foundations shaping my understanding of media, people, technology and communication.</p><div class="timeline"><article class="timeline-item"><span class="timeline-tag">POSTGRADUATE</span><h2>MA — Journalism and Mass Communication</h2><p class="muted">Institution and completion status to be confirmed.</p><p>Advanced study in journalism, mass communication, media practice and related areas.</p></article><article class="timeline-item"><span class="timeline-tag">UNDERGRADUATE</span><h2>BSc — Journalism, Psychology &amp; Computer Science</h2><p class="muted">St. Paul's College, Bengaluru · Bangalore University</p><p>An interdisciplinary foundation combining media, human behaviour and computing.</p></article></div><div class="note-box"><strong>Academic profile</strong><p>Certifications, workshops, academic achievements and relevant coursework can be added here.</p></div></main><footer class="site-footer"><div class="wrap footer-inner"><a class="brand footer-brand" href="index.html">M<span>.</span><small>MURALI M</small></a><p>Stories, frames &amp; ideas.</p><span>© 2026 Murali M</span></div></footer><script>const toggle=document.querySelector('.menu-toggle');const nav=document.querySelector('.site-header nav');toggle.addEventListener('click',()=>{nav.classList.toggle('open');toggle.setAttribute('aria-expanded',nav.classList.contains('open'));});</script><script>
-document.documentElement.classList.add('js-ready');
-const progress=document.createElement('div');progress.className='scroll-progress';document.body.appendChild(progress);
-const glow=document.createElement('div');glow.className='pointer-glow';document.body.appendChild(glow);
-window.addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=(max>0?scrollY/max*100:0)+'%';},{passive:true});
-window.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px';},{passive:true});
-const revealTargets=document.querySelectorAll('.section-head,.feature-card,.profile-strip,.timeline-item,.photo-tile,.research-layout,.quote-card,.project-list article,.contact-panel,.note-box,.empty-editorial,.simple-card');
-revealTargets.forEach(el=>el.classList.add('reveal'));
-if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:.12});revealTargets.forEach(el=>observer.observe(el));}else{revealTargets.forEach(el=>el.classList.add('is-visible'));}
-</script></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Murali M — DOP, video producer, visual storyteller and research aspirant.">
+    <meta name="theme-color" content="#080c14">
+
+    <title>Education | Murali M</title>
+
+    <link rel="stylesheet" href="assets/css/murali-custom.css">
+</head>
+
+<body>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="site-header">
+        <div class="wrap nav-wrap">
+
+            <a class="brand" href="index.html">
+                M<span>.</span>
+                <small>MURALI M</small>
+            </a>
+
+            <button
+                class="menu-toggle"
+                aria-label="Toggle navigation"
+                aria-expanded="false">
+                ☰
+            </button>
+
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="education.html" class="active">Education</a>
+                <a href="photography.html">Photography</a>
+                <a href="research.html">Research</a>
+                <a href="books.html">Books</a>
+                <a href="quotes.html">Quotes</a>
+                <a href="projects.html">Projects</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- EDUCATION MAIN CONTENT -->
+    <main class="wrap page">
+
+        <p class="eyebrow">
+            01 / ACADEMIC JOURNEY
+        </p>
+
+        <h1>
+            Education<span class="accent">.</span>
+        </h1>
+
+        <p class="page-lead">
+            The academic foundations shaping my understanding of media,
+            people, technology and communication.
+        </p>
+
+
+        <!-- EDUCATION TIMELINE -->
+        <div class="timeline">
+
+            <!-- POSTGRADUATE -->
+            <article class="timeline-item">
+
+                <span class="timeline-tag">
+                    POSTGRADUATE
+                </span>
+
+                <h2>
+                    MA — Journalism and Mass Communication
+                </h2>
+
+                <p class="muted">
+                    Institution and completion status to be confirmed.
+                </p>
+
+                <p>
+                    Advanced study in journalism, mass communication,
+                    media practice and related areas.
+                </p>
+
+            </article>
+
+
+            <!-- UNDERGRADUATE -->
+            <article class="timeline-item">
+
+                <span class="timeline-tag">
+                    UNDERGRADUATE
+                </span>
+
+                <h2>
+                    BSc — Journalism, Psychology &amp; Computer Science
+                </h2>
+
+                <p class="muted">
+                    St. Paul's College, Bengaluru · Bangalore University
+                </p>
+
+                <p>
+                    An interdisciplinary foundation combining media,
+                    human behaviour and computing.
+                </p>
+
+            </article>
+
+        </div>
+
+
+        <!-- ACADEMIC PROFILE -->
+        <div class="note-box">
+
+            <strong>
+                Academic profile
+            </strong>
+
+            <p>
+                Certifications, workshops, academic achievements
+                and relevant coursework can be added here.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+
+        <div class="wrap footer-inner">
+
+            <a class="brand footer-brand" href="index.html">
+                M<span>.</span>
+                <small>MURALI M</small>
+            </a>
+
+            <p>Stories, frames &amp; ideas.</p>
+
+            <span>© 2026 Murali M</span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- MOBILE NAVIGATION -->
+    <script>
+        const toggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.site-header nav');
+
+        toggle.addEventListener('click', () => {
+
+            nav.classList.toggle('open');
+
+            toggle.setAttribute(
+                'aria-expanded',
+                nav.classList.contains('open')
+            );
+
+        });
+    </script>
+
+
+    <!-- ANIMATIONS & SCROLL EFFECTS -->
+    <script>
+        document.documentElement.classList.add('js-ready');
+
+
+        // Scroll progress bar
+        const progress = document.createElement('div');
+        progress.className = 'scroll-progress';
+        document.body.appendChild(progress);
+
+
+        // Mouse-follow glow
+        const glow = document.createElement('div');
+        glow.className = 'pointer-glow';
+        document.body.appendChild(glow);
+
+
+        // Update scroll progress
+        window.addEventListener('scroll', () => {
+
+            const max =
+                document.documentElement.scrollHeight - innerHeight;
+
+            progress.style.width =
+                (max > 0 ? scrollY / max * 100 : 0) + '%';
+
+        }, { passive: true });
+
+
+        // Mouse-follow animation
+        window.addEventListener('pointermove', (e) => {
+
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+
+        }, { passive: true });
+
+
+        // Scroll reveal elements
+        const revealTargets = document.querySelectorAll(
+            '.section-head, .feature-card, .profile-strip, ' +
+            '.timeline-item, .photo-tile, .research-layout, ' +
+            '.quote-card, .project-list article, .contact-panel, ' +
+            '.note-box, .empty-editorial, .simple-card'
+        );
+
+        revealTargets.forEach(el => {
+            el.classList.add('reveal');
+        });
+
+
+        // Intersection Observer
+        if ('IntersectionObserver' in window) {
+
+            const observer = new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add('is-visible');
+
+                            observer.unobserve(entry.target);
+
+                        }
+
+                    });
+
+                },
+                { threshold: 0.12 }
+            );
+
+            revealTargets.forEach(el => {
+                observer.observe(el);
+            });
+
+        } else {
+
+            revealTargets.forEach(el => {
+                el.classList.add('is-visible');
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>
