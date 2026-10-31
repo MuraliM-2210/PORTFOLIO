@@ -19,3 +19,6 @@ BEFORE PUBLISHING
 4. Upload the contents of this folder to the root of a GitHub Pages or Netlify site.
 
 No build step or server-side runtime is required. Open index.html locally to preview.
+
+THEME UPDATE
+Dark navy editorial theme, animated 3D camera, subtle grid atmosphere, scroll reveal, top scroll progress, pointer glow on desktop, hover transitions and reduced-motion accessibility support.
