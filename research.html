@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/css/murali-custom.css">
 
     <style>
-        /* Research hero: homepage-inspired 3D camera, navy + cool silver palette */
+        /* Research hero: 3D academic document and magnifying glass */
         .research-hero {
             display: grid;
             grid-template-columns: 1fr minmax(300px, .9fr);
@@ -21,9 +21,7 @@
             border-bottom: 1px solid var(--line);
         }
 
-        .research-hero-copy .eyebrow {
-            color: #6f96b7;
-        }
+        .research-hero-copy .eyebrow { color: #6f96b7; }
 
         .research-hero-copy h2 {
             margin: .5rem 0 1rem;
@@ -33,183 +31,147 @@
             letter-spacing: -.055em;
         }
 
-        .research-hero-copy p {
-            max-width: 510px;
-        }
+        .research-hero-copy p { max-width: 510px; }
 
-        .research-camera-scene {
+        .research-visual-scene {
             position: relative;
             min-height: 330px;
             display: grid;
             place-items: center;
-            perspective: 900px;
+            perspective: 1000px;
             isolation: isolate;
             overflow: hidden;
             background:
-                radial-gradient(ellipse at 50% 50%, rgba(111,150,183,.17), transparent 58%),
+                radial-gradient(ellipse at 52% 48%, rgba(111,150,183,.2), transparent 60%),
                 linear-gradient(145deg, #f8fafc, #e8eff5 58%, #f4f7fa);
             border: 1px solid #dce6ee;
             border-radius: 18px;
         }
 
-        .research-camera-glow {
+        .research-visual-glow {
             position: absolute;
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(76,140,196,.22), transparent 68%);
-            filter: blur(8px);
-        }
-
-        .research-camera {
-            position: relative;
-            width: 310px;
-            height: 225px;
-            transform-style: preserve-3d;
-            transform: rotateY(-19deg) rotateX(8deg) rotateZ(-4deg);
-            filter: drop-shadow(22px 30px 18px rgba(16,43,70,.14));
-            animation: research-camera-float 7s ease-in-out infinite;
-        }
-
-        .research-camera-body {
-            position: absolute;
-            left: 25px;
-            top: 48px;
             width: 260px;
-            height: 150px;
-            border-radius: 18px 20px 24px 18px;
-            background: linear-gradient(145deg, #fff 0%, #e8eff5 48%, #c7d6e3 100%);
-            border: 1px solid #c6d5e2;
-            box-shadow: inset 0 2px 3px #fff, inset -9px -8px 18px rgba(65,104,137,.13), 12px 13px 0 #a9bdce;
-            transform: translateZ(15px);
+            height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(76,140,196,.2), transparent 68%);
+            filter: blur(9px);
         }
 
-        .research-camera-body::after {
+        .research-document {
+            position: relative;
+            width: 220px;
+            height: 260px;
+            padding: 28px 24px;
+            border: 1px solid #c7d6e3;
+            border-radius: 9px;
+            background: linear-gradient(145deg, #fff 0%, #edf3f8 75%, #dce7ef 100%);
+            box-shadow: 13px 17px 0 #b6c8d7, 24px 29px 28px rgba(16,43,70,.16), inset 0 2px 3px #fff;
+            transform: translateX(-20px) rotateY(-15deg) rotateX(5deg) rotateZ(-7deg);
+            transform-style: preserve-3d;
+            animation: research-document-float 7s ease-in-out infinite;
+        }
+
+        .research-document::before {
             content: "";
             position: absolute;
-            right: -13px;
-            top: 15px;
-            width: 13px;
-            height: 118px;
-            border-radius: 0 8px 9px 0;
-            background: linear-gradient(90deg, #aebfce, #8299ad);
-            transform: skewY(-9deg);
+            inset: 8px -8px -8px 8px;
+            z-index: -1;
+            border: 1px solid #a9bdce;
+            border-radius: 8px;
+            background: linear-gradient(145deg, #dce7ef, #b9cad8);
+            transform: translateZ(-12px);
         }
 
-        .research-camera-top {
-            position: absolute;
-            left: 76px;
-            top: 30px;
-            width: 115px;
-            height: 27px;
-            border-radius: 9px 10px 0 0;
-            background: linear-gradient(145deg, #f9fcff, #c8d7e4);
-            border: 1px solid #c3d2df;
-            transform: translateZ(19px) rotateX(8deg);
-            box-shadow: inset 0 2px 2px #fff;
-        }
-
-        .research-camera-top::after {
-            content: "";
-            position: absolute;
-            right: 12px;
-            top: 6px;
-            width: 24px;
-            height: 8px;
-            border-radius: 4px;
-            background: #9aafc1;
-        }
-
-        .research-camera-viewfinder {
-            position: absolute;
-            left: 22px;
-            top: -12px;
-            width: 42px;
-            height: 22px;
-            border-radius: 6px 6px 2px 2px;
-            background: linear-gradient(135deg, #d9e5ee, #9fb3c5);
-            border: 1px solid #b3c5d4;
-        }
-
-        .research-camera-dial {
-            position: absolute;
-            right: 30px;
-            top: 18px;
-            width: 19px;
-            height: 19px;
-            border-radius: 50%;
-            background: linear-gradient(145deg, #f9fcff, #a8bbcb);
-            border: 2px solid #9fb3c5;
-            box-shadow: 0 2px 3px #8096a9;
-        }
-
-        .research-camera-lens {
-            position: absolute;
-            left: 88px;
-            top: 22px;
-            width: 104px;
-            height: 104px;
-            border-radius: 50%;
-            background: linear-gradient(145deg, #dce7ef, #8ea4b8);
-            display: grid;
-            place-items: center;
-            box-shadow: 0 0 0 7px #d4e0e9, 0 0 0 9px #a9bdcd, 0 8px 12px rgba(16,43,70,.18);
-            transform: translateZ(20px);
-        }
-
-        .research-lens-ring {
-            width: 82px;
-            height: 82px;
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-            background: repeating-conic-gradient(from 10deg, #8298aa 0deg 5deg, #dce6ee 5deg 11deg);
-            box-shadow: inset 0 0 0 4px #b5c6d4, inset 0 0 0 7px #e8f0f5;
-        }
-
-        .research-lens-glass {
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 34% 28%, #7896ad 0%, #294963 28%, #102b46 63%, #071725 100%);
-            border: 3px solid #829bad;
-            box-shadow: inset 0 0 12px #071725, 0 0 0 2px #dce7ef;
-        }
-
-        .research-lens-glass::after {
-            content: "";
+        .research-document-kicker {
             display: block;
-            width: 17px;
-            height: 9px;
-            margin: 12px 0 0 12px;
-            border-radius: 50%;
-            background: rgba(220,239,255,.55);
-            filter: blur(2px);
-            transform: rotate(-35deg);
-        }
-
-        .research-camera-grip {
-            position: absolute;
-            right: 12px;
-            top: 25px;
-            width: 19px;
-            height: 88px;
-            border-radius: 5px;
-            background: repeating-linear-gradient(0deg, #a8bac9 0 3px, #d4dfe8 3px 6px);
-            opacity: .8;
-        }
-
-        .research-camera-brand {
-            position: absolute;
-            left: 25px;
-            bottom: 13px;
-            color: #6e8498;
-            font-size: 7px;
+            margin-bottom: 14px;
+            color: #6485a1;
+            font-size: 8px;
             font-weight: 800;
             letter-spacing: 2px;
         }
 
-        .research-camera-note {
+        .research-document-title {
+            display: block;
+            width: 92%;
+            margin-bottom: 18px;
+            color: #17344d;
+            font-family: Georgia, serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.12;
+        }
+
+        .research-document-rule {
+            display: block;
+            width: 100%;
+            height: 4px;
+            margin: 9px 0;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #91a9bd, #d6e1e9);
+        }
+
+        .research-document-rule.short { width: 62%; }
+        .research-document-rule.medium { width: 82%; }
+
+        .research-document-seal {
+            position: absolute;
+            right: 22px;
+            bottom: 20px;
+            display: grid;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            border: 2px solid #7896ad;
+            border-radius: 50%;
+            color: #426987;
+            font-size: 18px;
+            transform: translateZ(12px);
+        }
+
+        .research-magnifier {
+            position: absolute;
+            top: 62px;
+            right: 54px;
+            width: 116px;
+            height: 116px;
+            border: 11px solid #a9bdcd;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, rgba(220,239,255,.78), rgba(41,73,99,.32) 58%, rgba(7,23,37,.62));
+            box-shadow: inset 0 0 0 4px #e8f0f5, 0 8px 18px rgba(16,43,70,.2), 0 0 0 2px #8298aa;
+            transform: rotate(13deg) translateZ(55px);
+            animation: research-glass-float 7s ease-in-out infinite;
+        }
+
+        .research-magnifier::before {
+            content: "";
+            position: absolute;
+            width: 23px;
+            height: 91px;
+            left: 78px;
+            top: 85px;
+            border: 1px solid #8199ad;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #8298aa, #e0e9f0 48%, #9aafc1);
+            box-shadow: 4px 7px 9px rgba(16,43,70,.2);
+            transform: rotate(-38deg);
+            transform-origin: top center;
+        }
+
+        .research-magnifier::after {
+            content: "";
+            position: absolute;
+            top: 18px;
+            left: 19px;
+            width: 31px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.62);
+            filter: blur(3px);
+            transform: rotate(-35deg);
+        }
+
+        .research-visual-caption {
             position: absolute;
             left: 22px;
             bottom: 18px;
@@ -219,7 +181,7 @@
             letter-spacing: 2px;
         }
 
-        .research-camera-crosshair {
+        .research-visual-crosshair {
             position: absolute;
             right: 22px;
             top: 20px;
@@ -228,9 +190,14 @@
             font-weight: 200;
         }
 
-        @keyframes research-camera-float {
-            0%, 100% { transform: rotateY(-19deg) rotateX(8deg) rotateZ(-4deg) translateY(0); }
-            50% { transform: rotateY(-15deg) rotateX(10deg) rotateZ(-2deg) translateY(-9px); }
+        @keyframes research-document-float {
+            0%, 100% { transform: translateX(-20px) rotateY(-15deg) rotateX(5deg) rotateZ(-7deg) translateY(0); }
+            50% { transform: translateX(-20px) rotateY(-11deg) rotateX(7deg) rotateZ(-5deg) translateY(-8px); }
+        }
+
+        @keyframes research-glass-float {
+            0%, 100% { transform: rotate(13deg) translateY(0) translateZ(55px); }
+            50% { transform: rotate(9deg) translateY(-8px) translateZ(55px); }
         }
 
         .research-status.upcoming {
@@ -245,17 +212,13 @@
                 padding-bottom: 2.5rem;
             }
 
-            .research-camera-scene {
-                min-height: 290px;
-            }
-
-            .research-camera {
-                transform: scale(.88) rotateY(-19deg) rotateX(8deg) rotateZ(-4deg);
-            }
+            .research-visual-scene { min-height: 300px; }
+            .research-document { transform: scale(.9) translateX(-20px) rotateY(-15deg) rotateX(5deg) rotateZ(-7deg); }
+            .research-magnifier { right: 35px; transform: scale(.9) rotate(13deg) translateZ(55px); }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .research-camera { animation: none; }
+            .research-document, .research-magnifier { animation: none; }
         }
     </style>
 
@@ -435,8 +398,8 @@
             An evolving space for research interests, questions, reading and academic work.
         </p>
 
-        <!-- Research Visual: 3D camera inspired by the homepage -->
-        <section class="research-hero" aria-label="Research and visual inquiry">
+        <!-- Research Visual: 3D academic document and magnifying glass -->
+        <section class="research-hero" aria-label="Research and academic inquiry">
             <div class="research-hero-copy">
                 <p class="eyebrow">MEDIA · CREDIBILITY · SOCIETY</p>
                 <h2>Looking beyond<br>the frame<span class="accent">.</span></h2>
@@ -446,24 +409,21 @@
                 </p>
             </div>
 
-            <div class="research-camera-scene" role="img" aria-label="A floating three-dimensional silver camera with a deep navy lens, representing observation and research">
-                <div class="research-camera-glow"></div>
-                <div class="research-camera">
-                    <div class="research-camera-top"></div>
-                    <div class="research-camera-body">
-                        <div class="research-camera-viewfinder"></div>
-                        <div class="research-camera-dial"></div>
-                        <div class="research-camera-lens">
-                            <div class="research-lens-ring">
-                                <div class="research-lens-glass"></div>
-                            </div>
-                        </div>
-                        <div class="research-camera-grip"></div>
-                        <div class="research-camera-brand">MURALI M · RESEARCH</div>
-                    </div>
+            <div class="research-visual-scene" role="img" aria-label="Three-dimensional academic research document with a magnifying glass, representing reading, investigation and fact-checking">
+                <div class="research-visual-glow"></div>
+                <div class="research-document">
+                    <span class="research-document-kicker">RESEARCH / 2026</span>
+                    <strong class="research-document-title">Knowledge begins with a question.</strong>
+                    <span class="research-document-rule"></span>
+                    <span class="research-document-rule medium"></span>
+                    <span class="research-document-rule short"></span>
+                    <span class="research-document-rule"></span>
+                    <span class="research-document-rule medium"></span>
+                    <span class="research-document-seal">✦</span>
                 </div>
-                <span class="research-camera-note">03 — THE ART OF QUESTIONING</span>
-                <span class="research-camera-crosshair">+</span>
+                <div class="research-magnifier"></div>
+                <span class="research-visual-caption">03 — THE ART OF QUESTIONING</span>
+                <span class="research-visual-crosshair">+</span>
             </div>
         </section>
 
