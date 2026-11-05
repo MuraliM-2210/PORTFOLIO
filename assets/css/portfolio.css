@@ -186,6 +186,6 @@ nav .nav-contact:after{right:0;opacity:.55}
 .hero-image-frame img{object-fit:cover;object-position:center}
 
 /* Hero image fallback and explicit loading */
-.hero-frame{min-height:300px;background:#141824 url("https://raw.githubusercontent.com/MuraliM-2210/PORTFOLIO/main/assets/images/portfolio-hero.webp") center/cover no-repeat}
+.hero-frame{min-height:300px;background:#141824 url("../images/murali-creative-hero.jpg") center/cover no-repeat}
 .hero-frame img{display:block!important;opacity:1!important;visibility:visible!important}
 @media(max-width:720px){.hero-frame{min-height:240px}}
