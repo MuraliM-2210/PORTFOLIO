@@ -9,6 +9,129 @@
     <title>Research</title>
 
     <link rel="stylesheet" href="assets/css/murali-custom.css">
+
+    <style>
+        .research-topics {
+            margin-top: 4rem;
+        }
+
+        .research-topics .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .research-topics .section-heading h2 {
+            margin-bottom: .45rem;
+        }
+
+        .research-topics .section-heading p {
+            margin: 0;
+        }
+
+        .research-table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid rgba(20, 30, 45, .12);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .72);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .research-table {
+            width: 100%;
+            min-width: 760px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .research-table th,
+        .research-table td {
+            padding: 1.1rem 1.2rem;
+            border-bottom: 1px solid rgba(20, 30, 45, .09);
+            vertical-align: middle;
+        }
+
+        .research-table th {
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+            color: var(--muted, #687386);
+            background: rgba(20, 30, 45, .035);
+            white-space: nowrap;
+        }
+
+        .research-table td {
+            font-size: .94rem;
+        }
+
+        .research-table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .research-table tbody tr:hover {
+            background: rgba(20, 30, 45, .025);
+        }
+
+        .research-table .topic-title {
+            font-weight: 650;
+            color: var(--text, #172033);
+            min-width: 260px;
+        }
+
+        .research-status {
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            padding: .35rem .7rem;
+            border-radius: 999px;
+            background: rgba(190, 130, 40, .12);
+            color: #946019;
+            font-size: .78rem;
+            font-weight: 650;
+            white-space: nowrap;
+        }
+
+        .research-status::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .research-access {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            font-weight: 650;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .research-access:hover {
+            text-decoration: underline;
+        }
+
+        .research-access-placeholder {
+            color: var(--muted, #687386);
+            font-size: .85rem;
+        }
+
+        @media (max-width: 640px) {
+            .research-topics {
+                margin-top: 3rem;
+            }
+
+            .research-topics .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -83,6 +206,47 @@
             </div>
 
         </div>
+
+        <!-- Research Topics -->
+        <section class="research-topics" aria-labelledby="research-topics-title">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">SELECTED WORK &amp; ACADEMIC INTERESTS</p>
+                    <h2 id="research-topics-title">Research Topics<span class="accent">.</span></h2>
+                    <p class="muted">A record of research projects, papers and ongoing academic work.</p>
+                </div>
+            </div>
+
+            <div class="research-table-wrap">
+                <table class="research-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Topic</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Authors</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Access link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="topic-title">Impact of Social Media on College Students’ Learning Behaviour After the COVID-19 Pandemic</td>
+                            <td>2025</td>
+                            <td>Murali M</td>
+                            <td><span class="research-status">Dissertation completed</span></td>
+                            <td><span class="research-access-placeholder">Link to be added</span></td>
+                        </tr>
+                        <tr>
+                            <td class="topic-title">Digital Classrooms: From Disruption to Transformation — A Primary Survey-Based Study on Hybrid and Blended Learning Models in Higher Education</td>
+                            <td>2026</td>
+                            <td>Dr. Jenin Raj S; Murali M</td>
+                            <td><span class="research-status">Published / verify access</span></td>
+                            <td><span class="research-access-placeholder">Link to be added</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
         <!-- Research Note -->
         <div class="note-box">
@@ -160,7 +324,7 @@
         const revealTargets = document.querySelectorAll(
             '.section-head, .feature-card, .profile-strip, ' +
             '.timeline-item, .photo-tile, .research-layout, ' +
-            '.quote-card, .project-list article, .contact-panel, ' +
+            '.research-topics, .quote-card, .project-list article, .contact-panel, ' +
             '.note-box, .empty-editorial, .simple-card'
         );
 
