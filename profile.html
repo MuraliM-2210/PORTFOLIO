@@ -43,6 +43,7 @@
         <a href="#services">What I Do</a>
         <a href="#toolkit">Toolkit</a>
         <a href="#research">Research</a>
+        <a href="#credentials">Credentials</a>
         <a href="#about">About</a>
         <a href="#contact" class="nav-contact">Let's Talk ↗</a>
       </nav>
@@ -284,6 +285,22 @@
     window.addEventListener('scroll',updateProgress,{passive:true});
     window.addEventListener('resize',updateProgress);
     updateProgress();
+    const sectionLinks=[...nav.querySelectorAll('a[href^="#"]')];
+    const observed=[...document.querySelectorAll('main section[id]')];
+    if('IntersectionObserver' in window){
+      const sectionObserver=new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+          if(!entry.isIntersecting)return;
+          sectionLinks.forEach(link=>{
+            const active=link.getAttribute('href')==='#'+entry.target.id;
+            link.classList.toggle('is-active',active);
+            if(active)link.setAttribute('aria-current','location');
+            else link.removeAttribute('aria-current');
+          });
+        });
+      },{rootMargin:'-32% 0px -58% 0px'});
+      observed.forEach(section=>sectionObserver.observe(section));
+    }
     document.getElementById('year').textContent=new Date().getFullYear();
   </script>
 </body>
