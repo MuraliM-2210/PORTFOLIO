@@ -35,7 +35,7 @@ body{overflow-x:hidden}
 <main class="landing">
 <div class="wordmark" aria-label="Portfolio">Portfolio</div>
 <div class="visual">
-<img id="hero-img" alt="Creative workspace with a video editor working across visual production software" loading="eager">
+<img id="hero-img" src="assets/images/murali-creative-hero.webp" alt="Creative workspace with a video editor working across visual production software" loading="eager">
 </div>
 <section class="identity" aria-label="Introduction">
 <h1>Murali M</h1>
@@ -45,27 +45,5 @@ body{overflow-x:hidden}
 <p class="micro">Visual storytelling · Cinematography · Editing</p>
 </main>
 
-<script>
-(async function loadEditedHeroImage() {
-    const image = document.getElementById("hero-img");
-    if (!image) return;
-    const parts = [
-        "assets/images/hero-image-part-1.txt",
-        "assets/images/hero-image-part-2.txt",
-        "assets/images/hero-image-part-3.txt"
-    ];
-    try {
-        const encoded = await Promise.all(parts.map(async (path) => {
-            const response = await fetch(path);
-            if (!response.ok) throw new Error("Unable to load " + path);
-            return (await response.text()).trim();
-        }));
-        image.src = "data:image/webp;base64," + encoded.join("");
-    } catch (error) {
-        image.alt = "Creative workspace image could not be loaded. Please refresh the page.";
-        console.error("Hero image load failed:", error);
-    }
-})();
-</script>
 </body>
 </html>
