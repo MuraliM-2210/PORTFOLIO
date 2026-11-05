@@ -259,3 +259,37 @@ nav a{font-size:12px;color:#d0d6e0}
 @media(max-width:560px){
   .contact-card.contact-email .contact-card-copy strong{font-size:clamp(11px,3.1vw,13px)}
 }
+
+
+/* Final email single-line layout override */
+.contact-links .contact-card.contact-email{
+  display:grid !important;
+  grid-column:1 / -1 !important;
+  grid-template-columns:42px minmax(0,1fr) 14px !important;
+  align-items:center !important;
+  gap:10px !important;
+  width:100% !important;
+  min-width:0 !important;
+}
+.contact-links .contact-card.contact-email .contact-card-copy{
+  display:block !important;
+  min-width:0 !important;
+  width:100% !important;
+}
+.contact-links .contact-card.contact-email .contact-card-copy small{
+  display:block !important;
+}
+.contact-links .contact-card.contact-email .contact-card-copy strong{
+  display:block !important;
+  width:100% !important;
+  white-space:nowrap !important;
+  overflow-wrap:normal !important;
+  word-break:keep-all !important;
+  font-size:12px !important;
+  letter-spacing:-.35px !important;
+  line-height:1.4 !important;
+}
+@media(max-width:380px){
+  .contact-links .contact-card.contact-email{grid-template-columns:36px minmax(0,1fr) 12px !important;gap:7px !important;padding:10px !important}
+  .contact-links .contact-card.contact-email .contact-card-copy strong{font-size:11px !important;letter-spacing:-.45px !important}
+}
