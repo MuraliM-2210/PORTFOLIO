@@ -407,3 +407,42 @@ nav a{font-size:12px;color:#d0d6e0}
   .site-header .brand .brand-smiley{flex-basis:28px!important;width:28px!important;height:28px!important;font-size:28px!important}
   .site-header .brand .brand-title{font-size:clamp(19px,5vw,25px)!important}
 }
+
+
+/* Research cards: consistent typography across published, dissertation and upcoming work */
+#research .research-feature,
+#research .research-item{font-size:14px}
+#research .research-feature h3,
+#research .research-item h3{
+  max-width:none;
+  margin:14px 0 10px;
+  font-size:18px!important;
+  line-height:1.45!important;
+  font-weight:800;
+  letter-spacing:0;
+}
+#research .research-feature p,
+#research .research-item p{
+  max-width:none;
+  margin:0;
+  font-size:14px!important;
+  line-height:1.8!important;
+  color:#cbd3df!important;
+}
+#research .research-label,
+#research .status,
+#research .research-byline{
+  font-size:12px!important;
+  line-height:1.5!important;
+  letter-spacing:.06em;
+}
+#research .research-byline{margin-top:14px;gap:12px}
+#research .paper-link{font-size:12px!important}
+#research .research-feature{padding:24px}
+#research .research-item{padding:22px}
+@media(max-width:700px){
+  #research .research-feature h3,
+  #research .research-item h3{font-size:17px!important}
+  #research .research-feature p,
+  #research .research-item p{font-size:14px!important}
+}
