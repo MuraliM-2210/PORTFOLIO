@@ -61,7 +61,7 @@ p{color:#c2c6ce}
 .hero-visual{min-width:0;position:relative}
 .hero-frame{position:relative;aspect-ratio:1.19/1;overflow:hidden;border:1px solid rgba(255,255,255,.16);background:#131722;box-shadow:0 28px 90px rgba(0,0,0,.52)}
 .hero-frame:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(140deg,rgba(141,108,255,.14),transparent 40%,rgba(229,170,77,.10))}
-.hero-frame img{width:100%;height:100%;object-fit:cover;object-position:center}
+.hero-frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;opacity:1;visibility:visible;position:relative;z-index:0}
 .frame-corner{position:absolute;right:-14px;top:-14px;width:90px;height:90px;border-top:1px solid var(--gold);border-right:1px solid var(--gold)}
 .hero-caption{display:flex;justify-content:space-between;gap:15px;padding-top:12px;color:#858d9b;font-size:8px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}
 .hero-caption span:last-child{color:var(--gold2)}
@@ -184,3 +184,8 @@ nav a.is-active{color:var(--gold2)}
 nav .nav-contact{color:var(--gold2)}
 nav .nav-contact:after{right:0;opacity:.55}
 .hero-image-frame img{object-fit:cover;object-position:center}
+
+/* Hero image fallback and explicit loading */
+.hero-frame{min-height:300px;background:#141824 url("https://raw.githubusercontent.com/MuraliM-2210/PORTFOLIO/main/assets/images/portfolio-hero.webp") center/cover no-repeat}
+.hero-frame img{display:block!important;opacity:1!important;visibility:visible!important}
+@media(max-width:720px){.hero-frame{min-height:240px}}
