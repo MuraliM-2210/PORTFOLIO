@@ -215,7 +215,7 @@ nav .nav-contact:after{right:0;opacity:.55}
 @media(prefers-reduced-motion:reduce){.contact-card{transition:none}.contact-card:hover{transform:none}}
 
 
-/* Global readability baseline: no visible text below 12px */
-body :where(*):not(svg):not(path):not(circle):not(rect):not(line):not(polyline):not(polygon):not(g):not(use) {
+/* Global readability baseline: descriptive and supporting text is at least 12px */
+body :where(p, li, td, th, label, small, figcaption, blockquote, dd, dt, .eyebrow, .description, .project-description, .research-description, .contact-card-copy strong, .contact-card-copy small) {
   font-size: max(12px, 1em);
 }
