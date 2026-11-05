@@ -1,219 +1,252 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description" content="Murali M — DOP & Video Editor. Portfolio of visual storytelling, photography, research and media projects.">
-    <meta name="theme-color" content="#080c14">
-
-    <title>Murali M | Portfolio</title>
-
-    <link rel="stylesheet" href="assets/css/murali-custom.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Murali M is a Director of Photography and Video Editor working across cinematography, visual storytelling, post-production and media research.">
+  <meta name="theme-color" content="#0b0d10">
+  <meta property="og:title" content="Murali M — DOP & Video Editor">
+  <meta property="og:description" content="Cinematography, video production, post-production and media research.">
+  <meta property="og:type" content="website">
+  <title>Murali M — DOP & Video Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/portfolio.css">
+  <link rel="icon" href="assets/images/portfolio-hero.avif" type="image/avif">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Murali M",
+    "jobTitle":"Director of Photography and Video Editor",
+    "knowsAbout":["Cinematography","Video Production","Video Editing","Photography","Media and Communication Research"],
+    "alumniOf":["Bangalore University","St Pauls Institute of Communication Education"]
+  }
+  </script>
 </head>
-
 <body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="wrap nav-wrap">
+      <a class="brand" href="#top" aria-label="Murali M — top">
+        <span class="brand-mark">M.</span>
+        <span> MURALI M <small>VISUALS · EDITING · RESEARCH</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <nav aria-label="Main navigation">
+        <a href="#work">Selected Work</a>
+        <a href="#capabilities">Expertise</a>
+        <a href="#research">Research</a>
+        <a href="#credentials">Credentials</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- HEADER / NAVIGATION -->
-    <header class="site-header">
-        <div class="wrap nav-wrap">
-
-            <a class="brand" href="profile.html">M<span>.</span><small>MURALI M</small></a>
-
-            <button
-                class="menu-toggle"
-                aria-label="Toggle navigation"
-                aria-expanded="false">
-                ☰
-            </button>
-
-            <nav>
-                <a href="profile.html" class="active">Profile</a>
-                <a href="education.html">Education</a>
-                <a href="photography.html">Photography</a>
-                <a href="research.html">Research</a>
-                <a href="books.html">Books</a>
-                <a href="projects.html">Projects</a>
-                <a href="contact.html">Contact</a>
-                
-            </nav>
-
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <div class="hero-kicker">Director of Photography <span>·</span> Video Editor</div>
+          <p class="eyebrow">CINEMATIC THINKING. CLEAR STORYTELLING.</p>
+          <h1>Murali<br><span class="accent">M.</span></h1>
+          <p class="hero-role">DOP &amp; VIDEO EDITOR</p>
+          <p class="hero-description">I shape ideas into visual stories — from camera and composition to editing, colour and final delivery. Alongside production, I pursue research in journalism, media and communication.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#work">Explore selected work <span aria-hidden="true">↘</span></a>
+            <a class="btn btn-outline" href="#contact">Start a conversation <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-meta">
+            <div><strong>01</strong><span>Production</span></div>
+            <div><strong>02</strong><span>Post-production</span></div>
+            <div><strong>03</strong><span>Media research</span></div>
+          </div>
         </div>
-    </header>
-
-
-    <!-- PROFILE LANDING -->
-    <style>
-.profile-landing{position:relative;isolation:isolate;min-height:calc(100svh - 78px);display:grid;place-items:center;overflow:hidden;padding:36px 22px;background-color:#080817;
-background-image:linear-gradient(180deg,rgba(5,7,20,.08),rgba(5,7,20,.2) 52%,rgba(5,7,20,.76)),radial-gradient(ellipse at 3% 20%,rgba(240,75,223,.24),transparent 55%),radial-gradient(ellipse at 97% 18%,rgba(40,197,255,.24),transparent 58%),url("assets/images/portfolio-hero.avif");
-background-repeat:no-repeat;background-size:cover,60% 82%,60% 82%,contain;background-position:center,left center,right center,center center}
-.profile-landing:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse at 50% 100%,rgba(4,8,24,.28),transparent 52%)}
-.profile-landing-content{display:flex;flex-direction:column;align-items:center;text-align:center;gap:13px;width:min(760px,100%);padding:28px 24px 24px;border:1px solid rgba(224,226,255,.18);border-radius:26px;background:linear-gradient(125deg,rgba(9,12,35,.76),rgba(12,20,45,.64));box-shadow:0 22px 70px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-.profile-landing-kicker{color:#c6c9ed;font-size:.62rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase}
-.profile-landing-name{margin:0;color:#fff;font-size:clamp(2.8rem,7vw,5.7rem);font-weight:850;letter-spacing:-.065em;line-height:.98;text-shadow:0 4px 25px rgba(0,0,0,.32)}
-.profile-landing-role{margin:0;color:#f4f2ff;font-size:clamp(.9rem,2vw,1.18rem);font-weight:800;letter-spacing:.17em;text-transform:uppercase;text-shadow:0 2px 16px rgba(0,0,0,.45)}
-.profile-landing-role:before{content:"";display:block;width:76px;height:3px;margin:0 auto 13px;border-radius:4px;background:linear-gradient(90deg,#f04bdf,#a55dff,#28c5ff);box-shadow:0 0 18px rgba(165,93,255,.65)}
-.profile-landing-cta{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:16px;min-width:218px;min-height:56px;padding:0 28px;border:1px solid transparent;border-radius:999px;color:#fff;text-decoration:none;text-transform:uppercase;font-size:.76rem;font-weight:850;letter-spacing:.15em;background:linear-gradient(110deg,rgba(10,13,35,.94),rgba(13,20,48,.94)) padding-box,linear-gradient(105deg,#f04bdf,#a55dff 45%,#28c5ff) border-box;box-shadow:0 0 20px rgba(221,54,229,.32),0 0 36px rgba(28,135,255,.22),0 14px 34px rgba(0,0,0,.45);transition:transform .25s ease,box-shadow .25s ease}
-.profile-landing-cta:hover{transform:translateY(-4px);box-shadow:0 0 26px rgba(221,54,229,.48),0 0 48px rgba(28,135,255,.32),0 18px 42px rgba(0,0,0,.5)}
-.profile-landing-cta span{font-size:1.2rem;color:#71dfff}
-.profile-sections{padding-top:84px;padding-bottom:88px}
-@media(max-width:780px){.profile-landing{min-height:calc(100svh - 72px);background-size:cover,72% 70%,72% 70%,auto 72%;background-position:center,left center,right center,center 22%}}
-@media(max-width:600px){.profile-landing{padding:22px 15px 26px}.profile-landing-content{padding:23px 16px 20px;border-radius:20px}.profile-landing-name{font-size:clamp(2.5rem,12vw,4rem)}.profile-landing-role{font-size:.78rem;letter-spacing:.12em}}
-@media(prefers-reduced-motion:reduce){.profile-landing-cta{transition:none}}
-</style>
-    <main>
-        <section class="profile-landing" aria-label="Murali M portfolio landing">
-            <div class="profile-landing-content">
-                <span class="profile-landing-kicker">Visual Storytelling · Media Production</span>
-                <h1 class="profile-landing-name">Murali M</h1>
-                <p class="profile-landing-role">DOP &amp; Video Editor</p>
-                <a class="profile-landing-cta" href="#portfolio-sections">Explore Portfolio <span aria-hidden="true">↘</span></a>
-            </div>
-        </section>
-        <section class="wrap section profile-sections" id="portfolio-sections">
-            <div class="section-head">
-                <div><p class="eyebrow">DISCOVER</p><h2>Explore the portfolio</h2></div>
-                <p class="muted">A connected overview of my academic journey, creative work, research and current projects.</p>
-            </div>
-            <div class="card-grid">
-                <a class="feature-card" href="education.html"><span class="card-no">01</span><h3>Education</h3><p>Academic journey and qualifications.</p><span class="card-arrow">↗</span></a>
-                <a class="feature-card" href="photography.html"><span class="card-no">02</span><h3>Photography</h3><p>Frames, places and visual observations.</p><span class="card-arrow">↗</span></a>
-                <a class="feature-card" href="research.html"><span class="card-no">03</span><h3>Research</h3><p>Questions, ideas and areas of inquiry.</p><span class="card-arrow">↗</span></a>
-                <a class="feature-card" href="books.html"><span class="card-no">04</span><h3>Books &amp; Novels</h3><p>Writing stories and literary works.</p><span class="card-arrow">↗</span></a>
-                <a class="feature-card" href="projects.html"><span class="card-no">05</span><h3>Projects</h3><p>Work in progress and selected projects.</p><span class="card-arrow">↗</span></a>
-                <a class="feature-card" href="contact.html"><span class="card-no">06</span><h3>Contact</h3><p>Start a conversation or collaboration.</p><span class="card-arrow">↗</span></a>
-            </div>
-        </section>
-        <section class="page-next" aria-label="Continue through the portfolio">
-            <div class="page-next-copy">
-                <span class="page-next-eyebrow">PORTFOLIO PATH · 01 / 07</span>
-                <h2>Continue to Education</h2>
-                <p>Explore the academic journey and qualifications.</p>
-            </div>
-            <div class="page-next-actions">
-                <a class="page-next-link" href="education.html"><span>Next: Education</span><span class="page-next-arrow" aria-hidden="true">↗</span></a>
-            </div>
-        </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="site-footer">
-
-        <div class="wrap footer-inner">
-
-            <a class="brand footer-brand" href="profile.html">
-                M<span>.</span>
-                <small>MURALI M</small>
-            </a>
-
-            <p>Stories, frames &amp; ideas.</p>
-
-            <span>© 2026 Murali M</span>
-
+        <div class="hero-visual">
+          <span class="hero-ornament" aria-hidden="true"></span>
+          <div class="hero-image-frame">
+            <img src="assets/images/portfolio-hero.avif" alt="Creative video editing workstation with a cinematic editing timeline" fetchpriority="high">
+          </div>
+          <div class="hero-image-caption"><span>Visual storytelling · Production to post</span><span>Portfolio / 2026</span></div>
         </div>
+      </div>
+      <div class="hero-scroll">Scroll to explore <span aria-hidden="true">↓</span></div>
+    </section>
 
-    </footer>
+    <section class="credibility">
+      <div class="wrap credibility-inner">
+        <div class="credibility-item"><strong>Director of Photography</strong><span>Camera · Lighting · Visual direction</span></div>
+        <div class="credibility-item"><strong>Video Editor</strong><span>Editing · Colour · Finishing</span></div>
+        <div class="credibility-item"><strong>Media Research</strong><span>Journalism · Communication</span></div>
+        <div class="credibility-item"><strong>MA Journalism &amp; Mass Communication</strong><span>Bangalore University · 2023–2025</span></div>
+      </div>
+    </section>
 
+    <section class="wrap section" id="work">
+      <div class="section-head">
+        <div><p class="eyebrow">01 / SELECTED WORK</p><h2>Stories, shaped<br>with intention.</h2></div>
+        <p>A selection of production, campaign, event and film work. Each project reflects a different part of the process — capturing, directing, editing and delivering a story.</p>
+      </div>
+      <div class="work-grid">
+        <article class="work-card featured">
+          <div class="work-card-top"><span>01 / Institutional films</span><span>Video production</span></div>
+          <div><h3>University &amp; institutional productions</h3><p>Production work with the Centre for Media at Mount Carmel (Deemed to be University), including campus communication, course promotions and institutional video content.</p></div>
+          <span class="card-arrow" aria-hidden="true">↗</span>
+        </article>
+        <article class="work-card">
+          <div class="work-card-top"><span>02 / Short film</span><span>Direction · Edit</span></div>
+          <div><h3>The Unseen Hero</h3><p>Directed and edited a short film highlighting the contributions of people whose work often goes unnoticed.</p></div>
+          <span class="card-arrow" aria-hidden="true">↗</span>
+        </article>
+        <article class="work-card">
+          <div class="work-card-top"><span>03 / Education campaign</span><span>2024</span></div>
+          <div><h3>Shikshana: My Right</h3><p>Campaign Editor and Director of Photography, contributing to the visual treatment and edit of an education-rights campaign.</p></div>
+          <span class="card-arrow" aria-hidden="true">↗</span>
+        </article>
+        <article class="work-card">
+          <div class="work-card-top"><span>04 / Live event</span><span>2025</span></div>
+          <div><h3>TEDx St Pauls College</h3><p>Videography across speaker sessions, audience moments and behind-the-scenes coverage, including camera setup and lighting coordination.</p></div>
+          <span class="card-arrow" aria-hidden="true">↗</span>
+        </article>
+        <article class="work-card">
+          <div class="work-card-top"><span>05 / Campus media</span><span>News &amp; storytelling</span></div>
+          <div><h3>MCC Digital</h3><p>Campus news-channel concept and media identity work, connecting student stories with a digital-first format.</p></div>
+          <span class="card-arrow" aria-hidden="true">↗</span>
+        </article>
+      </div>
+      <p class="muted" style="font-size:11px;margin:18px 0 0">Project descriptions reflect documented roles and work. Production stills and final video links can be added to each case study as they are selected.</p>
+    </section>
 
-    <!-- MOBILE NAVIGATION -->
-    <script>
-        const toggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('.site-header nav');
+    <section class="work-section" id="capabilities">
+      <div class="wrap section">
+        <div class="section-head">
+          <div><p class="eyebrow">02 / CREATIVE EXPERTISE</p><h2>From first frame<br>to final cut.</h2></div>
+          <p>A production workflow that connects technical control with a strong sense of story, pace and visual detail.</p>
+        </div>
+        <div class="capability-grid">
+          <article class="capability"><span class="capability-index">01</span><h3>Cinematography</h3><p>Camera operation, framing, composition, lighting and visual continuity.</p></article>
+          <article class="capability"><span class="capability-index">02</span><h3>Video Editing</h3><p>Story assembly, pacing, transitions, sound alignment and delivery.</p></article>
+          <article class="capability"><span class="capability-index">03</span><h3>Colour &amp; Finishing</h3><p>Colour correction, grading and a considered final visual treatment.</p></article>
+          <article class="capability"><span class="capability-index">04</span><h3>Photography</h3><p>Professional photography across different genres and visual contexts.</p></article>
+          <article class="capability"><span class="capability-index">05</span><h3>Production</h3><p>Planning, studio workflow, equipment handling and collaborative execution.</p></article>
+          <article class="capability"><span class="capability-index">06</span><h3>Media Research</h3><p>Survey-based inquiry, media analysis and academic communication.</p></article>
+        </div>
+        <div class="skill-groups">
+          <div class="skill-group"><p class="eyebrow">POST-PRODUCTION SOFTWARE</p><h3>Editing &amp; finishing</h3><div class="tags"><span class="tag">Adobe Premiere Pro</span><span class="tag">DaVinci Resolve</span><span class="tag">After Effects</span></div></div>
+          <div class="skill-group"><p class="eyebrow">VISUAL DESIGN &amp; IMAGE</p><h3>Creative tools</h3><div class="tags"><span class="tag">Photoshop</span><span class="tag">Lightroom</span><span class="tag">InDesign</span></div></div>
+        </div>
+      </div>
+    </section>
 
-        toggle.addEventListener('click', () => {
-            nav.classList.toggle('open');
+    <section class="wrap section" id="research">
+      <div class="section-head">
+        <div><p class="eyebrow">03 / RESEARCH &amp; PUBLICATIONS</p><h2>Practice informed<br>by inquiry.</h2></div>
+        <p>My academic work examines digital media, learning, journalism and communication. Research is a parallel part of my professional practice, grounded in my journalism and mass communication education.</p>
+      </div>
+      <article class="research-highlight">
+        <span class="label">Published research · 2026</span>
+        <h2>Digital Classrooms: From Disruption to Transformation</h2>
+        <p>A primary survey-based study on hybrid and blended learning models in higher education. Co-authored with Dr. Jenin Raj S.</p>
+        <div class="research-meta"><span>Authors: Dr. Jenin Raj S · Murali M</span><span>Higher education</span><span class="status-pill">Published</span></div>
+        <a class="paper-link" href="http://ijrar.org/viewfull.php?&amp;p_id=IJRAR26D1084" target="_blank" rel="noopener noreferrer">Read published paper ↗</a>
+      </article>
+      <div class="research-list">
+        <article class="research-item">
+          <span class="research-meta">Academic dissertation · 2025 <span class="status-pill">Completed</span></span>
+          <h3>Impact of Social Media on College Students’ Learning Behaviour After the COVID-19 Pandemic</h3>
+          <p>A quantitative study exploring social media use and learning behaviour among college students in the post-pandemic context.</p>
+          <div class="research-meta"><span>Author: Murali M</span><span>Journalism &amp; Mass Communication</span></div>
+        </article>
+        <article class="research-item">
+          <span class="research-meta">Research in development · 2026 <span class="status-pill">Upcoming</span></span>
+          <h3>Social Media Influencers as Alternative News Sources</h3>
+          <p>A study of fact-checking, credibility and contemporary yellow journalism. In development with Dr. Jenin Raj S.</p>
+          <div class="research-meta"><span>Authors: Murali M · Dr. Jenin Raj S</span><span>Journalism · Digital media</span></div>
+        </article>
+      </div>
+      <div class="research-meta" style="margin-top:22px"><span>Research interests</span><span>Digital journalism</span><span>Media credibility</span><span>Media literacy</span><span>Hybrid learning</span><span>Visual communication</span></div>
+    </section>
 
-            toggle.setAttribute(
-                'aria-expanded',
-                nav.classList.contains('open')
-            );
-        });
-    </script>
+    <section class="work-section" id="credentials">
+      <div class="wrap section">
+        <div class="section-head">
+          <div><p class="eyebrow">04 / EDUCATION &amp; RECOGNITION</p><h2>Grounded in media.<br>Driven by curiosity.</h2></div>
+          <p>An interdisciplinary academic foundation in journalism, human behaviour and technology, with postgraduate specialisation in journalism and mass communication.</p>
+        </div>
+        <div class="education-list">
+          <article class="education-item">
+            <div class="education-date">2023 — 2025 / Postgraduate</div>
+            <div><h3>MA — Journalism &amp; Mass Communication</h3><p>St Pauls Institute of Communication Education, Bengaluru · Bangalore University</p></div>
+          </article>
+          <article class="education-item">
+            <div class="education-date">Undergraduate</div>
+            <div><h3>BSc — Journalism, Psychology &amp; Computer Science</h3><p>St. Pauls College, Bengaluru · Bangalore University</p></div>
+          </article>
+        </div>
+        <div class="achievement-grid">
+          <article class="achievement"><strong>4th Rank — Bangalore University</strong><p>MA Journalism and Mass Communication, 2023–2025.</p></article>
+          <article class="achievement"><strong>PRCI Best Education Campaign Award</strong><p>2021 · Recognition for a campaign focused on basic needs in rural communities.</p></article>
+          <article class="achievement"><strong>Director &amp; Editor — The Unseen Hero</strong><p>Short-film project focused on unsung community contributions.</p></article>
+          <article class="achievement"><strong>Videographer — TEDx St Pauls College</strong><p>2025 · Speaker sessions, audience coverage and behind-the-scenes videography.</p></article>
+        </div>
+      </div>
+    </section>
 
+    <section class="wrap section" id="about">
+      <div class="intro-grid">
+        <div><p class="eyebrow">05 / ABOUT</p><h2>A visual storyteller with a researcher's curiosity.</h2></div>
+        <div class="intro-copy">
+          <p>I’m Murali M, a Director of Photography and Video Editor with an academic background in Journalism and Mass Communication. My work sits at the intersection of visual craft and communication — understanding what a story needs, finding the right way to capture it, and shaping it carefully in post-production.</p>
+          <p>My experience includes institutional video production, short films, education campaigns, event coverage, photography and media-related work. Alongside professional practice, I continue to explore research questions around digital media, learning behaviour, journalism and credibility.</p>
+          <p>I value thoughtful preparation, clear collaboration and work that communicates with purpose.</p>
+        </div>
+      </div>
+    </section>
 
-    <!-- ANIMATIONS & SCROLL EFFECTS -->
-    <script>
-        document.documentElement.classList.add('js-ready');
+    <section class="wrap section" id="contact">
+      <div class="contact-panel">
+        <div><p class="eyebrow">06 / CONTACT</p><h2>Have a project<br>worth telling?</h2><p>Open to conversations around cinematography, video editing, institutional productions, photography and media research.</p></div>
+        <div class="contact-links">
+          <div class="contact-link"><span>Professional focus</span><strong>DOP · Video Editing · Media Research</strong></div>
+          <div class="contact-link"><span>Location</span><strong>Bengaluru, India</strong></div>
+          <p class="muted" style="font-size:12px;margin:8px 0 0">Contact links can be added here once your preferred professional email and profile URLs are confirmed.</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        // Scroll progress bar
-        const progress = document.createElement('div');
-        progress.className = 'scroll-progress';
-        document.body.appendChild(progress);
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <a class="brand" href="#top"><span class="brand-mark">M.</span><span>MURALI M <small>DOP &amp; VIDEO EDITOR</small></span></a>
+      <p>Thoughtful frames. Purposeful stories.</p>
+      <p>© <span id="year">2026</span> Murali M</p>
+    </div>
+  </footer>
 
-        // Mouse-follow glow
-        const glow = document.createElement('div');
-        glow.className = 'pointer-glow';
-        document.body.appendChild(glow);
-
-        // Scroll progress update
-        window.addEventListener('scroll', () => {
-
-            const max =
-                document.documentElement.scrollHeight - innerHeight;
-
-            progress.style.width =
-                (max > 0 ? scrollY / max * 100 : 0) + '%';
-
-        }, { passive: true });
-
-
-        // Mouse-follow animation
-        window.addEventListener('pointermove', (e) => {
-
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
-
-        }, { passive: true });
-
-
-        // Scroll reveal elements
-        const revealTargets = document.querySelectorAll(
-            '.section-head, .feature-card, .profile-strip, ' +
-            '.timeline-item, .photo-tile, .research-layout, ' +
-            '.quote-card, .project-list article, .contact-panel, ' +
-            '.note-box, .empty-editorial, .simple-card'
-        );
-
-        revealTargets.forEach(el => {
-            el.classList.add('reveal');
-        });
-
-
-        // Intersection Observer
-        if ('IntersectionObserver' in window) {
-
-            const observer = new IntersectionObserver(
-                entries => {
-
-                    entries.forEach(entry => {
-
-                        if (entry.isIntersecting) {
-
-                            entry.target.classList.add('is-visible');
-
-                            observer.unobserve(entry.target);
-                        }
-
-                    });
-
-                },
-                { threshold: 0.12 }
-            );
-
-            revealTargets.forEach(el => {
-                observer.observe(el);
-            });
-
-        } else {
-
-            revealTargets.forEach(el => {
-                el.classList.add('is-visible');
-            });
-
-        }
-
-    </script>
-
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navigation = document.querySelector('.site-header nav');
+    menuButton.addEventListener('click', () => {
+      const isOpen = navigation.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+    });
+    navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navigation.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', 'Open navigation');
+    }));
+    const progress = document.querySelector('.scroll-progress');
+    const updateProgress = () => {
+      const range = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (range > 0 ? window.scrollY / range * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
