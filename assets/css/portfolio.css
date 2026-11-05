@@ -189,3 +189,14 @@ nav .nav-contact:after{right:0;opacity:.55}
 .hero-frame{min-height:300px;background:#141824 url("../images/murali-creative-hero.jpg") center/cover no-repeat}
 .hero-frame img{display:block!important;opacity:1!important;visibility:visible!important}
 @media(max-width:720px){.hero-frame{min-height:240px}}
+
+/* Direct contact and social links */
+.contact-location{margin:0 0 12px!important;color:var(--gold)!important;font-size:9px!important;font-weight:800;letter-spacing:1.5px}
+.contact-links{display:grid;gap:0}
+.contact-links a{display:grid;grid-template-columns:76px minmax(0,1fr) 16px;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);color:#e9edf4;text-decoration:none;transition:color .2s ease,transform .2s ease}
+.contact-links a:last-child{border-bottom:0}
+.contact-links a:hover{color:var(--gold);transform:translateX(3px)}
+.contact-links a span:first-child{color:#929baa;font-size:10px;font-weight:700;letter-spacing:.6px}
+.contact-links a strong{min-width:0;overflow-wrap:anywhere;font-size:11px;font-weight:600}
+.contact-links a span:last-child{color:var(--gold);font-size:14px}
+@media(max-width:600px){.contact-links a{grid-template-columns:66px minmax(0,1fr) 14px;gap:8px}.contact-links a strong{font-size:10px}}
