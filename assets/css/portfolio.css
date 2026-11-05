@@ -190,13 +190,26 @@ nav .nav-contact:after{right:0;opacity:.55}
 .hero-frame img{display:block!important;opacity:1!important;visibility:visible!important}
 @media(max-width:720px){.hero-frame{min-height:240px}}
 
-/* Direct contact and social links */
-.contact-location{margin:0 0 12px!important;color:var(--gold)!important;font-size:9px!important;font-weight:800;letter-spacing:1.5px}
-.contact-links{display:grid;gap:0}
-.contact-links a{display:grid;grid-template-columns:76px minmax(0,1fr) 16px;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);color:#e9edf4;text-decoration:none;transition:color .2s ease,transform .2s ease}
-.contact-links a:last-child{border-bottom:0}
-.contact-links a:hover{color:var(--gold);transform:translateX(3px)}
-.contact-links a span:first-child{color:#929baa;font-size:10px;font-weight:700;letter-spacing:.6px}
-.contact-links a strong{min-width:0;overflow-wrap:anywhere;font-size:11px;font-weight:600}
-.contact-links a span:last-child{color:var(--gold);font-size:14px}
-@media(max-width:600px){.contact-links a{grid-template-columns:66px minmax(0,1fr) 14px;gap:8px}.contact-links a strong{font-size:10px}}
+
+/* Contact cards — visual identity, clarity and responsive behaviour */
+.contact-section{position:relative;overflow:hidden;background:radial-gradient(ellipse at 10% 20%,rgba(151,76,255,.14),transparent 42%),radial-gradient(ellipse at 92% 82%,rgba(0,174,255,.10),transparent 38%),#0a0d15;border-top:1px solid rgba(255,255,255,.08)}
+.contact-section:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.2;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(90deg,black,transparent 75%)}
+.contact-section .wrap{position:relative;z-index:1}
+.contact-panel{grid-template-columns:minmax(0,.88fr) minmax(420px,1.12fr);align-items:center;gap:clamp(28px,5vw,68px);padding:clamp(28px,4.5vw,54px);border:1px solid rgba(255,255,255,.10);border-radius:18px;background:linear-gradient(135deg,rgba(24,27,43,.96),rgba(12,17,28,.96));box-shadow:0 24px 70px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.04)}
+.contact-panel h2{max-width:450px;margin-bottom:16px}
+.contact-panel>div:first-child>p:last-child{max-width:430px;color:#aeb7c5;font-size:13px;line-height:1.9}
+.contact-note{align-self:stretch;padding:22px;border:1px solid rgba(255,255,255,.09);border-left:0;border-radius:14px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));color:#dce3ef}
+.contact-location{margin:0 0 16px!important;color:#e9b65e!important;font-size:9px!important;font-weight:800;letter-spacing:1.6px}
+.contact-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.contact-card{position:relative;display:flex;min-width:0;min-height:82px;align-items:center;gap:13px;padding:14px 13px;border:1px solid rgba(255,255,255,.10);border-radius:11px;background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));color:#f4f6fb;text-decoration:none;transition:transform .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease}
+.contact-card:hover{transform:translateY(-3px);border-color:rgba(232,181,94,.55);background:linear-gradient(145deg,rgba(141,108,255,.13),rgba(229,170,77,.07));box-shadow:0 12px 28px rgba(0,0,0,.22)}
+.contact-icon{display:grid;flex:0 0 42px;width:42px;height:42px;place-items:center;border:1px solid rgba(232,181,94,.30);border-radius:10px;background:linear-gradient(145deg,rgba(141,108,255,.19),rgba(229,170,77,.12));color:#f0c778}
+.contact-icon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.contact-card-copy{display:flex;min-width:0;flex:1;flex-direction:column;gap:5px}
+.contact-card-copy small{color:#9ca8ba;font-size:8px;font-weight:800;letter-spacing:1.4px}
+.contact-card-copy strong{overflow-wrap:anywhere;color:#f1f3f8;font-size:10px;font-weight:650;line-height:1.45}
+.contact-arrow{align-self:flex-start;color:#e8b55e;font-size:15px;line-height:1}
+.contact-xmark svg{stroke-width:2.4}
+@media(max-width:900px){.contact-panel{grid-template-columns:1fr;gap:24px}.contact-note{padding:18px}}
+@media(max-width:560px){.contact-panel{padding:20px;border-radius:14px}.contact-links{grid-template-columns:1fr;gap:9px}.contact-card{min-height:72px;padding:12px}.contact-icon{width:40px;height:40px;flex-basis:40px}.contact-card-copy strong{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.contact-card{transition:none}.contact-card:hover{transform:none}}
