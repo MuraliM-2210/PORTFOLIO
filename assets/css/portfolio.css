@@ -367,3 +367,43 @@ nav a{font-size:12px;color:#d0d6e0}
 /* Refined header wordmark scale */
 .brand-title{font-size:clamp(18px,1.8vw,25px)!important;letter-spacing:-.035em!important}
 @media(max-width:420px){.brand-title{font-size:25px!important;letter-spacing:-.035em!important}}
+
+
+/* Balanced smiley + wordmark: equal visual scale and shared baseline */
+.site-header .brand{
+  display:flex!important;
+  align-items:center!important;
+  flex-direction:row!important;
+  gap:12px!important;
+  min-height:42px;
+}
+.site-header .brand .brand-smiley{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 32px!important;
+  width:32px!important;
+  height:32px!important;
+  margin:0!important;
+  padding:0!important;
+  font-size:30px!important;
+  line-height:1!important;
+  vertical-align:middle!important;
+}
+.site-header .brand .brand-title{
+  display:inline-flex!important;
+  align-items:center!important;
+  flex:0 1 auto!important;
+  margin:0!important;
+  padding:0!important;
+  font-size:30px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:-.04em!important;
+  white-space:nowrap!important;
+}
+@media(max-width:600px){
+  .site-header .brand{gap:9px!important}
+  .site-header .brand .brand-smiley{flex-basis:28px!important;width:28px!important;height:28px!important;font-size:28px!important}
+  .site-header .brand .brand-title{font-size:clamp(19px,5vw,25px)!important}
+}
