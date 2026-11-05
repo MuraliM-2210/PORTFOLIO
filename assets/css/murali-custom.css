@@ -2149,3 +2149,73 @@ code { color: #c6a9ff; background: rgba(154,112,255,.13); border-radius: 5px; }
     .reveal { opacity: 1; transform: none; }
     .camera-3d { animation: none; }
 }
+
+
+/* Research table — high-contrast, accessible reading surface */
+.research-table-wrap {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 18px 42px rgba(0,0,0,.24) !important;
+    color: #172033 !important;
+    overflow-x: auto;
+}
+.research-table {
+    background: #f8fafc !important;
+    color: #253247 !important;
+}
+.research-table thead th {
+    color: #ffffff !important;
+    background: #17213d !important;
+    border-bottom: 2px solid #a855f7 !important;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: .12em;
+}
+.research-table tbody tr {
+    background: #ffffff !important;
+}
+.research-table tbody tr:nth-child(even) {
+    background: #edf2f8 !important;
+}
+.research-table tbody tr:hover td {
+    background: #e5eaf7 !important;
+}
+.research-table td {
+    color: #344256 !important;
+    border-bottom: 1px solid #d7deea !important;
+    font-size: 12px;
+    line-height: 1.7;
+    vertical-align: top;
+}
+.research-table td.topic-title {
+    color: #17213d !important;
+    font-weight: 750 !important;
+}
+.research-status, .research-access-placeholder {
+    color: #164e63 !important;
+    background: #cffafe !important;
+    border: 1px solid #67e8f9 !important;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: normal;
+}
+.research-status.upcoming {
+    color: #86198f !important;
+    background: #fae8ff !important;
+    border-color: #e9a8f5 !important;
+}
+.research-table a.research-access {
+    color: #ffffff !important;
+    background: linear-gradient(105deg, #6d28d9, #0369a1) !important;
+    border: 1px solid #6d28d9 !important;
+    box-shadow: 0 4px 14px rgba(109,40,217,.2) !important;
+}
+.research-table a.research-access:hover {
+    color: #ffffff !important;
+    background: linear-gradient(105deg, #581c87, #075985) !important;
+}
+@media (max-width: 560px) {
+    .research-table { min-width: 760px; }
+    .research-table th, .research-table td { padding: 14px 12px; }
+}
