@@ -332,3 +332,33 @@ nav a{font-size:12px;color:#d0d6e0}
 @media(max-width:420px){
   .brand-title{font-size:clamp(21px,5.2vw,30px)!important;letter-spacing:-.045em!important}
 }
+
+
+/* Professional experience — editorial timeline cards */
+.experience-section{position:relative;overflow:hidden;background:radial-gradient(ellipse at 8% 18%,rgba(139,83,255,.13),transparent 38%),radial-gradient(ellipse at 95% 88%,rgba(0,166,255,.09),transparent 36%),#0a0d15;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07)}
+.experience-heading{margin-bottom:34px}
+.experience-track{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;position:relative}
+.experience-card{position:relative;overflow:hidden;min-width:0;padding:24px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:linear-gradient(145deg,rgba(25,29,47,.97),rgba(12,17,29,.98));box-shadow:0 20px 48px rgba(0,0,0,.22);transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.experience-card:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,#9b6bff,#e8b55e 72%,transparent)}
+.experience-current:before{background:linear-gradient(90deg,#a56bff,#35c9ff)}
+.experience-card:hover{transform:translateY(-5px);border-color:rgba(232,181,94,.42);box-shadow:0 26px 60px rgba(0,0,0,.32)}
+.experience-topline{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.09)}
+.experience-index{color:#f0c778;font-size:13px;font-weight:900;letter-spacing:1px}
+.experience-period{display:inline-flex;align-items:center;gap:7px;color:#e4e8f0;font-size:12px;font-weight:800;letter-spacing:1px}
+.experience-period i{width:7px;height:7px;border-radius:50%;background:#65d6a2;box-shadow:0 0 12px rgba(101,214,162,.65)}
+.experience-status{margin-left:auto;padding:6px 9px;border:1px solid rgba(232,181,94,.28);border-radius:4px;color:#f0c778;font-size:12px;font-weight:800;letter-spacing:1px}
+.experience-main{display:flex;gap:17px;padding:24px 0 20px}
+.experience-symbol{display:grid;flex:0 0 54px;width:54px;height:54px;place-items:center;border:1px solid rgba(164,121,255,.35);border-radius:13px;background:linear-gradient(145deg,rgba(155,107,255,.2),rgba(0,181,255,.08));color:#c3a2ff}
+.experience-symbol svg{width:29px;height:29px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.experience-copy{min-width:0}
+.experience-type{margin:0 0 9px!important;color:#bda0ff!important;font-size:12px!important;font-weight:900;letter-spacing:1.5px}
+.experience-copy h3{margin:0 0 12px;color:#f5f6fa;font-size:clamp(20px,2.2vw,27px);line-height:1.2;font-weight:900;letter-spacing:-.7px}
+.experience-copy h3 span{color:#e8b55e}
+.experience-copy h4{margin:0 0 5px;color:#f0c778;font-size:16px;font-weight:800;line-height:1.4}
+.experience-department{margin:0 0 13px!important;color:#aab5c6!important;font-size:12px!important;font-weight:700;letter-spacing:.3px}
+.experience-description{margin:0!important;color:#d0d7e2!important;font-size:14px!important;line-height:1.8!important}
+.experience-footer{display:flex;flex-wrap:wrap;gap:7px;padding-top:16px;border-top:1px solid rgba(255,255,255,.09)}
+.experience-footer span{padding:6px 9px;border:1px solid rgba(255,255,255,.11);border-radius:4px;background:rgba(255,255,255,.035);color:#cbd3df;font-size:12px;font-weight:800;letter-spacing:.5px}
+@media(max-width:760px){.experience-track{grid-template-columns:1fr}.experience-card{padding:20px}.experience-main{gap:13px}}
+@media(max-width:420px){.experience-topline{gap:8px}.experience-status{margin-left:0}.experience-symbol{flex-basis:44px;width:44px;height:44px}.experience-symbol svg{width:24px;height:24px}.experience-copy h3{font-size:21px}}
+@media(prefers-reduced-motion:reduce){.experience-card{transition:none}.experience-card:hover{transform:none}}
