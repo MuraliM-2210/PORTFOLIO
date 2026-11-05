@@ -175,3 +175,12 @@ p{color:#c2c6ce}
  .hero-meta{gap:16px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Navigation affordances */
+nav a{position:relative;padding-block:9px}
+nav a:after{content:"";position:absolute;left:0;right:100%;bottom:2px;height:1px;background:var(--gradient);transition:right .2s ease}
+nav a:hover:after,nav a.is-active:after{right:0}
+nav a.is-active{color:var(--gold2)}
+nav .nav-contact{color:var(--gold2)}
+nav .nav-contact:after{right:0;opacity:.55}
+.hero-image-frame img{object-fit:cover;object-position:center}
