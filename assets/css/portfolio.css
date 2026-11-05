@@ -293,3 +293,10 @@ nav a{font-size:12px;color:#d0d6e0}
   .contact-links .contact-card.contact-email{grid-template-columns:36px minmax(0,1fr) 12px !important;gap:7px !important;padding:10px !important}
   .contact-links .contact-card.contact-email .contact-card-copy strong{font-size:11px !important;letter-spacing:-.45px !important}
 }
+
+
+/* Header brand refresh */
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-smiley{display:grid;place-items:center;font-family:Arial,sans-serif;font-size:27px!important;font-weight:800;line-height:1;color:#f3c46d}
+.brand-title{display:block;font-size:16px!important;font-weight:900;letter-spacing:.045em;color:#f7f5f2;white-space:nowrap}
+@media(max-width:420px){.brand-title{font-size:13px!important;letter-spacing:.02em}.brand{gap:8px}}
