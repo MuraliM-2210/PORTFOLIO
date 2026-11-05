@@ -3,47 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#101114">
-<meta name="description" content="Murali M — DOP & Video Producer. Visual storyteller, photographer and editor.">
-<title>Murali M | Creative Portfolio</title>
+<meta name="theme-color" content="#090817">
+<meta name="description" content="Murali M — DOP & Video Producer. Explore the portfolio.">
+<title>Murali M | Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:dark;--silver:#e8e9ec;--blue:#00b9ee;--ink:#090b10}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#101114;color:#fff;font-family:"DM Sans",sans-serif}
-body{overflow-x:hidden}
-.landing{min-height:100svh;display:flex;flex-direction:column;align-items:center;padding:clamp(24px,4vw,54px) 18px 36px;position:relative;isolation:isolate}
-.landing:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 38%,#45474b 0%,#222427 44%,#0c0d10 100%)}
-.landing:after{content:"";position:fixed;inset:0;z-index:-1;opacity:.14;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E")}
-.wordmark{font-family:"Barlow Condensed",sans-serif;font-size:clamp(4rem,12vw,9rem);font-weight:900;line-height:.82;letter-spacing:.035em;text-transform:uppercase;color:#d7d9dc;text-shadow:1px 1px 0 #85898e,2px 2px 0 #686c71,3px 3px 0 #4d5157,4px 4px 0 #383c41,5px 5px 0 #25292e,8px 12px 18px #000;transform:perspective(500px) rotateX(9deg);margin:5px 0 28px;position:relative}
-.wordmark:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 20%,#fff8 42%,transparent 58%);background-clip:text;-webkit-background-clip:text;color:transparent;pointer-events:none}
-.visual{width:min(100%,880px);position:relative;border:1px solid #ffffff35;box-shadow:0 30px 90px #000b,0 0 50px #0008;overflow:hidden;background:#17191d}
-.visual img{display:block;width:100%;height:auto;max-height:65svh;object-fit:cover;object-position:center 48%;filter:brightness(.88) contrast(1.04)}
-.visual:after{content:"";position:absolute;inset:40% 0 0;background:linear-gradient(transparent,#050609a8)}
-.identity{text-align:center;margin-top:-.15rem;z-index:1;position:relative}
-.identity h1{font-family:"Barlow Condensed",sans-serif;font-size:clamp(2.8rem,7vw,5.4rem);font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin:0;text-shadow:0 4px 20px #000}
-.role{font-family:"Barlow Condensed",sans-serif;font-size:clamp(1.15rem,3vw,2rem);font-weight:800;letter-spacing:.19em;text-transform:uppercase;color:#e7e9eb;margin:2px 0 22px;text-shadow:0 2px 12px #000}
-.access{display:inline-flex;align-items:center;gap:17px;padding:15px 25px;border:1px solid #d9e1e8a8;background:linear-gradient(135deg,#f4f5f6,#aeb5bd);color:#101317;text-decoration:none;font-size:.78rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;box-shadow:0 8px 25px #0008;transition:transform .25s,box-shadow .25s}
-.access span{font-size:1.2rem}.access:hover{transform:translateY(-4px);box-shadow:0 14px 32px #000a}
-.micro{font-size:.65rem;letter-spacing:.22em;color:#a8adb4;text-transform:uppercase;margin-top:22px}
-@media(max-width:600px){.landing{padding-top:34px}.wordmark{margin-bottom:24px}.visual img{max-height:58svh;min-height:360px;object-fit:cover}.identity{margin-top:12px}.role{margin-bottom:18px}}
-@media(prefers-reduced-motion:reduce){.access{transition:none}}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;background:#080816}
+body{font-family:"DM Sans",sans-serif;overflow:hidden}
+.landing{
+  position:relative;isolation:isolate;
+  width:100%;min-height:100svh;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:0 22px clamp(34px,6.5vh,68px);
+  background-color:#080816;
+  background-image:linear-gradient(180deg,rgba(5,7,20,.04) 45%,rgba(5,7,20,.27) 100%),url("assets/images/portfolio-hero.avif");
+  background-repeat:no-repeat;background-size:cover;background-position:center center;
+}
+.landing:before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 100%,rgba(4,8,24,.52),transparent 52%);
+}
+.access{
+  position:relative;isolation:isolate;
+  display:inline-flex;align-items:center;justify-content:center;gap:17px;
+  min-width:218px;min-height:58px;padding:0 30px;
+  border:1px solid transparent;border-radius:999px;
+  color:#fff;text-decoration:none;text-transform:uppercase;
+  font-size:.78rem;font-weight:800;letter-spacing:.16em;
+  background:linear-gradient(110deg,rgba(10,13,35,.92),rgba(13,20,48,.91)) padding-box,
+             linear-gradient(105deg,#f04bdf 0%,#a55dff 40%,#28c5ff 100%) border-box;
+  box-shadow:0 0 18px rgba(221,54,229,.33),0 0 38px rgba(28,135,255,.22),0 14px 34px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.22);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .25s ease,box-shadow .25s ease,filter .25s ease;
+}
+.access:before{
+  content:"";position:absolute;inset:2px;border-radius:inherit;z-index:-1;
+  background:linear-gradient(100deg,rgba(255,255,255,.10),rgba(255,255,255,.015) 50%,rgba(255,255,255,.08));
+}
+.access span{font-size:1.25rem;line-height:1;color:#71dfff;transition:transform .25s ease}
+.access:hover{transform:translateY(-5px) scale(1.025);filter:brightness(1.15);box-shadow:0 0 24px rgba(221,54,229,.5),0 0 48px rgba(28,135,255,.36),0 18px 42px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.28)}
+.access:hover span{transform:translate(3px,-3px)}
+.access:focus-visible{outline:3px solid #fff;outline-offset:5px}
+@media(max-width:600px){
+ .landing{padding:0 18px 34px;background-position:center center}
+ .access{min-width:205px;min-height:54px}
+}
+@media(prefers-reduced-motion:reduce){.access,.access span{transition:none}}
 </style>
 </head>
 <body>
-<main class="landing">
-<div class="wordmark" aria-label="Portfolio">Portfolio</div>
-<div class="visual">
-<img id="hero-img" src="assets/images/murali-creative-hero.webp" alt="Creative workspace with a video editor working across visual production software" loading="eager">
-</div>
-<section class="identity" aria-label="Introduction">
-<h1>Murali M</h1>
-<p class="role">DOP &amp; Video Producer</p>
-<a class="access" href="profile.html">Enter Profile <span aria-hidden="true">↗</span></a>
-</section>
-<p class="micro">Visual storytelling · Cinematography · Editing</p>
+<main class="landing" aria-label="Portfolio landing page">
+<a class="access" href="profile.html">Explore Profile <span aria-hidden="true">↗</span></a>
 </main>
-
 </body>
 </html>
