@@ -215,7 +215,39 @@ nav .nav-contact:after{right:0;opacity:.55}
 @media(prefers-reduced-motion:reduce){.contact-card{transition:none}.contact-card:hover{transform:none}}
 
 
-/* Global readability baseline: descriptive and supporting text is at least 12px */
-body :where(p, li, td, th, label, small, figcaption, blockquote, dd, dt, .eyebrow, .description, .project-description, .research-description, .contact-card-copy strong, .contact-card-copy small) {
-  font-size: max(12px, 1em);
+
+
+/* Readability refinement — larger body copy, stronger contrast and calmer line spacing */
+body{font-size:16px;line-height:1.75;color:#f2f4f8}
+p,.about-copy p,.hero-description,.work-card p,.service-card p,.research-feature p,.research-item p,.education-item p,.award p,.contact-panel p,.contact-note{
+  font-size:15px;
+  line-height:1.85;
+  color:#d0d6e0;
+}
+.lead{font-size:clamp(17px,1.8vw,20px);line-height:1.8;color:#d7dce5}
+.section-head>p{font-size:15px;line-height:1.8;color:#c7ced9}
+.hero-description{font-size:16px;line-height:1.9;color:#d4dae4}
+.work-card p,.service-card p,.research-item p,.education-item p,.award p{font-size:14px;line-height:1.85;color:#c6ceda}
+.research-feature p{font-size:15px;line-height:1.9;color:#d0d7e2}
+.about-copy p{font-size:15px;line-height:1.9;color:#d0d7e2}
+.about-copy p:first-child{font-size:17px;line-height:1.85;color:#f0f2f6}
+.contact-panel p,.contact-note{font-size:15px;line-height:1.85;color:#d4dbe5}
+.contact-card-copy small{font-size:12px;color:#c0c9d7;letter-spacing:1.1px}
+.contact-card-copy strong{font-size:13px;line-height:1.5;color:#fff}
+nav a{font-size:12px;color:#d0d6e0}
+.btn,.paper-link{font-size:12px}
+.hero-meta span,.film-strip span,.work-card-top,.research-byline,.education-date,.research-label,.status,.hero-caption,.hero-kicker,.eyebrow,.brand small,.footer-inner p,.footer-inner span,.tag{
+  font-size:12px;
+}
+.service-number{font-size:18px}
+.toolkit-card .eyebrow{font-size:12px}
+.toolkit-card h3{font-size:18px}
+.tag{padding:8px 11px;color:#e0e5ed}
+.research-label,.status,.education-date{color:#f2ca82}
+.muted{color:#c1cad7}
+@media(max-width:700px){
+  body{font-size:16px}
+  p,.about-copy p,.hero-description,.work-card p,.service-card p,.research-feature p,.research-item p,.education-item p,.award p,.contact-panel p,.contact-note{font-size:14px;line-height:1.85}
+  .hero-description{font-size:15px}
+  nav a{font-size:12px}
 }
