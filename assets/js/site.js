@@ -1,4 +1,4 @@
-const nav=[['Home','index.html'],['Education','education.html'],['Photography','photography.html'],['Research','research.html'],['Books','books.html'],['Quotes','quotes.html'],['Projects','projects.html'],['Contact','contact.html']];
+const nav=[['Home','index.html'],['Profile','profile.html'],['Education','education.html'],['Photography','photography.html'],['Research','research.html'],['Books','books.html'],['Projects','projects.html'],['Contact','contact.html']];
 const current=location.pathname.split('/').pop()||'index.html';
 document.getElementById('site-header').innerHTML=`<header class="site-header"><div class="wrap nav-wrap"><a class="brand" href="index.html">M<span>.</span><small>MURALI M</small></a><button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button><nav>${nav.map(([n,u])=>`<a href="${u}" class="${current===u?'active':''}">${n}</a>`).join('')}</nav></div></header>`;
 document.querySelector('.menu-toggle').addEventListener('click',()=>{const n=document.querySelector('nav');const b=document.querySelector('.menu-toggle');n.classList.toggle('open');b.setAttribute('aria-expanded',n.classList.contains('open'));});
