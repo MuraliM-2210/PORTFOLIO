@@ -362,3 +362,8 @@ nav a{font-size:12px;color:#d0d6e0}
 @media(max-width:760px){.experience-track{grid-template-columns:1fr}.experience-card{padding:20px}.experience-main{gap:13px}}
 @media(max-width:420px){.experience-topline{gap:8px}.experience-status{margin-left:0}.experience-symbol{flex-basis:44px;width:44px;height:44px}.experience-symbol svg{width:24px;height:24px}.experience-copy h3{font-size:21px}}
 @media(prefers-reduced-motion:reduce){.experience-card{transition:none}.experience-card:hover{transform:none}}
+
+
+/* Refined header wordmark scale */
+.brand-title{font-size:clamp(21px,1.8vw,30px)!important;letter-spacing:-.035em!important}
+@media(max-width:420px){.brand-title{font-size:20px!important;letter-spacing:-.035em!important}}
