@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Smiley VisualSX — photography and visual stories by Murali M.">
+<meta name="theme-color" content="#070812"><title>Explore My Visuals | Smiley VisualSX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/visuals.css?v=1"><link rel="icon" href="assets/images/smiley-visualsx-logo.webp" type="image/webp">
+</head><body>
+<div class="ambient a1"></div><div class="ambient a2"></div>
+<header class="visual-header"><a class="visual-brand" href="profile.html"><img src="assets/images/smiley-visualsx-logo.webp" alt="Smiley VisualSX logo"><span class="divider"></span><span class="brand-caption">A VISUAL JOURNAL BY MURALI M</span></a><a class="back-link" href="profile.html">← Portfolio</a></header>
+<main>
+<section class="visual-hero"><div class="hero-copy glass">
+<p class="eyebrow">PHOTOGRAPHY · VISUAL STORYTELLING · CREATIVE FRAMES</p>
+<h1>Explore My <span>Visuals.</span></h1>
+<p class="intro">A collection of moments, perspectives and stories seen through my lens. Each frame is an opportunity to notice something differently.</p>
+<div class="hero-actions"><a class="ig-button" href="https://www.instagram.com/smiley.visualsx?dlrf=Y3Azdmh0bndybGZ6" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>Visit Smiley VisualSX on Instagram ↗</a><a class="quiet-button" href="#gallery">Browse gallery ↓</a></div>
+<div class="hero-foot"><span>01 / THE FRAME</span><span>MADE TO BE SEEN</span></div></div>
+<div class="hero-art glass" aria-hidden="true"><div class="orbit o1"></div><div class="orbit o2"></div><div class="lens"><div></div></div><span class="spark s1">✳</span><span class="spark s2">✦</span><small>OBSERVE / CAPTURE / CREATE</small></div></section>
+<section class="gallery-section" id="gallery"><div class="section-heading"><div><p class="eyebrow">THE VISUAL ARCHIVE</p><h2>Frames from my world<span>.</span></h2></div><p>Photography and visual experiments — added as the collection grows.</p></div>
+<div class="gallery-toolbar"><span class="chip">ALL FRAMES</span><span id="frame-count">Loading collection…</span></div>
+<div class="gallery-grid" id="gallery-grid" aria-live="polite"><div class="empty"><span class="loader"></span><p>Preparing the visual archive…</p></div></div></section>
+<section class="instagram glass"><div class="ig-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></div><div><p class="eyebrow">FOLLOW THE NEXT FRAME</p><h2>More stories on <span>Instagram.</span></h2><p>Follow Smiley VisualSX for new photographs, visual experiments and behind-the-frame moments.</p></div><a class="ig-button" href="https://www.instagram.com/smiley.visualsx?dlrf=Y3Azdmh0bndybGZ6" target="_blank" rel="noopener noreferrer">Visit Instagram ↗</a></section>
+<section class="admin glass"><div class="admin-symbol">✧</div><div class="admin-copy"><p class="eyebrow">PRIVATE CONTRIBUTOR WORKFLOW</p><h2>Update the visual archive</h2><p>Sign in to the authorised GitHub account, open the image folder, choose <b>Add file → Upload files</b>, then commit your photographs. JPG, PNG and WebP images will appear in this gallery automatically.</p><small>Admin account email: <b>Muralimuni6381@gmail.com</b></small></div><a class="admin-button" href="https://github.com/MuraliM-2210/PORTFOLIO/tree/main/assets/visuals" target="_blank" rel="noopener noreferrer">Open admin upload folder ↗</a></section>
+<p class="security-note">Uploads are protected by GitHub repository permissions. Only accounts with write access can add or replace images.</p>
+</main>
+<footer class="visual-footer"><a href="profile.html">← Back to Murali M's Portfolio</a><span>SMILEY VISUALSX · © <span id="year"></span></span></footer>
+<dialog class="lightbox" id="lightbox"><button class="close" aria-label="Close image">×</button><img id="lightbox-image" alt=""><p id="lightbox-caption"></p></dialog>
+<script>
+const gallery=document.getElementById('gallery-grid'),count=document.getElementById('frame-count'),dialog=document.getElementById('lightbox');
+document.getElementById('year').textContent=new Date().getFullYear();
+function empty(message){gallery.innerHTML='<div class="empty"><div class="empty-mark">✧</div><h3>The next frame is yours to add.</h3><p>'+message+'</p><a href="https://github.com/MuraliM-2210/PORTFOLIO/tree/main/assets/visuals" target="_blank" rel="noopener noreferrer">Open image upload folder ↗</a></div>';count.textContent='0 FRAMES'}
+function card(file,i){const b=document.createElement('button');b.className='photo-card';b.type='button';const img=document.createElement('img');img.src=file.download_url;img.alt=file.name.replace(/[-_]/g,' ').replace(/\.[^.]+$/,'');img.loading='lazy';const label=document.createElement('span');label.textContent=String(i+1).padStart(2,'0')+' / '+img.alt;b.append(img,label);b.addEventListener('click',()=>{document.getElementById('lightbox-image').src=file.download_url;document.getElementById('lightbox-image').alt=img.alt;document.getElementById('lightbox-caption').textContent=img.alt;dialog.showModal()});return b}
+fetch('https://api.github.com/repos/MuraliM-2210/PORTFOLIO/contents/assets/visuals?ref=main',{headers:{Accept:'application/vnd.github+json'}}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(files=>{const imgs=files.filter(f=>f.type==='file'&&/\.(jpe?g|png|webp|avif)$/i.test(f.name)).sort((a,b)=>a.name.localeCompare(b.name));if(!imgs.length){empty('Your gallery folder is ready. Upload photographs with the secure GitHub admin folder and they will appear here automatically.');return}gallery.replaceChildren(...imgs.map(card));count.textContent=imgs.length+' FRAMES'}).catch(()=>empty('The image folder could not be loaded. Please try again or open the upload folder to manage your images.'));
+document.querySelector('.close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
+</script></body></html>
