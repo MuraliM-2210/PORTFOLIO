@@ -30,7 +30,18 @@
 const gallery=document.getElementById('gallery-grid'),count=document.getElementById('frame-count'),dialog=document.getElementById('lightbox');
 document.getElementById('year').textContent=new Date().getFullYear();
 function empty(message){gallery.innerHTML='<div class="empty"><div class="empty-mark">✧</div><h3>The next frame is yours to add.</h3><p>'+message+'</p><a href="https://github.com/MuraliM-2210/PORTFOLIO/tree/main/assets/visuals" target="_blank" rel="noopener noreferrer">Open image upload folder ↗</a></div>';count.textContent='0 FRAMES'}
-function card(file,i){const b=document.createElement('button');b.className='photo-card';b.type='button';const img=document.createElement('img');img.src=file.download_url;img.alt=file.name.replace(/[-_]/g,' ').replace(/\.[^.]+$/,'');img.loading='lazy';const label=document.createElement('span');label.textContent=String(i+1).padStart(2,'0')+' / '+img.alt;b.append(img,label);b.addEventListener('click',()=>{document.getElementById('lightbox-image').src=file.download_url;document.getElementById('lightbox-image').alt=img.alt;document.getElementById('lightbox-caption').textContent=img.alt;dialog.showModal()});return b}
+function card(file,i){
+  const number=String(i+1).padStart(2,'0');
+  const card=document.createElement('article');card.className='photo-card';
+  const view=document.createElement('button');view.className='photo-view';view.type='button';view.setAttribute('aria-label','Open gallery frame '+number);
+  const img=document.createElement('img');img.src=file.download_url;img.alt='Smiley VisualSX photograph, frame '+number;img.loading='lazy';
+  const label=document.createElement('span');label.className='photo-label';label.textContent='FRAME / '+number;
+  view.append(img,label);
+  view.addEventListener('click',()=>{document.getElementById('lightbox-image').src=file.download_url;document.getElementById('lightbox-image').alt='Smiley VisualSX photograph, frame '+number;document.getElementById('lightbox-caption').textContent='SMILEY VISUALSX  /  FRAME '+number;dialog.showModal()});
+  const del=document.createElement('a');del.className='photo-delete';del.href='https://github.com/MuraliM-2210/PORTFOLIO/delete/main/assets/visuals/'+encodeURIComponent(file.name);del.target='_blank';del.rel='noopener noreferrer';del.setAttribute('aria-label','Delete frame '+number+' in GitHub; sign-in and repository write access required');del.innerHTML='<span aria-hidden="true">⌫</span> Delete';
+  del.addEventListener('click',e=>{if(!confirm('Open GitHub to delete this photograph? GitHub will require an authorised account and a commit to confirm deletion.'))e.preventDefault()});
+  card.append(view,del);return card;
+}
 fetch('https://api.github.com/repos/MuraliM-2210/PORTFOLIO/contents/assets/visuals?ref=main',{headers:{Accept:'application/vnd.github+json'}}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(files=>{const imgs=files.filter(f=>f.type==='file'&&/\.(jpe?g|png|webp|avif)$/i.test(f.name)).sort((a,b)=>a.name.localeCompare(b.name));if(!imgs.length){empty('Your gallery folder is ready. Upload photographs with the secure GitHub admin folder and they will appear here automatically.');return}gallery.replaceChildren(...imgs.map(card));count.textContent=imgs.length+' FRAMES'}).catch(()=>empty('The image folder could not be loaded. Please try again or open the upload folder to manage your images.'));
 document.querySelector('.close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
 </script></body></html>
