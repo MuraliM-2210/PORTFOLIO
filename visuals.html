@@ -5,7 +5,7 @@
 <meta name="theme-color" content="#070812"><title>Explore My Visuals | Smiley VisualSX</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/visuals.css?v=2"><link rel="icon" href="assets/images/smiley-visualsx-logo.webp" type="image/webp">
+<link rel="stylesheet" href="assets/css/visuals.css?v=3"><link rel="icon" href="assets/images/smiley-visualsx-logo.webp" type="image/webp">
 </head><body>
 <div class="ambient a1"></div><div class="ambient a2"></div>
 <header class="visual-header"><a class="visual-brand" href="profile.html"><img src="assets/images/smiley-visualsx-logo.webp" alt="Smiley VisualSX logo"><span class="divider"></span><span class="brand-caption">A VISUAL JOURNAL BY MURALI M</span></a><a class="back-link" href="profile.html">← Portfolio</a></header>
@@ -21,143 +21,18 @@
 <div class="gallery-toolbar"><span class="chip">ALL FRAMES</span><span id="frame-count">Loading collection…</span></div>
 <div class="gallery-grid" id="gallery-grid" aria-live="polite"><div class="empty"><span class="loader"></span><p>Preparing the visual archive…</p></div></div></section>
 <section class="instagram glass"><div class="ig-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></div><div><p class="eyebrow">FOLLOW THE NEXT FRAME</p><h2>More stories on <span>Instagram.</span></h2><p>Follow Smiley VisualSX for new photographs, visual experiments and behind-the-frame moments.</p></div><a class="ig-button" href="https://www.instagram.com/smiley.visualsx?dlrf=Y3Azdmh0bndybGZ6" target="_blank" rel="noopener noreferrer">Visit Instagram ↗</a></section>
-<section class="upload-cta" aria-label="Photo upload">
-  <button class="admin-button" id="open-uploader" type="button"><span aria-hidden="true">↑</span> Upload Photos</button>
+<section class="upload-cta" aria-label="Admin photo upload">
+  <a class="admin-button" href="https://github.com/MuraliM-2210/PORTFOLIO/upload/main/assets/visuals" target="_blank" rel="noopener noreferrer" aria-label="Upload photographs to Smiley VisualSX gallery">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7 9m5-5 5 5M4 16v4h16v-4"/></svg>
+    Upload Photos
+  </a>
 </section>
 
-<dialog class="upload-dialog" id="upload-dialog">
-  <div class="upload-dialog-panel">
-    <button class="upload-close" id="close-uploader" type="button" aria-label="Close">×</button>
-    <p class="eyebrow">SMILEY VISUALSX · PHOTO PREPARATION</p>
-    <h2>Prepare your photographs</h2>
-    <p class="upload-intro">Select large photos. They will be converted to high-quality WebP images under 20 MB each and packaged into smaller ZIP batches.</p>
-    <label class="file-picker" for="photo-files"><span aria-hidden="true">＋</span> Choose photos
-      <input id="photo-files" type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple>
-    </label>
-    <p id="photo-selection" class="photo-selection">No photos selected</p>
-    <button id="compress-photos" class="compress-button" type="button" disabled>Compress &amp; Prepare</button>
-    <div id="compression-status" class="compression-status" role="status" aria-live="polite"></div>
-    <div id="download-batches" class="download-batches"></div>
-    <a class="github-upload-link" href="https://github.com/MuraliM-2210/PORTFOLIO/upload/main/assets/visuals" target="_blank" rel="noopener noreferrer">Continue to GitHub upload <span aria-hidden="true">↗</span></a>
-    <p class="upload-footnote">After downloading, extract the ZIP file in your phone's Files app. Upload the extracted .webp photographs to GitHub. Each photo is kept below GitHub's 25 MB per-file limit.</p>
-  </div>
-</dialog>
+
 </main>
 <footer class="visual-footer"><a href="profile.html">← Back to Murali M's Portfolio</a><span>SMILEY VISUALSX · © <span id="year"></span></span></footer>
 <dialog class="lightbox" id="lightbox"><button class="close" aria-label="Close image">×</button><img id="lightbox-image" alt=""><p id="lightbox-caption"></p></dialog>
-<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-<script>
-const uploadDialog=document.getElementById('upload-dialog');
-const openUploader=document.getElementById('open-uploader');
-const closeUploader=document.getElementById('close-uploader');
-const fileInput=document.getElementById('photo-files');
-const selection=document.getElementById('photo-selection');
-const compressButton=document.getElementById('compress-photos');
-const statusBox=document.getElementById('compression-status');
-const batchesBox=document.getElementById('download-batches');
-const TARGET_FILE=19*1024*1024;
-const TARGET_BATCH=22*1024*1024;
-openUploader.addEventListener('click',()=>uploadDialog.showModal());
-closeUploader.addEventListener('click',()=>uploadDialog.close());
-uploadDialog.addEventListener('click',e=>{if(e.target===uploadDialog)uploadDialog.close()});
-fileInput.addEventListener('change',()=>{
-  const files=[...(fileInput.files||[])];
-  selection.textContent=files.length?files.length+' photo'+(files.length===1?'':'s')+' selected':'No photos selected';
-  compressButton.disabled=!files.length;
-  statusBox.textContent='';
-  batchesBox.replaceChildren();
-});
-function canvasToWebp(canvas,quality){
-  return new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error('This browser could not create a WebP image.')),'image/webp',quality));
-}
-async function compressPhoto(file,index,total){
-  if(!('createImageBitmap' in window)) throw new Error(file.name+': this browser cannot decode the selected image.');
-  const bitmap=await createImageBitmap(file);
-  let scale=Math.min(1,5000/Math.max(bitmap.width,bitmap.height));
-  const canvas=document.createElement('canvas');
-  const ctx=canvas.getContext('2d',{alpha:true});
-  if(!ctx){bitmap.close?.();throw new Error('Canvas is not available in this browser.');}
-  let result=null;
-  try{
-    for(let resizePass=0;resizePass<9;resizePass++){
-      const width=Math.max(1,Math.round(bitmap.width*scale));
-      const height=Math.max(1,Math.round(bitmap.height*scale));
-      canvas.width=width;canvas.height=height;
-      ctx.clearRect(0,0,width,height);
-      ctx.drawImage(bitmap,0,0,width,height);
-      for(const quality of [0.92,0.88,0.84,0.80,0.76,0.72,0.68,0.64]){
-        const blob=await canvasToWebp(canvas,quality);
-        if(blob.size<=TARGET_FILE){result=blob;break;}
-      }
-      if(result)break;
-      scale*=.82;
-      if(Math.max(bitmap.width*scale,bitmap.height*scale)<320)break;
-    }
-  }finally{
-    bitmap.close?.();
-    canvas.width=1;canvas.height=1;
-  }
-  if(!result)throw new Error(file.name+': could not reduce this photo below 19 MB.');
-  const base=file.name.replace(/\.[^.]+$/,'').normalize('NFKD').replace(/[^a-zA-Z0-9_-]+/g,'-').replace(/^-+|-+$/g,'').slice(0,65)||'photo';
-  const outputName=String(index+1).padStart(3,'0')+'-'+base+'.webp';
-  return {name:outputName,blob:result,size:result.size};
-}
-function makeBatches(items){
-  const groups=[];let current=[],size=0;
-  for(const item of items){
-    if(current.length&&size+item.size>TARGET_BATCH){groups.push(current);current=[];size=0;}
-    current.push(item);size+=item.size;
-  }
-  if(current.length)groups.push(current);
-  return groups;
-}
-compressButton.addEventListener('click',async()=>{
-  const files=[...(fileInput.files||[])];
-  if(!files.length)return;
-  if(typeof JSZip==='undefined'){
-    statusBox.textContent='The compression library could not load. Check your internet connection and reopen this panel.';
-    return;
-  }
-  compressButton.disabled=true;
-  batchesBox.replaceChildren();
-  const finished=[];
-  const errors=[];
-  try{
-    for(let i=0;i<files.length;i++){
-      statusBox.textContent='Optimising photo '+(i+1)+' of '+files.length+'…';
-      try{finished.push(await compressPhoto(files[i],i,files.length));}
-      catch(err){errors.push(err.message||files[i].name+' could not be processed.');}
-    }
-    if(!finished.length){statusBox.textContent='No photos could be prepared. '+errors.join(' ');return;}
-    const groups=makeBatches(finished);
-    for(let i=0;i<groups.length;i++){
-      statusBox.textContent='Creating download batch '+(i+1)+' of '+groups.length+'…';
-      const zip=new JSZip();
-      groups[i].forEach(item=>zip.file(item.name,item.blob,{binary:true}));
-      const archive=await zip.generateAsync({type:'blob',compression:'STORE'},meta=>{
-        statusBox.textContent='Packaging batch '+(i+1)+' of '+groups.length+' · '+Math.round(meta.percent)+'%';
-      });
-      const url=URL.createObjectURL(archive);
-      const link=document.createElement('a');
-      link.className='batch-download';
-      link.href=url;
-      link.download='smiley-visualsx-photos-'+String(i+1).padStart(2,'0')+'.zip';
-      link.textContent='↓ Download ZIP batch '+(i+1)+' ('+(archive.size/1024/1024).toFixed(1)+' MB)';
-      batchesBox.append(link);
-    }
-    statusBox.textContent=finished.length+' photo'+(finished.length===1?'':'s')+' prepared successfully. '+groups.length+' ZIP batch'+(groups.length===1?'':'es')+' ready.';
-    if(errors.length){
-      const note=document.createElement('p');note.className='compression-errors';
-      note.textContent='Skipped: '+errors.join(' ');
-      batchesBox.append(note);
-    }
-  }catch(err){
-    statusBox.textContent='Could not prepare these photos: '+(err.message||'Unknown error');
-  }finally{
-    compressButton.disabled=false;
-  }
-});
-</script>
+
 <script>
 const gallery=document.getElementById('gallery-grid'),count=document.getElementById('frame-count'),dialog=document.getElementById('lightbox');
 document.getElementById('year').textContent=new Date().getFullYear();
@@ -170,7 +45,7 @@ function card(file,i){
   const label=document.createElement('span');label.className='photo-label';label.textContent='FRAME / '+number;
   view.append(img,label);
   view.addEventListener('click',()=>{document.getElementById('lightbox-image').src=file.download_url;document.getElementById('lightbox-image').alt='Smiley VisualSX photograph, frame '+number;document.getElementById('lightbox-caption').textContent='SMILEY VISUALSX  /  FRAME '+number;dialog.showModal()});
-  const del=document.createElement('a');del.className='photo-delete';del.href='https://github.com/MuraliM-2210/PORTFOLIO/delete/main/assets/visuals/'+encodeURIComponent(file.name);del.target='_blank';del.rel='noopener noreferrer';del.setAttribute('aria-label','Delete frame '+number+' in GitHub; sign-in and repository write access required');del.innerHTML='<span aria-hidden="true">⌫</span> Delete';
+  const del=document.createElement('a');del.className='photo-delete';del.href='https://github.com/MuraliM-2210/PORTFOLIO/delete/main/assets/visuals/'+encodeURIComponent(file.name);del.target='_blank';del.rel='noopener noreferrer';del.setAttribute('aria-label','Delete frame '+number+' in GitHub; authorised GitHub sign-in required');del.title='Delete photo';del.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3m3 0-.8 13H6.8L6 7m3.5 3v7m5-7v7"/></svg>';
   del.addEventListener('click',e=>{if(!confirm('Open GitHub to delete this photograph? GitHub will require an authorised account and a commit to confirm deletion.'))e.preventDefault()});
   card.append(view,del);return card;
 }
