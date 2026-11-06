@@ -43,3 +43,14 @@ h1{margin:0 0 20px;font-size:clamp(42px,6vw,76px);line-height:1.03;letter-spacin
 .photo-delete span{font-size:15px}
 @media(hover:hover){.photo-delete{opacity:.82}.photo-card:hover .photo-delete{opacity:1}}
 @media(max-width:600px){.photo-delete{opacity:1;min-height:43px}}
+
+
+/* Mobile-first direct photo upload panel */
+.admin{grid-template-columns:54px minmax(0,1fr) auto;align-items:center}
+.upload-steps{display:flex;flex-wrap:wrap;gap:8px 16px;margin:12px 0 9px}
+.upload-steps span{display:inline-flex;align-items:center;gap:6px;color:#c5cedd;font-size:11px;font-weight:700}
+.upload-steps b{color:#efc477;font-size:10px;letter-spacing:.7px}
+.admin-button{min-height:48px;padding:13px 19px;background:linear-gradient(105deg,#bb8aff,#55d5ff 72%,#efc477);border:0;border-radius:9px;color:#080b16;font-size:12px;font-weight:900;box-shadow:0 8px 25px rgba(125,120,255,.18)}
+.admin-button span{font-size:18px;font-weight:900}
+@media(max-width:900px){.admin{grid-template-columns:48px minmax(0,1fr)}.admin-button{grid-column:2;justify-self:start}}
+@media(max-width:600px){.admin{display:flex;flex-direction:column;align-items:stretch;gap:13px;padding:22px;margin:0 15px 20px}.admin-symbol{width:46px;height:46px}.admin-button{width:100%;min-height:52px;justify-content:center}.upload-steps{display:grid;grid-template-columns:1fr;gap:7px}.admin-copy>p:not(.eyebrow){font-size:13px;line-height:1.8}}
