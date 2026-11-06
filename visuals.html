@@ -5,7 +5,7 @@
 <meta name="theme-color" content="#070812"><title>Explore My Visuals | Smiley VisualSX</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/visuals.css?v=3"><link rel="icon" href="assets/images/smiley-visualsx-logo.webp" type="image/webp">
+<link rel="stylesheet" href="assets/css/visuals.css?v=4"><link rel="icon" href="assets/images/smiley-visualsx-logo.webp" type="image/webp">
 </head><body>
 <div class="ambient a1"></div><div class="ambient a2"></div>
 <header class="visual-header"><a class="visual-brand" href="profile.html"><img src="assets/images/smiley-visualsx-logo.webp" alt="Smiley VisualSX logo"><span class="divider"></span><span class="brand-caption">A VISUAL JOURNAL BY MURALI M</span></a><a class="back-link" href="profile.html">← Portfolio</a></header>
@@ -40,15 +40,47 @@ function empty(message){gallery.innerHTML='<div class="empty"><div class="empty-
 function card(file,i){
   const number=String(i+1).padStart(2,'0');
   const card=document.createElement('article');card.className='photo-card';
-  const view=document.createElement('button');view.className='photo-view';view.type='button';view.setAttribute('aria-label','Open gallery frame '+number);
-  const img=document.createElement('img');img.src=file.download_url;img.alt='Smiley VisualSX photograph, frame '+number;img.loading='lazy';
+  const view=document.createElement('button');view.className='photo-view';view.type='button';
+  view.setAttribute('aria-label','Open gallery frame '+number);
+  const imageUrl='/PORTFOLIO/assets/visuals/'+encodeURIComponent(file.name)+'?v='+encodeURIComponent(file.sha||'latest');
+  const img=document.createElement('img');
+  img.src=imageUrl;img.alt='Smiley VisualSX photograph, frame '+number;
+  img.loading=i<3?'eager':'lazy';img.decoding='async';
+  img.onerror=()=>{
+    img.hidden=true;
+    const fallback=document.createElement('span');
+    fallback.className='photo-fallback';fallback.textContent='IMAGE COULD NOT LOAD';
+    view.appendChild(fallback);
+  };
   const label=document.createElement('span');label.className='photo-label';label.textContent='FRAME / '+number;
   view.append(img,label);
-  view.addEventListener('click',()=>{document.getElementById('lightbox-image').src=file.download_url;document.getElementById('lightbox-image').alt='Smiley VisualSX photograph, frame '+number;document.getElementById('lightbox-caption').textContent='SMILEY VISUALSX  /  FRAME '+number;dialog.showModal()});
-  const del=document.createElement('a');del.className='photo-delete';del.href='https://github.com/MuraliM-2210/PORTFOLIO/delete/main/assets/visuals/'+encodeURIComponent(file.name);del.target='_blank';del.rel='noopener noreferrer';del.setAttribute('aria-label','Delete frame '+number+' in GitHub; authorised GitHub sign-in required');del.title='Delete photo';del.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3m3 0-.8 13H6.8L6 7m3.5 3v7m5-7v7"/></svg>';
-  del.addEventListener('click',e=>{if(!confirm('Open GitHub to delete this photograph? GitHub will require an authorised account and a commit to confirm deletion.'))e.preventDefault()});
+  view.addEventListener('click',()=>{
+    if(img.complete&&img.naturalWidth>0){
+      document.getElementById('lightbox-image').src=imageUrl;
+      document.getElementById('lightbox-image').alt='Smiley VisualSX photograph, frame '+number;
+      document.getElementById('lightbox-caption').textContent='SMILEY VISUALSX  /  FRAME '+number;
+      dialog.showModal();
+    }
+  });
+  const del=document.createElement('a');del.className='photo-delete';
+  del.href='https://github.com/MuraliM-2210/PORTFOLIO/delete/main/assets/visuals/'+encodeURIComponent(file.name);
+  del.target='_blank';del.rel='noopener noreferrer';
+  del.setAttribute('aria-label','Delete frame '+number+' in GitHub; authorised GitHub sign-in required');
+  del.title='Delete photo';
+  del.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3m3 0-.8 13H6.8L6 7m3.5 3v7m5-7v7"/></svg>';
+  del.addEventListener('click',e=>{
+    if(!confirm('Open GitHub to delete this photograph? GitHub will require an authorised account and a commit to confirm deletion.'))e.preventDefault();
+  });
   card.append(view,del);return card;
 }
-fetch('https://api.github.com/repos/MuraliM-2210/PORTFOLIO/contents/assets/visuals?ref=main',{headers:{Accept:'application/vnd.github+json'}}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(files=>{const imgs=files.filter(f=>f.type==='file'&&/\.(jpe?g|png|webp|avif)$/i.test(f.name)).sort((a,b)=>a.name.localeCompare(b.name));if(!imgs.length){empty('Your gallery folder is ready. Upload photographs with the secure GitHub admin folder and they will appear here automatically.');return}gallery.replaceChildren(...imgs.map(card));count.textContent=imgs.length+' FRAMES'}).catch(()=>empty('The image folder could not be loaded. Please try again or open the upload folder to manage your images.'));
+fetch('https://api.github.com/repos/MuraliM-2210/PORTFOLIO/contents/assets/visuals?ref=main',{headers:{Accept:'application/vnd.github+json'},cache:'no-store'})
+.then(r=>{if(!r.ok)throw Error('Gallery listing unavailable');return r.json()})
+.then(files=>{
+  const imgs=files.filter(f=>f.type==='file'&&/\\.(jpe?g|png|webp|avif)$/i.test(f.name)).sort((a,b)=>a.name.localeCompare(b.name));
+  if(!imgs.length){empty('Your visual collection is ready for its first photograph.');return}
+  gallery.replaceChildren(...imgs.map(card));count.textContent=imgs.length+' FRAMES';
+})
+.catch(()=>empty('The image folder could not be loaded. Please refresh and try again.'));
+
 document.querySelector('.close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
 </script></body></html>

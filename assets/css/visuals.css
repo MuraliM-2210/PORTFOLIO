@@ -57,3 +57,11 @@ h1{margin:0 0 20px;font-size:clamp(42px,6vw,76px);line-height:1.03;letter-spacin
 .photo-delete span{display:none}
 @media(max-width:600px){.upload-cta{padding:0 15px;margin-bottom:35px}.admin-button{width:100%;min-height:56px;font-size:14px}.photo-delete{opacity:1}}
 @media(prefers-reduced-motion:reduce){.admin-button,.photo-delete{transition:none}.admin-button:hover{transform:none}}
+
+/* Reliable gallery rendering: stable frame dimensions and clear load fallback */
+.photo-view{display:block!important;position:relative!important;width:100%!important;aspect-ratio:4/3!important;min-height:180px!important;overflow:hidden!important;background:linear-gradient(145deg,#252938,#141824)!important}
+.photo-view img{display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;object-fit:cover!important;opacity:1!important;visibility:visible!important}
+.photo-view img[hidden]{display:none!important}
+.photo-fallback{position:absolute!important;inset:0!important;display:grid!important;place-items:center!important;padding:20px!important;background:linear-gradient(145deg,#24293a,#121622)!important;color:#d2d8e4!important;font-size:11px!important;font-weight:900!important;letter-spacing:1.4px!important}
+.photo-label{z-index:2!important;pointer-events:none!important}
+.photo-delete{position:relative;z-index:3}
