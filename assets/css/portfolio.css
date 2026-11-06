@@ -186,8 +186,8 @@ nav .nav-contact:after{right:0;opacity:.55}
 .hero-image-frame img{object-fit:cover;object-position:center}
 
 /* Hero image fallback and explicit loading */
-.hero-frame{min-height:300px;background:#141824 url("../images/murali-creative-hero.jpg") center/cover no-repeat}
-.hero-frame img{display:block!important;opacity:1!important;visibility:visible!important}
+.hero-frame{min-height:300px;background:#141824}
+.hero-frame img{display:block!important;width:100%!important;height:100%!important;min-height:300px;object-fit:cover!important;object-position:center!important;opacity:1!important;visibility:visible!important;position:relative!important;z-index:2!important}
 @media(max-width:720px){.hero-frame{min-height:240px}}
 
 
@@ -446,3 +446,7 @@ nav a{font-size:12px;color:#d0d6e0}
   #research .research-feature p,
   #research .research-item p{font-size:14px!important}
 }
+
+/* Active homepage hero: use the current PNG asset, never the legacy JPG fallback */
+.hero-visual .hero-frame{background:#101522!important}
+.hero-visual .hero-frame img{display:block!important;width:100%!important;height:100%!important;min-height:300px;object-fit:cover!important;object-position:center!important;position:relative!important;z-index:2!important;opacity:1!important;visibility:visible!important}
