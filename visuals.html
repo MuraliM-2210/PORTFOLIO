@@ -74,14 +74,14 @@ async function compressPhoto(file,index,total){
   if(!('createImageBitmap' in window)) throw new Error(file.name+': this browser cannot decode the selected image.');
   const bitmap=await createImageBitmap(file);
   let scale=Math.min(1,5000/Math.max(bitmap.width,bitmap.height));
-  let width=Math.max(1,Math.round(bitmap.width*scale));
-  let height=Math.max(1,Math.round(bitmap.height*scale));
   const canvas=document.createElement('canvas');
   const ctx=canvas.getContext('2d',{alpha:true});
   if(!ctx){bitmap.close?.();throw new Error('Canvas is not available in this browser.');}
   let result=null;
   try{
     for(let resizePass=0;resizePass<9;resizePass++){
+      const width=Math.max(1,Math.round(bitmap.width*scale));
+      const height=Math.max(1,Math.round(bitmap.height*scale));
       canvas.width=width;canvas.height=height;
       ctx.clearRect(0,0,width,height);
       ctx.drawImage(bitmap,0,0,width,height);
@@ -90,9 +90,8 @@ async function compressPhoto(file,index,total){
         if(blob.size<=TARGET_FILE){result=blob;break;}
       }
       if(result)break;
-      width=Math.max(1200,Math.round(width*.82));
-      height=Math.max(1200,Math.round(height*.82));
-      if(Math.max(width,height)<=1200)break;
+      scale*=.82;
+      if(Math.max(bitmap.width*scale,bitmap.height*scale)<320)break;
     }
   }finally{
     bitmap.close?.();
