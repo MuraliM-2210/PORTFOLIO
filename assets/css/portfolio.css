@@ -626,3 +626,23 @@ nav a{font-size:12px;color:#d0d6e0}
   #about .about-portrait-wrap.motion-ready .portrait-3d,
   #about .about-portrait-wrap.motion-ready .portrait-greeting{opacity:1!important;transform:none!important}
 }
+
+
+/* About portrait final refinement: full-body transparent illustration + simple Hi greeting */
+#about .about-portrait-wrap{min-height:clamp(470px,48vw,680px)}
+#about .portrait-3d{width:min(100%,540px)}
+#about .about-portrait-image{width:100%;max-height:660px;object-fit:contain;filter:drop-shadow(18px 24px 26px rgba(0,0,0,.38)) drop-shadow(0 0 20px rgba(229,170,77,.10))}
+#about .portrait-greeting{top:8%;right:1%;gap:9px;padding:10px 16px;border-radius:14px 14px 4px 14px;font-size:15px;letter-spacing:.01em}
+#about .greeting-wave{font-size:24px}
+#about .portrait-caption{display:none}
+#about .portrait-orbit{opacity:.45}
+@media(max-width:700px){
+ #about .about-portrait-wrap{min-height:460px}
+ #about .portrait-3d{width:min(100%,430px)}
+ #about .about-portrait-image{max-height:500px}
+ #about .portrait-greeting{top:5%;right:3%}
+}
+@media(max-width:420px){
+ #about .about-portrait-wrap{min-height:390px}
+ #about .about-portrait-image{max-height:430px}
+}
