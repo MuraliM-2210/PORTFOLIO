@@ -264,13 +264,26 @@
       </div>
     </section>
 
-    <section class="wrap section" id="about">
-      <div class="about-grid">
-        <div><p class="eyebrow">06 / A LITTLE ABOUT ME</p><h2>Visual instinct.<br>Editorial thinking<span class="accent">.</span></h2></div>
-        <div class="about-copy">
-          <p>I’m Murali M — a Director of Photography and Video Editor with a postgraduate background in Journalism and Mass Communication.</p>
-          <p>My work brings together camera craft, editing and visual communication. I have worked on institutional productions, short films, education campaigns, event coverage and photography, while also contributing to practical media environments through studio and production workflows.</p>
-          <p>Research remains an important part of my practice. It gives me another way to examine media, audience behaviour and the impact of visual communication — connecting creative decisions with a wider understanding of society.</p>
+    <section class="wrap section about-section" id="about">
+      <div class="about-layout">
+        <div class="about-content">
+          <p class="eyebrow">06 / A LITTLE ABOUT ME</p>
+          <h2>Hi, I am <span class="accent">Murali.</span></h2>
+          <div class="about-copy">
+            <p>I’m Murali M — a Director of Photography and Video Editor with a postgraduate background in Journalism and Mass Communication.</p>
+            <p>My work brings together camera craft, editing and visual communication. I have worked on institutional productions, short films, education campaigns, event coverage and photography, while also contributing to practical media environments through studio and production workflows.</p>
+            <p>Research remains an important part of my practice. It gives me another way to examine media, audience behaviour and the impact of visual communication — connecting creative decisions with a wider understanding of society.</p>
+          </div>
+        </div>
+        <div class="about-portrait-wrap" aria-label="Illustrated portrait of Murali">
+          <div class="portrait-aura" aria-hidden="true"></div>
+          <div class="portrait-orbit portrait-orbit-one" aria-hidden="true"></div>
+          <div class="portrait-orbit portrait-orbit-two" aria-hidden="true"></div>
+          <div class="portrait-greeting"><span class="greeting-wave" aria-hidden="true">👋</span><span>Hello there!</span></div>
+          <div class="portrait-3d">
+            <img class="about-portrait-image" src="assets/images/murali-about-avatar.webp" alt="Illustrated portrait of Murali M wearing a tan blazer and black outfit" width="520" height="626" loading="lazy" decoding="async">
+          </div>
+          <p class="portrait-caption">MURALI M <span>·</span> VISUAL STORYTELLER</p>
         </div>
       </div>
     </section>
@@ -350,6 +363,22 @@
     window.addEventListener('scroll',updateProgress,{passive:true});
     window.addEventListener('resize',updateProgress);
     updateProgress();
+    const aboutPortrait=document.querySelector('.about-portrait-wrap');
+    if(aboutPortrait){
+      if('IntersectionObserver' in window){
+        aboutPortrait.classList.add('motion-ready');
+        const portraitObserver=new IntersectionObserver(entries=>{
+          entries.forEach(entry=>{
+            if(!entry.isIntersecting)return;
+            aboutPortrait.classList.add('is-visible');
+            portraitObserver.unobserve(aboutPortrait);
+          });
+        },{threshold:.22});
+        portraitObserver.observe(aboutPortrait);
+      }else{
+        aboutPortrait.classList.add('is-visible');
+      }
+    }
     const sectionLinks=[...nav.querySelectorAll('a[href^="#"]')];
     const observed=[...document.querySelectorAll('main section[id]')];
     if('IntersectionObserver' in window){
