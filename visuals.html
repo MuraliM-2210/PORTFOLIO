@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -5,7 +8,7 @@
 <meta name="theme-color" content="#070812"><title>Explore My Visuals | Smiley VisualSX</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/visuals.css?v=5"><link rel="icon" href="assets/images/smiley-visualsx-logo.webp" type="image/webp">
+<link rel="stylesheet" href="assets/css/visuals.css?v=6"><link rel="icon" href="assets/images/smiley-visualsx-logo.webp" type="image/webp">
 </head><body>
 <div class="ambient a1"></div><div class="ambient a2"></div>
 <header class="visual-header"><a class="visual-brand" href="profile.html"><img src="assets/images/smiley-visualsx-logo.webp" alt="Smiley VisualSX logo"><span class="divider"></span><span class="brand-caption">A VISUAL JOURNAL BY MURALI M</span></a><a class="back-link" href="profile.html">← Portfolio</a></header>
@@ -43,34 +46,21 @@ function card(file,i){
   const view=document.createElement('button');view.className='photo-view';view.type='button';
   view.setAttribute('aria-label','Open gallery frame '+number);
 
-  const encodedName=encodeURIComponent(file.name);
-  const version=encodeURIComponent(file.sha||'latest');
-  const sources=[
-    'assets/visuals/'+encodedName+'?v='+version,
-    'https://raw.githubusercontent.com/MuraliM-2210/PORTFOLIO/main/assets/visuals/'+encodedName+'?v='+version,
-    'https://cdn.jsdelivr.net/gh/MuraliM-2210/PORTFOLIO@main/assets/visuals/'+encodedName+'?v='+version
-  ];
-  let sourceIndex=0;
+  // Images are generated from Jekyll's published static-file list.
+  const imageUrl=file.url+'?v='+file.version;
   const img=document.createElement('img');
+  img.src=imageUrl;
   img.alt='Smiley VisualSX photograph, frame '+number;
   img.loading=i<3?'eager':'lazy';
   img.decoding='async';
-  img.fetchPriority=i<3?'high':'auto';
-  img.src=sources[sourceIndex];
-
-  img.addEventListener('error',()=>{
-    sourceIndex+=1;
-    if(sourceIndex<sources.length){
-      img.src=sources[sourceIndex];
-      return;
-    }
+  if(i===0)img.fetchPriority='high';
+  img.onerror=()=>{
     img.hidden=true;
     const fallback=document.createElement('span');
     fallback.className='photo-fallback';
     fallback.textContent='PHOTO COULD NOT LOAD';
     view.appendChild(fallback);
-  });
-
+  };
   const label=document.createElement('span');
   label.className='photo-label';
   label.textContent='FRAME / '+number;
@@ -79,16 +69,17 @@ function card(file,i){
   view.addEventListener('click',()=>{
     if(img.complete&&img.naturalWidth>0){
       const lightboxImage=document.getElementById('lightbox-image');
-      lightboxImage.src=img.currentSrc||img.src;
+      lightboxImage.src=img.currentSrc||imageUrl;
       lightboxImage.alt='Smiley VisualSX photograph, frame '+number;
       document.getElementById('lightbox-caption').textContent='SMILEY VISUALSX  /  FRAME '+number;
       dialog.showModal();
     }
   });
 
+  const deletePath=file.path.split('/').map(encodeURIComponent).join('/');
   const del=document.createElement('a');
   del.className='photo-delete';
-  del.href='https://github.com/MuraliM-2210/PORTFOLIO/delete/main/assets/visuals/'+encodedName;
+  del.href='https://github.com/MuraliM-2210/PORTFOLIO/delete/main/'+deletePath;
   del.target='_blank';
   del.rel='noopener noreferrer';
   del.setAttribute('aria-label','Delete frame '+number+' in GitHub; authorised GitHub sign-in required');
@@ -100,14 +91,29 @@ function card(file,i){
   card.append(view,del);
   return card;
 }
-fetch('https://api.github.com/repos/MuraliM-2210/PORTFOLIO/contents/assets/visuals?ref=main',{headers:{Accept:'application/vnd.github+json'},cache:'no-store'})
-.then(r=>{if(!r.ok)throw Error('Gallery listing unavailable');return r.json()})
-.then(files=>{
-  const imgs=files.filter(f=>f.type==='file'&&/\\.(jpe?g|png|webp|avif)$/i.test(f.name)).sort((a,b)=>a.name.localeCompare(b.name));
-  if(!imgs.length){empty('Your visual collection is ready for its first photograph.');return}
-  gallery.replaceChildren(...imgs.map(card));count.textContent=imgs.length+' FRAMES';
-})
-.catch(()=>empty('The image folder could not be loaded. Please refresh and try again.'));
+{% assign gallery_images = site.static_files | sort: "path" %}
+const galleryFiles = [
+{% for photo in gallery_images %}
+  {% assign photo_ext = photo.extname | downcase %}
+  {% if photo.path contains '/assets/visuals/' %}
+    {% if photo_ext == '.jpg' or photo_ext == '.jpeg' or photo_ext == '.png' or photo_ext == '.webp' or photo_ext == '.avif' %}
+      {
+        url: {{ photo.path | remove_first: '/' | jsonify }},
+        path: {{ photo.path | remove_first: '/' | jsonify }},
+        name: {{ photo.basename | jsonify }},
+        version: {{ site.time | date: "%s" | jsonify }}
+      },
+    {% endif %}
+  {% endif %}
+{% endfor %}
+];
+galleryFiles.sort((a,b)=>a.path.localeCompare(b.path));
+if(galleryFiles.length){
+  gallery.replaceChildren(...galleryFiles.map(card));
+  count.textContent=galleryFiles.length+' FRAMES';
+}else{
+  empty('Your visual collection is ready for its first photograph.');
+}
 
 document.querySelector('.close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
 </script></body></html>
