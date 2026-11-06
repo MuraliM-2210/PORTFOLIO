@@ -90,3 +90,10 @@ h1{margin:0 0 20px;font-size:clamp(42px,6vw,76px);line-height:1.03;letter-spacin
 .photo-view img[hidden]{display:none!important}
 .photo-fallback{position:absolute!important;inset:0!important;display:grid!important;place-items:center!important;padding:20px!important;background:linear-gradient(145deg,#24293a,#121622)!important;color:#e1d3d8!important;font-size:11px!important;font-weight:900!important;letter-spacing:1.3px!important}
 .photo-label{z-index:2!important;pointer-events:none!important}
+
+
+/* Footer brand mark replaces the text portfolio link */
+.visual-footer-logo-link{display:inline-flex;align-items:center;justify-content:flex-start;min-width:0;max-width:220px;line-height:0}
+.visual-footer-logo{display:block;width:clamp(130px,15vw,180px);height:auto;max-height:48px;object-fit:contain;object-position:left center;filter:drop-shadow(0 0 12px rgba(255,255,255,.09));transition:opacity .2s ease,transform .2s ease}
+.visual-footer-logo-link:hover .visual-footer-logo{opacity:.88;transform:translateY(-1px)}
+@media(max-width:600px){.visual-footer-logo{width:150px;max-height:42px}.visual-footer{align-items:flex-start}}
