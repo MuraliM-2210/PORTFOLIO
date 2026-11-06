@@ -450,3 +450,12 @@ nav a{font-size:12px;color:#d0d6e0}
 /* Active homepage hero: use the current PNG asset, never the legacy JPG fallback */
 .hero-visual .hero-frame{background:#101522!important}
 .hero-visual .hero-frame img{display:block!important;width:100%!important;height:100%!important;min-height:300px;object-fit:cover!important;object-position:center!important;position:relative!important;z-index:2!important;opacity:1!important;visibility:visible!important}
+
+
+/* Smiley VisualSX invitation beneath contact */
+.visuals-promo{padding:28px 0 64px}
+.visuals-promo-card{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:30px clamp(22px,4vw,44px);border:1px solid rgba(255,255,255,.13);border-radius:17px;background:radial-gradient(ellipse at 0 0,rgba(162,100,255,.16),transparent 45%),linear-gradient(125deg,rgba(21,25,44,.96),rgba(10,15,28,.96));box-shadow:0 22px 55px rgba(0,0,0,.24)}
+.visuals-promo-card h2{margin:0 0 8px;font-size:clamp(24px,3vw,34px);color:#f4f5f8}
+.visuals-promo-card p:not(.eyebrow){max-width:620px;margin:0;color:#c4ccda;font-size:14px;line-height:1.8}
+.visuals-promo-card .eyebrow{margin-bottom:8px}
+@media(max-width:650px){.visuals-promo{padding:20px 0 45px}.visuals-promo-card{align-items:flex-start;flex-direction:column}.visuals-promo-card .btn{width:100%;justify-content:center}}
