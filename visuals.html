@@ -5,7 +5,7 @@
 <meta name="theme-color" content="#070812"><title>Explore My Visuals | Smiley VisualSX</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/visuals.css?v=1"><link rel="icon" href="assets/images/smiley-visualsx-logo.webp" type="image/webp">
+<link rel="stylesheet" href="assets/css/visuals.css?v=2"><link rel="icon" href="assets/images/smiley-visualsx-logo.webp" type="image/webp">
 </head><body>
 <div class="ambient a1"></div><div class="ambient a2"></div>
 <header class="visual-header"><a class="visual-brand" href="profile.html"><img src="assets/images/smiley-visualsx-logo.webp" alt="Smiley VisualSX logo"><span class="divider"></span><span class="brand-caption">A VISUAL JOURNAL BY MURALI M</span></a><a class="back-link" href="profile.html">← Portfolio</a></header>
@@ -42,11 +42,11 @@
     <p class="upload-footnote">After downloading, extract the ZIP file in your phone's Files app. Upload the extracted .webp photographs to GitHub. Each photo is kept below GitHub's 25 MB per-file limit.</p>
   </div>
 </dialog>
-<p class="security-note">Uploads are protected by GitHub repository permissions. Only accounts with write access can add or replace images.</p>
 </main>
 <footer class="visual-footer"><a href="profile.html">← Back to Murali M's Portfolio</a><span>SMILEY VISUALSX · © <span id="year"></span></span></footer>
 <dialog class="lightbox" id="lightbox"><button class="close" aria-label="Close image">×</button><img id="lightbox-image" alt=""><p id="lightbox-caption"></p></dialog>
-<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js">
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script>
 const uploadDialog=document.getElementById('upload-dialog');
 const openUploader=document.getElementById('open-uploader');
 const closeUploader=document.getElementById('close-uploader');
@@ -157,7 +157,6 @@ compressButton.addEventListener('click',async()=>{
     compressButton.disabled=false;
   }
 });
-
 </script>
 <script>
 const gallery=document.getElementById('gallery-grid'),count=document.getElementById('frame-count'),dialog=document.getElementById('lightbox');
