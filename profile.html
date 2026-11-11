@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/portfolio.css?v=20261107-rightside-final">
+  <link rel="stylesheet" href="assets/css/portfolio.css?v=20261111-static-hq">
   <link rel="icon" href="assets/images/murali-creative-hero.png?v=20261106-hero2" type="image/png">
   <script type="application/ld+json">
   {
@@ -299,9 +299,8 @@
             <p>Research remains an important part of my practice. It gives me another way to examine media, audience behaviour and the impact of visual communication — connecting creative decisions with a wider understanding of society.</p>
           </div>
         </div>
-        <div class="about-portrait-wrap" aria-label="Illustrated portrait of Murali M">
-          <div class="portrait-greeting"><span class="greeting-wave" aria-hidden="true">👋</span><span>Hi!</span></div>
-          <img class="about-portrait-image" src="assets/images/murali-about-rightside-20261107.webp?v=20261107-image-new2" alt="Full-body illustrated portrait of Murali M wearing a beige blazer, black outfit and white sneakers" width="680" height="803" loading="lazy" decoding="async">
+        <div class="about-portrait-wrap">
+          <img class="about-portrait-image" src="assets/images/murali%20m.png?v=20261111-static-hq" alt="Full-body illustrated portrait of Murali M wearing a beige blazer, black outfit and white sneakers" width="1154" height="1363" loading="lazy" decoding="async">
         </div>
       </div>
     </section>
@@ -381,22 +380,6 @@
     window.addEventListener('scroll',updateProgress,{passive:true});
     window.addEventListener('resize',updateProgress);
     updateProgress();
-    const aboutPortrait=document.querySelector('.about-portrait-wrap');
-    if(aboutPortrait){
-      if('IntersectionObserver' in window){
-        aboutPortrait.classList.add('motion-ready');
-        const portraitObserver=new IntersectionObserver(entries=>{
-          entries.forEach(entry=>{
-            if(!entry.isIntersecting)return;
-            aboutPortrait.classList.add('is-visible');
-            portraitObserver.unobserve(aboutPortrait);
-          });
-        },{threshold:.22});
-        portraitObserver.observe(aboutPortrait);
-      }else{
-        aboutPortrait.classList.add('is-visible');
-      }
-    }
     const sectionLinks=[...nav.querySelectorAll('a[href^="#"]')];
     const observed=[...document.querySelectorAll('main section[id]')];
     if('IntersectionObserver' in window){
