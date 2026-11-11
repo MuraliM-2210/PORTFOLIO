@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/blogs.css?v=20261111-1">
+<link rel="stylesheet" href="assets/css/blogs.css?v=20261111-admin-split">
 </head>
 <body>
 <header class="blog-header">
@@ -30,73 +30,17 @@
   <section class="blog-main-section">
     <div class="section-top">
       <div><p class="eyebrow">THE JOURNAL</p><h2>Latest writing<span>.</span></h2></div>
-      <button class="primary-btn" id="openEditor" type="button"><span>＋</span> Write a blog</button>
+      <span class="journal-note">A PERSONAL JOURNAL BY MURALI M</span>
     </div>
     <div class="blog-toolbar">
       <label class="search-box"><span aria-hidden="true">⌕</span><input id="searchPosts" type="search" placeholder="Search stories, topics or words…" aria-label="Search blogs"></label>
       <div class="filter-list" id="categoryFilters"><button class="filter-chip active" data-category="All" type="button">All posts</button><button class="filter-chip" data-category="Photography" type="button">Photography</button><button class="filter-chip" data-category="Media" type="button">Media</button><button class="filter-chip" data-category="Culture" type="button">Culture</button><button class="filter-chip" data-category="Personal" type="button">Personal</button><button class="filter-chip" data-category="Research" type="button">Research</button></div>
     </div>
-    <div id="postsGrid" class="posts-grid" aria-live="polite"><div class="empty-posts"><span class="empty-icon">✎</span><h3>Your writing space is ready.</h3><p>Your published blogs will appear here. Start with your first story.</p><button class="text-btn" type="button" data-open-editor>Write your first blog ↗</button></div></div>
+    <div id="postsGrid" class="posts-grid" aria-live="polite"><div class="empty-posts"><span class="empty-icon">✎</span><h3>Your writing space is ready.</h3><p>Your published blogs will appear here. Start with your first story.</p></div></div>
     <p id="postCount" class="post-count">YOUR JOURNAL · 0 POSTS</p>
   </section>
 
-  <section class="editor-section" id="editorSection" hidden>
-    <div class="editor-heading">
-      <div><p class="eyebrow">PRIVATE WORKSPACE · SAVED ON THIS DEVICE</p><h2>The writing desk<span>.</span></h2><p class="editor-intro">Write freely. Your draft autosaves in this browser. Add images, preview the story, then export a ready-to-upload publishing package.</p></div>
-      <button class="close-editor" id="closeEditor" type="button" aria-label="Close editor">×</button>
-    </div>
-    <div class="editor-layout">
-      <aside class="draft-sidebar">
-        <button class="new-draft-btn" id="newDraft" type="button">＋ New draft</button>
-        <div class="draft-sidebar-label">YOUR DRAFTS <span id="draftCount">0</span></div>
-        <div id="draftList" class="draft-list"><p class="draft-empty">No saved drafts yet.</p></div>
-        <div class="publish-help"><strong>How publishing works</strong><p>Export a ZIP containing your blog index and images. Upload its files to your GitHub repository to make the post public.</p><a href="https://github.com/MuraliM-2210/PORTFOLIO/upload/main" target="_blank" rel="noopener noreferrer">Open repository upload ↗</a></div>
-      </aside>
-      <div class="editor-main">
-        <div class="editor-status-row"><span id="saveStatus" class="save-status"><i></i> Ready to write</span><span class="autosave-label">AUTOSAVE ON</span></div>
-        <label class="field-label" for="postTitle">BLOG TITLE</label>
-        <input class="title-input" id="postTitle" maxlength="120" placeholder="Give your story a title…" autocomplete="off">
-        <div class="field-grid">
-          <label class="field-label">CATEGORY
-            <select id="postCategory"><option>Photography</option><option>Media</option><option>Culture</option><option>Personal</option><option>Research</option><option>Travel</option><option>Opinion</option></select>
-          </label>
-          <label class="field-label">PUBLISH DATE
-            <input id="postDate" type="date">
-          </label>
-        </div>
-        <label class="field-label" for="postExcerpt">SHORT INTRO / EXCERPT</label>
-        <textarea id="postExcerpt" class="excerpt-input" rows="2" maxlength="260" placeholder="A short introduction that helps readers decide to open your story…"></textarea>
-        <div class="cover-uploader">
-          <div class="cover-preview" id="coverPreview"><span>✧</span><small>FEATURED IMAGE</small></div>
-          <div class="cover-tools"><strong>Featured image</strong><p>Choose a cover image for your blog. Original quality is retained in the publishing package.</p><label class="upload-btn" for="coverFile">＋ Upload cover image</label><input id="coverFile" type="file" accept="image/*" hidden><button class="remove-cover" id="removeCover" type="button" hidden>Remove image</button><small id="coverName">Recommended: landscape image, 1600 px wide or larger.</small></div>
-        </div>
-        <div class="field-label editor-label">YOUR STORY</div>
-        <div class="format-toolbar" role="toolbar" aria-label="Text formatting">
-          <button type="button" data-command="bold" title="Bold"><b>B</b></button>
-          <button type="button" data-command="italic" title="Italic"><i>I</i></button>
-          <button type="button" data-command="underline" title="Underline"><u>U</u></button>
-          <span class="toolbar-sep"></span>
-          <button type="button" data-block="h2" title="Heading">H2</button>
-          <button type="button" data-block="h3" title="Subheading">H3</button>
-          <button type="button" data-command="insertUnorderedList" title="Bullet list">☷</button>
-          <button type="button" data-command="insertOrderedList" title="Numbered list">1.</button>
-          <button type="button" data-block="blockquote" title="Quote">❝</button>
-          <span class="toolbar-sep"></span>
-          <label class="toolbar-upload" for="bodyImageFile" title="Insert image">▧ Image</label>
-          <input id="bodyImageFile" type="file" accept="image/*" multiple hidden>
-          <button type="button" data-command="removeFormat" title="Clear formatting">Tx</button>
-        </div>
-        <div id="postBody" class="rich-editor" contenteditable="true" spellcheck="true" data-placeholder="Start writing your story here…&#10;&#10;Take your time. Add headings, quotes, lists and photographs wherever they help tell the story."></div>
-        <div class="editor-foot"><span>Tip: paste text directly, or use the toolbar to format your story.</span><span id="wordCount">0 words</span></div>
-        <div class="editor-actions">
-          <button class="secondary-btn" id="previewPost" type="button">Preview story ↗</button>
-          <button class="secondary-btn" id="downloadBackup" type="button">Download draft</button>
-          <button class="primary-btn" id="exportPackage" type="button">Export publish package <span>↓</span></button>
-        </div>
-        <p class="publish-note"><strong>Publishing note:</strong> The export creates a ZIP with the updated <code>blogs.json</code> and all image assets. Upload/replace these files in GitHub to publish. Your website does not store a GitHub password or access token.</p>
-      </div>
-    </div>
-  </section>
+
 </main>
 <footer class="blog-footer"><a href="profile.html">← Back to portfolio</a><span>© <span id="year"></span> MURALI M · A PERSONAL WRITING SPACE</span></footer>
 
@@ -109,204 +53,30 @@
 </div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
 (() => {
   "use strict";
-  const $ = id => document.getElementById(id);
-  const storeName = "murali-blog-drafts-v1";
-  let db, currentDraft = null, saveTimer = null, publishedPosts = [], activeCategory = "All";
-  const today = new Date().toISOString().slice(0,10);
-  $("year").textContent = new Date().getFullYear();
-  const openDB = () => new Promise((resolve,reject) => {
-    const request = indexedDB.open(storeName,1);
-    request.onupgradeneeded = () => { if(!request.result.objectStoreNames.contains("drafts")) request.result.createObjectStore("drafts",{keyPath:"id"}); };
-    request.onsuccess = () => { db=request.result; resolve(db); };
-    request.onerror = () => reject(request.error);
-  });
-  const draftStore = mode => db.transaction("drafts",mode).objectStore("drafts");
-  const getAllDrafts = () => new Promise((resolve,reject)=>{const r=draftStore("readonly").getAll();r.onsuccess=()=>resolve(r.result.sort((a,b)=>(b.updatedAt||"").localeCompare(a.updatedAt||"")));r.onerror=()=>reject(r.error);});
-  const putDraft = draft => new Promise((resolve,reject)=>{const r=draftStore("readwrite").put(draft);r.onsuccess=()=>resolve();r.onerror=()=>reject(r.error);});
-  const removeDraft = id => new Promise((resolve,reject)=>{const r=draftStore("readwrite").delete(id);r.onsuccess=()=>resolve();r.onerror=()=>reject(r.error);});
-  const id = () => (crypto.randomUUID ? crypto.randomUUID() : "draft-"+Date.now()+"-"+Math.random().toString(16).slice(2));
-  const slugify = value => value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,70) || "untitled-story";
-  const plainText = html => { const el=document.createElement("div");el.innerHTML=html||"";return (el.textContent||"").replace(/\s+/g," ").trim(); };
-  const words = text => text.trim() ? text.trim().split(/\s+/).length : 0;
-  const escapeHtml = str => String(str||"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-  const notify = message => { const t=$("toast");t.textContent=message;t.classList.add("show");clearTimeout(notify.timer);notify.timer=setTimeout(()=>t.classList.remove("show"),2800); };
-  const setStatus = (text,ok=true) => { $("saveStatus").innerHTML="<i class='"+(ok?"":"pending")+"'></i>"+escapeHtml(text); };
-  const readFile = file => new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(r.error);r.readAsDataURL(file);});
-  const fileExt = mime => ({ "image/jpeg":"jpg","image/png":"png","image/webp":"webp","image/gif":"gif","image/avif":"avif","image/svg+xml":"svg" }[mime] || "png");
-  const dataToBlob = data => { const [meta,b64]=data.split(",");const mime=(meta.match(/data:([^;]+)/)||[])[1]||"application/octet-stream";const bin=atob(b64);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return {blob:new Blob([bytes],{type:mime}),mime}; };
-  const cleanMarkup = html => {
-    const doc=new DOMParser().parseFromString("<div>"+(html||"")+"</div>","text/html"), root=doc.body.firstElementChild;
-    const allowed=new Set(["P","BR","STRONG","B","EM","I","U","S","H2","H3","H4","UL","OL","LI","BLOCKQUOTE","A","IMG","FIGURE","FIGCAPTION","HR","CODE","PRE"]);
-    const walk=node=>{
-      [...node.childNodes].forEach(child=>{
-        if(child.nodeType===1){
-          if(!allowed.has(child.tagName)){const frag=doc.createDocumentFragment();while(child.firstChild)frag.appendChild(child.firstChild);child.replaceWith(frag);return;}
-          [...child.attributes].forEach(attr=>{
-            const name=attr.name.toLowerCase(), val=attr.value;
-            if(child.tagName==="A"&&name==="href"&&/^(https?:|mailto:)/i.test(val)){child.setAttribute("rel","noopener noreferrer");child.setAttribute("target","_blank");}
-            else if(child.tagName==="IMG"&&name==="src"&&(val.startsWith("data:image/")||val.startsWith("assets/blogs/")||val.startsWith("https://"))){}
-            else if(child.tagName==="IMG"&&name==="alt"){}
-            else if(child.tagName==="IMG"&&name==="width"){}
-            else if(child.tagName==="IMG"&&name==="height"){}
-            else if(child.tagName==="A"&&name==="target"){}
-            else if(child.tagName==="A"&&name==="rel"){}
-            else child.removeAttribute(attr.name);
-          });
-          walk(child);
-        } else if(child.nodeType!==3) child.remove();
-      });
-    };
-    walk(root);
-    return root.innerHTML;
-  };
-  const collectPost = () => {
-    const title=$("postTitle").value.trim();
-    const body=cleanMarkup($("postBody").innerHTML);
-    const txt=plainText(body);
-    const excerpt=$("postExcerpt").value.trim() || txt.slice(0,210)+(txt.length>210?"…":"");
-    return {
-      id:currentDraft?.id||id(), slug:slugify(title), title, category:$("postCategory").value,
-      date:$("postDate").value||today, excerpt, cover:currentDraft?.cover||"",
-      content:body, updatedAt:new Date().toISOString()
-    };
-  };
-  const refreshWordCount = () => $("wordCount").textContent=words(plainText($("postBody").innerHTML))+" words";
-  const formToDraft = () => {
-    const value=collectPost(); value.cover=currentDraft?.cover||"";
-    currentDraft={...currentDraft,...value};
-    clearTimeout(saveTimer);setStatus("Unsaved changes",false);
-    saveTimer=setTimeout(async()=>{try{await putDraft(currentDraft);setStatus("Draft saved · "+new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}));await renderDraftList();}catch(e){setStatus("Could not save draft",false);notify("Browser storage is unavailable. Export a backup.");}},550);
-    refreshWordCount();
-  };
-  const renderDraftList = async () => {
-    const drafts=await getAllDrafts();$("draftCount").textContent=drafts.length;
-    $("draftList").innerHTML=drafts.length?drafts.map(d=>'<button class="draft-item '+(d.id===currentDraft?.id?"selected":"")+'" data-draft="'+escapeHtml(d.id)+'" type="button"><strong>'+escapeHtml(d.title||"Untitled draft")+'</strong><small>'+escapeHtml(d.category||"Draft")+' · '+new Date(d.updatedAt||Date.now()).toLocaleDateString()+'</small></button>').join(""):'<p class="draft-empty">No saved drafts yet.</p>';
-  };
-  const clearForm = draft => {
-    currentDraft=draft;
-    $("postTitle").value=draft.title||"";
-    $("postCategory").value=draft.category||"Photography";
-    $("postDate").value=draft.date||today;
-    $("postExcerpt").value=draft.excerpt||"";
-    $("postBody").innerHTML=draft.content||"";
-    renderCover();
-    refreshWordCount();setStatus(draft.title?"Draft opened":"New draft");
-    renderDraftList();
-  };
-  const newDraft = async () => {
-    if(currentDraft?.id) { try { await putDraft(collectPost()); } catch(e){} }
-    clearForm({id:id(),title:"",category:"Photography",date:today,excerpt:"",content:"",cover:"",updatedAt:new Date().toISOString()});
-    $("postTitle").focus();
-  };
-  const renderCover = () => {
-    const cover=currentDraft?.cover||"";
-    $("coverPreview").innerHTML=cover?'<img src="'+cover+'" alt="Blog cover preview">':'<span>✧</span><small>FEATURED IMAGE</small>';
-    $("removeCover").hidden=!cover;
-    $("coverName").textContent=cover?"Cover image selected · Original file quality retained":"Recommended: landscape image, 1600 px wide or larger.";
-  };
-  const showEditor = async () => { $("editorSection").hidden=false; $("editorSection").scrollIntoView({behavior:"smooth",block:"start"});if(!currentDraft){const drafts=await getAllDrafts();if(drafts.length)clearForm(drafts[0]);else await newDraft();} };
-  const showPreview = () => {
-    const post=collectPost();
-    $("previewMeta").textContent=post.category.toUpperCase()+" · "+new Date(post.date+"T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"long",year:"numeric"});
-    $("previewTitle").textContent=post.title||"Untitled story";
-    $("previewExcerpt").textContent=post.excerpt;
-    $("previewBody").innerHTML=cleanMarkup(post.content);
-    $("previewCover").hidden=!currentDraft?.cover;
-    if(currentDraft?.cover)$("previewCover").src=currentDraft.cover;
-    $("previewModal").hidden=false;
-  };
-  const convertImagesAndBuildPost = async draft => {
-    let body=cleanMarkup(draft.content||"");
-    const container=document.createElement("div");container.innerHTML=body;
-    const zipFiles=[];
-    let imageIndex=0;
-    for(const img of [...container.querySelectorAll("img")]){
-      const src=img.getAttribute("src")||"";
-      if(src.startsWith("data:image/")){
-        imageIndex++;
-        const {blob,mime}=dataToBlob(src), ext=fileExt(mime);
-        const path="assets/blogs/"+draft.slug+"/body-"+String(imageIndex).padStart(2,"0")+"."+ext;
-        zipFiles.push({path,blob});img.setAttribute("src",path);
-      }
-    }
-    let coverPath="";
-    if(draft.cover){
-      const {blob,mime}=dataToBlob(draft.cover);
-      coverPath="assets/blogs/"+draft.slug+"/cover."+fileExt(mime);
-      zipFiles.push({path:coverPath,blob});
-    }
-    const content=cleanMarkup(container.innerHTML);
-    const txt=plainText(content);
-    const excerpt=(draft.excerpt||txt.slice(0,210)+(txt.length>210?"…":"")).trim();
-    return {
-      post:{slug:draft.slug,title:draft.title,category:draft.category,date:draft.date,excerpt,cover:coverPath,content,readTime:Math.max(1,Math.ceil(words(txt)/220))},
-      files:zipFiles
-    };
-  };
-  const exportPackage = async () => {
-    if(!window.JSZip){notify("ZIP library did not load. Refresh and try again.");return;}
-    const draft=collectPost();
-    if(!draft.title||!plainText(draft.content)){notify("Add a title and write your story before exporting.");return;}
-    try{
-      clearTimeout(saveTimer);currentDraft={...currentDraft,...draft};await putDraft(currentDraft);
-      setStatus("Preparing publishing package…");
-      const built=await convertImagesAndBuildPost(draft);
-      const existing=await fetch("blogs.json?v="+Date.now()).then(r=>r.ok?r.json():[]).catch(()=>[]);
-      const posts=Array.isArray(existing)?existing:[];
-      const idx=posts.findIndex(p=>p.slug===built.post.slug);
-      if(idx>=0)posts[idx]=built.post;else posts.unshift(built.post);
-      posts.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
-      const zip=new JSZip();
-      zip.file("blogs.json",JSON.stringify(posts,null,2));
-      zip.file("UPLOAD-INSTRUCTIONS.txt","MURALI M — BLOG PUBLISH PACKAGE\n\n1. Extract this ZIP.\n2. Upload blogs.json to the root of MuraliM-2210/PORTFOLIO and replace the existing file.\n3. Upload the assets/ folder into the repository root, merging with the existing assets folder.\n4. Commit the changes to main.\n5. Open blogs.html to see the new post.\n\nDo not delete existing blog entries from blogs.json. This package includes the current published list plus this post.\n");
-      for(const f of built.files)zip.file(f.path,f.blob);
-      const blob=await zip.generateAsync({type:"blob",compression:"DEFLATE",compressionOptions:{level:6}});
-      const url=URL.createObjectURL(blob),a=document.createElement("a");
-      a.href=url;a.download="murali-blog-"+draft.slug+"-publish.zip";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
-      setStatus("Publish package ready · "+new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}));
-      notify("Publish package downloaded. Upload its files to GitHub.");
-    }catch(err){console.error(err);setStatus("Export failed",false);notify("Could not create the ZIP. Try downloading a draft backup.");}
-  };
-  const backupDraft = () => {
-    const draft=collectPost(),data=new Blob([JSON.stringify({...draft,cover:currentDraft?.cover||""},null,2)],{type:"application/json"});
-    const url=URL.createObjectURL(data),a=document.createElement("a");a.href=url;a.download="murali-draft-"+(draft.slug||"untitled")+".json";a.click();URL.revokeObjectURL(url);notify("Draft backup downloaded.");
-  };
-  const renderPosts = () => {
+  const $=id=>document.getElementById(id);
+  let publishedPosts=[],activeCategory="All";
+  $("year").textContent=new Date().getFullYear();
+  const escapeHtml=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const render=()=>{
     const q=$("searchPosts").value.trim().toLowerCase();
     const shown=publishedPosts.filter(p=>(activeCategory==="All"||p.category===activeCategory)&&[p.title,p.excerpt,p.category].join(" ").toLowerCase().includes(q));
     $("postCount").textContent="YOUR JOURNAL · "+publishedPosts.length+" "+(publishedPosts.length===1?"POST":"POSTS");
-    $("postsGrid").innerHTML=shown.length?shown.map(p=>'<article class="post-card"><a class="post-cover" href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">'+(p.cover?'<img src="'+escapeHtml(p.cover)+'" alt="" loading="lazy">':'<span class="cover-placeholder">M<span>.</span></span>')+'<span class="cover-open">READ STORY ↗</span></a><div class="post-card-copy"><div class="post-meta"><span>'+escapeHtml(p.category||"Journal")+'</span><time>'+escapeHtml(p.date||"")+'</time></div><h3><a href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">'+escapeHtml(p.title)+'</a></h3><p>'+escapeHtml(p.excerpt||"")+'</p><a class="read-link" href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">Read story <span>↗</span></a></div></article>').join(""):'<div class="empty-posts"><span class="empty-icon">✎</span><h3>No stories found.</h3><p>Try another search or category, or start writing your next story.</p></div>';
+    $("postsGrid").innerHTML=shown.length?shown.map(p=>'<article class="post-card"><a class="post-cover" href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">'+(p.cover?'<img src="'+escapeHtml(p.cover)+'" alt="" loading="lazy">':'<span class="cover-placeholder">M<span>.</span></span>')+'<span class="cover-open">READ STORY ↗</span></a><div class="post-card-copy"><div class="post-meta"><span>'+escapeHtml(p.category||"Journal")+'</span><time>'+escapeHtml(p.date||"")+'</time></div><h3><a href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">'+escapeHtml(p.title)+'</a></h3><p>'+escapeHtml(p.excerpt||"")+'</p><a class="read-link" href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">Read story <span>↗</span></a></div></article>').join(""):'<div class="empty-posts"><span class="empty-icon">✎</span><h3>No stories published yet.</h3><p>New articles will appear here when they are published.</p></div>';
   };
-  $("openEditor").addEventListener("click",showEditor);
-  document.querySelectorAll("[data-open-editor]").forEach(b=>b.addEventListener("click",showEditor));
-  $("closeEditor").addEventListener("click",()=>{$("editorSection").hidden=true;});
-  $("newDraft").addEventListener("click",newDraft);
-  ["postTitle","postCategory","postDate","postExcerpt"].forEach(id=>$ (id).addEventListener("input",formToDraft));
-  $("postBody").addEventListener("input",formToDraft);
-  $("draftList").addEventListener("click",async e=>{const b=e.target.closest("[data-draft]");if(!b)return;if(currentDraft?.id)await putDraft(collectPost());const list=await getAllDrafts();const found=list.find(d=>d.id===b.dataset.draft);if(found)clearForm(found);});
-  $("coverFile").addEventListener("change",async e=>{const file=e.target.files?.[0];if(!file)return;if(!file.type.startsWith("image/")){notify("Choose an image file.");return;}try{currentDraft=currentDraft||{id:id(),date:today,category:"Photography"};currentDraft.cover=await readFile(file);renderCover();formToDraft();notify("Cover image added.");}catch(err){notify("Could not read this image.");}e.target.value="";});
-  $("removeCover").addEventListener("click",()=>{if(currentDraft)currentDraft.cover="";renderCover();formToDraft();});
-  $("bodyImageFile").addEventListener("change",async e=>{const files=[...e.target.files||[]];for(const file of files){if(!file.type.startsWith("image/"))continue;try{const src=await readFile(file);$("postBody").focus();document.execCommand("insertHTML",false,'<figure><img src="'+src+'" alt="'+escapeHtml(file.name)+'"><figcaption>'+escapeHtml(file.name)+'</figcaption></figure><p><br></p>');}catch(err){notify("Could not insert "+file.name);}}formToDraft();e.target.value="";});
-  document.querySelector(".format-toolbar").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;$("postBody").focus();if(b.dataset.command)document.execCommand(b.dataset.command,false,null);if(b.dataset.block)document.execCommand("formatBlock",false,b.dataset.block);formToDraft();});
-  $("previewPost").addEventListener("click",showPreview);
-  $("downloadBackup").addEventListener("click",backupDraft);
-  $("exportPackage").addEventListener("click",exportPackage);
-  $("previewModal").addEventListener("click",e=>{if(e.target.closest("[data-close-preview]"))$("previewModal").hidden=true;});
-  $("searchPosts").addEventListener("input",renderPosts);
-  $("categoryFilters").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b)return;activeCategory=b.dataset.category;document.querySelectorAll(".filter-chip").forEach(x=>x.classList.toggle("active",x===b));renderPosts();});
-  const init=async()=>{
-    try{await openDB();const drafts=await getAllDrafts();await renderDraftList();if(drafts.length)clearForm(drafts[0]);}
-    catch(e){console.warn("IndexedDB unavailable",e);setStatus("Draft storage unavailable",false);}
-    try{const response=await fetch("blogs.json?v="+Date.now());publishedPosts=response.ok?await response.json():[];if(!Array.isArray(publishedPosts))publishedPosts=[];}
-    catch(e){publishedPosts=[];}
-    renderPosts();
-  };
-  init();
+  $("searchPosts").addEventListener("input",render);
+  $("categoryFilters").addEventListener("click",e=>{
+    const b=e.target.closest("[data-category]");if(!b)return;
+    activeCategory=b.dataset.category;
+    document.querySelectorAll(".filter-chip").forEach(x=>x.classList.toggle("active",x===b));
+    render();
+  });
+  fetch("blogs.json?v="+Date.now()).then(r=>r.ok?r.json():[]).then(data=>{
+    publishedPosts=Array.isArray(data)?data:[];
+    render();
+  }).catch(()=>{publishedPosts=[];render();});
 })();
-</script>
-</body>
+</script></body>
 </html>
