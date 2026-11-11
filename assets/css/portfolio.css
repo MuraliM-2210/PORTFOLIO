@@ -461,92 +461,58 @@ nav a{font-size:12px;color:#d0d6e0}
 @media(max-width:650px){.visuals-promo{padding:20px 0 45px}.visuals-promo-card{align-items:flex-start;flex-direction:column}.visuals-promo-card .btn{width:100%;justify-content:center}}
 
 
-/* ABOUT — fresh transparent illustrated portrait on the right */
+/* ABOUT — simple static high-resolution portrait */
 #about.about-section{overflow:hidden}
 #about .about-layout{
-  display:grid;grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);
-  align-items:center;gap:clamp(28px,5vw,76px);
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);
+  align-items:center;
+  gap:clamp(28px,5vw,76px);
 }
-#about .about-content{position:relative;z-index:2;max-width:670px}
+#about .about-content{max-width:670px}
 #about .about-content h2{
-  max-width:620px;margin:12px 0 25px;font-size:clamp(43px,5.4vw,72px);
-  line-height:.99;letter-spacing:-.065em;font-weight:900;
+  max-width:620px;
+  margin:12px 0 25px;
+  font-size:clamp(43px,5.4vw,72px);
+  line-height:.99;
+  letter-spacing:-.065em;
+  font-weight:900;
 }
 #about .about-content h2 .accent{white-space:nowrap}
 #about .about-copy{max-width:650px}
 #about .about-copy p{font-size:15px;line-height:1.9;color:#c7cfdb}
 #about .about-copy p:first-child{font-size:17px;line-height:1.85;color:#f0f2f6}
 #about .about-portrait-wrap{
-  position:relative;min-width:0;min-height:clamp(470px,48vw,680px);
-  display:flex;align-items:center;justify-content:center;isolation:isolate;
-  perspective:1100px;overflow:visible;
+  min-width:0;
+  min-height:clamp(470px,48vw,680px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 #about .about-portrait-image{
-  position:relative;z-index:1;display:block;width:min(100%,590px);height:auto;
-  max-height:690px;object-fit:contain;object-position:center bottom;
-  filter:drop-shadow(0 22px 32px rgba(0,0,0,.42));
-  transform-origin:50% 70%;opacity:1;
-  transition:opacity .9s ease,transform 1.15s cubic-bezier(.2,.78,.2,1);
-}
-#about .portrait-greeting{
-  position:absolute;z-index:2;top:4%;right:2%;display:flex;align-items:center;gap:9px;
-  padding:10px 15px;border:1px solid rgba(255,255,255,.2);
-  border-radius:14px 14px 4px 14px;
-  background:linear-gradient(135deg,rgba(42,38,67,.94),rgba(15,25,43,.94));
-  color:#fff;font-size:13px;font-weight:800;
-  box-shadow:0 14px 34px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.12);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  transition:opacity .7s ease .2s,transform .8s cubic-bezier(.2,.8,.2,1) .2s;
-}
-#about .greeting-wave{display:inline-block;font-size:21px;transform-origin:70% 75%}
-#about .about-portrait-wrap.motion-ready .about-portrait-image{
-  opacity:0;transform:perspective(1100px) translate3d(38px,34px,-70px) rotateY(-12deg) scale(.93);
-}
-#about .about-portrait-wrap.motion-ready .portrait-greeting{
-  opacity:0;transform:translate3d(14px,12px,0) scale(.85);
-}
-#about .about-portrait-wrap.is-visible .about-portrait-image{
-  opacity:1;transform:perspective(1100px) translate3d(0,0,0) rotateY(-5deg) scale(1);
-  animation:aboutPortraitFloat 6s ease-in-out 1.1s infinite;
-}
-#about .about-portrait-wrap.is-visible .portrait-greeting{
-  opacity:1;transform:translate3d(0,0,12px) scale(1);
-}
-#about .about-portrait-wrap.is-visible .greeting-wave{animation:aboutWave 1.1s ease-in-out .8s 2}
-@keyframes aboutPortraitFloat{
-  0%,100%{transform:perspective(1100px) translate3d(0,0,0) rotateY(-5deg) scale(1)}
-  50%{transform:perspective(1100px) translate3d(0,-9px,8px) rotateY(-2deg) scale(1.008)}
-}
-@keyframes aboutWave{
-  0%,100%{transform:rotate(0)}
-  20%,60%{transform:rotate(18deg)}
-  40%,80%{transform:rotate(-10deg)}
+  display:block;
+  width:min(100%,590px);
+  height:auto;
+  max-height:680px;
+  object-fit:contain;
+  object-position:center;
 }
 @media(max-width:900px){
   #about .about-layout{grid-template-columns:minmax(0,1fr) minmax(270px,.78fr);gap:24px}
   #about .about-portrait-wrap{min-height:500px}
   #about .about-content h2{font-size:clamp(42px,6vw,58px)}
-  #about .portrait-greeting{right:1%;top:4%;padding:9px 12px;font-size:12px}
 }
 @media(max-width:700px){
   #about .about-layout{grid-template-columns:1fr;gap:16px}
   #about .about-content h2{font-size:clamp(42px,12vw,58px);margin-bottom:18px}
   #about .about-copy p{font-size:14px;line-height:1.85}
   #about .about-copy p:first-child{font-size:16px}
-  #about .about-portrait-wrap{min-height:440px;margin-top:2px}
+  #about .about-portrait-wrap{min-height:420px;margin-top:2px}
   #about .about-portrait-image{width:min(100%,430px);max-height:500px}
-  #about .portrait-greeting{top:2%;right:5%}
 }
 @media(max-width:420px){
   #about .about-portrait-wrap{min-height:390px}
   #about .about-portrait-image{max-height:445px}
-}
-@media(prefers-reduced-motion:reduce){
-  #about .about-portrait-wrap *,
-  #about .about-portrait-wrap.is-visible .about-portrait-image,
-  #about .about-portrait-wrap.is-visible .greeting-wave{animation:none!important;transition:none!important}
-  #about .about-portrait-wrap.motion-ready .about-portrait-image,
-  #about .about-portrait-wrap.motion-ready .portrait-greeting{opacity:1!important;transform:none!important}
 }
 
 /* Research publication table — cache refresh / accessible contrast */
