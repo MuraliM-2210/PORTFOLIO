@@ -13,7 +13,7 @@
 </head>
 <body>
 <header class="blog-header">
-  <a class="blog-brand" href="profile.html"><span class="brand-smiley">☺</span><span>Murali M's Portfolio</span></a>
+  <a class="blog-brand" href="#" data-admin-shortcut aria-label="Murali M portfolio — return to top"><span class="brand-smiley">☺</span><span>Murali M's Portfolio</span></a>
   <nav aria-label="Blogs navigation"><a href="profile.html">Portfolio</a><a class="active" href="blogs.html">Blogs</a><a href="visuals.html">Visuals</a></nav>
 </header>
 <main>
@@ -78,5 +78,25 @@
     render();
   }).catch(()=>{publishedPosts=[];render();});
 })();
+
+    // Private admin shortcut: tap the portfolio smiley/brand five times quickly.
+    (() => {
+      const brand = document.querySelector('[data-admin-shortcut]');
+      if (!brand) return;
+      let taps = 0;
+      let resetTimer = null;
+      brand.addEventListener('click', event => {
+        event.preventDefault();
+        window.scrollTo({top:0,behavior:'smooth'});
+        taps += 1;
+        clearTimeout(resetTimer);
+        if (taps >= 5) {
+          taps = 0;
+          window.location.href = 'blogs-admin.html';
+          return;
+        }
+        resetTimer = setTimeout(() => { taps = 0; }, 2400);
+      });
+    })();
 </script></body>
 </html>
