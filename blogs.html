@@ -13,7 +13,7 @@
 </head>
 <body>
 <header class="blog-header">
-  <a class="blog-brand" href="#" data-admin-shortcut aria-label="Murali M portfolio — return to top"><span class="brand-smiley">☺</span><span>Murali M's Portfolio</span></a>
+  <a class="blog-brand" href="profile.html" aria-label="Murali M portfolio"><span class="brand-smiley" data-admin-shortcut>☺</span><span>Murali M's Portfolio</span></a>
   <nav aria-label="Blogs navigation"><a href="profile.html">Portfolio</a><a class="active" href="blogs.html">Blogs</a><a href="visuals.html">Visuals</a></nav>
 </header>
 <main>
@@ -79,22 +79,30 @@
   }).catch(()=>{publishedPosts=[];render();});
 })();
 
-    // Private admin shortcut: tap the portfolio smiley/brand five times quickly.
+    // Five quick taps on the yellow smiley open the private writing desk.
     (() => {
-      const brand = document.querySelector('[data-admin-shortcut]');
-      if (!brand) return;
+      const smiley = document.querySelector('[data-admin-shortcut]');
+      if (!smiley) return;
+      const brandLink = smiley.closest('a');
       let taps = 0;
       let resetTimer = null;
-      brand.addEventListener('click', event => {
+      let normalClickTimer = null;
+      smiley.addEventListener('click', event => {
         event.preventDefault();
-        window.scrollTo({top:0,behavior:'smooth'});
         taps += 1;
         clearTimeout(resetTimer);
+        clearTimeout(normalClickTimer);
         if (taps >= 5) {
           taps = 0;
           window.location.href = 'blogs-admin.html';
           return;
         }
+        normalClickTimer = setTimeout(() => {
+          const target = brandLink?.getAttribute('href') || '#top';
+          taps = 0;
+          if (target === '#top' || target === '#') window.scrollTo({top:0,behavior:'smooth'});
+          else window.location.href = target;
+        }, 650);
         resetTimer = setTimeout(() => { taps = 0; }, 2400);
       });
     })();
