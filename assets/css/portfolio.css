@@ -582,3 +582,7 @@ nav a{font-size:12px;color:#d0d6e0}
 .section-text-link span{color:#e9b75f;font-size:15px}
 .section-text-link:hover{color:#f4d79f;transform:translateX(3px)}
 @media(prefers-reduced-motion:reduce){.section-text-link{transition:none}.section-text-link:hover{transform:none}}
+
+
+/* Small private admin shortcut target */
+[data-admin-shortcut]{cursor:pointer;touch-action:manipulation}
