@@ -7,7 +7,7 @@
 <title>Blog | Murali M</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/blogs.css?v=20261112-captioned-galleries">
+<link rel="stylesheet" href="assets/css/blogs.css?v=20261112-supabase-engagement">
 </head>
 <body>
 <header class="blog-header"><a class="blog-brand" href="profile.html"><span class="brand-smiley">☺</span><span>Murali M's Portfolio</span></a><nav><a href="blogs.html">All blogs</a><a href="visuals.html">Visuals</a><a href="profile.html">Portfolio</a></nav></header>
@@ -46,6 +46,9 @@
 <article id="article" class="reader-article"><p class="eyebrow">THE JOURNAL</p><h1>Loading story…</h1></article>
 </main>
 <footer class="blog-footer"><a href="blogs.html">← All blogs</a><span>© <span id="year"></span> MURALI M</span></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-config.js?v=20261112-engagement"></script>
+<script src="assets/js/blog-engagement.js?v=20261112-engagement"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js"></script>
 <script>
 (()=>{
@@ -76,7 +79,8 @@ const posts=Array.isArray(data)?data:(Array.isArray(data?.posts)?data.posts:[]);
 const post=posts.find(p=>p.slug===slug);
 if(!post){root.innerHTML='<p class="eyebrow">THE JOURNAL</p><h1>Story not found.</h1><p>This post may have moved or is not published yet.</p><a class="read-link" href="blogs.html">Return to the journal ↗</a>';return;}
 document.title=post.title+" | Murali M";
-root.innerHTML='<p class="eyebrow">'+esc(post.category||"JOURNAL")+' · '+esc(post.date||"")+'</p><h1>'+esc(post.title)+'</h1><p class="reader-excerpt">'+esc(post.excerpt||"")+'</p><div class="reader-byline">BY MURALI M · '+(post.readTime||1)+' MIN READ</div>'+(post.cover?'<img class="reader-cover" src="'+esc(post.cover)+'" alt="">':'')+'<div class="article-body">'+safe(window.marked?window.marked.parse(post.content||""):post.content||"")+'</div><div class="reader-end"><span>END OF STORY</span><a href="blogs.html">More writing ↗</a></div>';
+root.innerHTML='<p class="eyebrow">'+esc(post.category||"JOURNAL")+' · '+esc(post.date||"")+'</p><h1>'+esc(post.title)+'</h1><p class="reader-excerpt">'+esc(post.excerpt||"")+'</p><div class="reader-byline">BY MURALI M · '+(post.readTime||1)+' MIN READ</div>'+(post.cover?'<img class="reader-cover" src="'+esc(post.cover)+'" alt="">':'')+'<div class="article-body">'+safe(window.marked?window.marked.parse(post.content||""):post.content||"")+'</div><div class="reader-end"><span>END OF STORY</span><a href="blogs.html">More writing ↗</a></div><section class="reader-community" aria-label="Article engagement"><div class="reader-engagement-bar"><button id="readerLikeButton" class="engagement-like" type="button" disabled aria-pressed="false"><span aria-hidden="true">♡</span> Like <b id="readerLikeCount">—</b></button><button id="readerShareButton" class="engagement-share" type="button">Share ↗</button><span class="reader-view-count"><span aria-hidden="true">◉</span> <b id="readerViewCount">—</b> unique views</span></div><p id="engagementStatus" class="engagement-status" aria-live="polite">Connecting engagement features…</p></section><section class="reader-comments" aria-labelledby="commentsHeading"><div class="comments-heading"><div><p class="eyebrow">READER CONVERSATION</p><h2 id="commentsHeading">Leave a thought<span>.</span></h2></div><span id="commentCount" class="comment-count">— comments</span></div><form id="commentForm" class="comment-form"><div class="comment-fields"><label>Name<input id="commentName" name="name" type="text" maxlength="60" required autocomplete="name" placeholder="Your name"></label><label>Your comment<textarea id="commentBody" name="body" rows="4" maxlength="2000" required placeholder="Share your thoughts on this story…"></textarea></label></div><div class="comment-form-footer"><p id="commentFormStatus" aria-live="polite">Comments appear immediately after posting. Please keep the conversation respectful.</p><button class="comment-submit" type="submit">Post comment ↗</button></div></form><div id="commentsList" class="comments-list" aria-live="polite"><p class="comments-loading">Loading comments…</p></div></section>'; 
+    if(window.MuraliBlogEngagement) window.MuraliBlogEngagement.mountReader(post.slug,post.title);
 }).catch(()=>{root.innerHTML='<h1>Could not load this story.</h1><a href="blogs.html">Back to blogs</a>';});
 })();
 </script>
