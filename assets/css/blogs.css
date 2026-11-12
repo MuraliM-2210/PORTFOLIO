@@ -90,3 +90,29 @@
   .reader-translate button{width:100%}
   .post-card-actions{flex-wrap:wrap}
 }
+
+
+/* Direct GitHub blog publishing panel */
+.github-publish-card{margin-top:20px;padding:15px;border:1px solid rgba(116,156,206,.26);border-radius:10px;background:linear-gradient(145deg,rgba(37,59,84,.38),rgba(18,27,42,.72))}
+.github-publish-card.is-connected{border-color:rgba(104,205,151,.45)}
+.github-publish-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.github-publish-heading strong{font-size:12px;color:#f2f5fb}
+.github-live-dot{color:#7e8a9e;font-size:12px}
+.github-publish-card.is-connected .github-live-dot{color:#6ed49b}
+.github-publish-card>p{margin:7px 0 12px;color:#9facbf;font-size:10px;line-height:1.65}
+.github-publish-card>label{display:block;margin:10px 0 6px;color:#b7c2d2;font-size:9px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.github-publish-card input{width:100%;min-width:0;padding:10px 11px;border:1px solid rgba(255,255,255,.15);border-radius:6px;outline:0;background:#080f1a;color:#eef3fa;font:11px "DM Sans",sans-serif}
+.github-publish-card input:focus{border-color:#9f84ff}
+.github-publish-buttons{display:flex;gap:7px;margin-top:9px}
+.connect-github-btn,.disconnect-github-btn{padding:8px 10px;border-radius:5px;border:1px solid rgba(153,125,255,.4);background:rgba(139,97,237,.18);color:#e3d9ff;font-size:10px;font-weight:900;cursor:pointer}
+.disconnect-github-btn{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:#aeb9ca}
+.connect-github-btn:disabled{opacity:.55;cursor:wait}
+.github-publish-card .github-connection-status{margin:10px 0;padding:8px 9px;border-radius:5px;background:rgba(0,0,0,.17);color:#d2b989;font-size:9px;line-height:1.6}
+.github-publish-card.is-connected .github-connection-status{color:#9de0b8}
+.github-token-link{display:inline-block;color:#d2bdff;font-size:9px;font-weight:850}
+.github-publish-card>small{display:block;margin-top:8px;color:#78879b;font-size:9px;line-height:1.55}
+.publish-result{display:flex;flex-direction:column;gap:6px;margin-top:15px;padding:12px 14px;border:1px solid rgba(110,205,153,.36);border-radius:7px;background:rgba(49,140,92,.09);color:#c7e9d2;font-size:11px;line-height:1.65;overflow-wrap:anywhere}
+.publish-result[hidden]{display:none}
+.publish-result a{color:#bce6cc;font-weight:900}
+.publish-result span{color:#99ad9f;font-size:10px}
+.github-publish-card [hidden]{display:none!important}
