@@ -275,14 +275,14 @@
       for(const f of built.files)zip.file(f.path,f.blob);
       const blob=await zip.generateAsync({type:"blob",compression:"DEFLATE",compressionOptions:{level:6}});
       const url=URL.createObjectURL(blob),a=document.createElement("a");
-      a.href=url;a.download="murali-blog-"+draft.slug+"-publish.zip";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+      a.href=url;a.download="murali-blog-"+draft.slug+"-publish.zip";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
       setStatus("Publish package ready · "+new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}));
       notify("Publish package downloaded. Upload its files to GitHub.");
     }catch(err){console.error(err);setStatus("Export failed",false);notify("Could not create the ZIP. Try downloading a draft backup.");}
   };
   const backupDraft = () => {
     const draft=collectPost(),data=new Blob([JSON.stringify({...draft,cover:currentDraft?.cover||""},null,2)],{type:"application/json"});
-    const url=URL.createObjectURL(data),a=document.createElement("a");a.href=url;a.download="murali-draft-"+(draft.slug||"untitled")+".json";a.click();URL.revokeObjectURL(url);notify("Draft backup downloaded.");
+    const url=URL.createObjectURL(data),a=document.createElement("a");a.href=url;a.download="murali-draft-"+(draft.slug||"untitled")+".json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);notify("Draft backup downloaded.");
   };
   const renderPosts = () => {
     const q=$("searchPosts").value.trim().toLowerCase();
