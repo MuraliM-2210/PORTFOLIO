@@ -4,73 +4,147 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<meta name="theme-color" content="#080a11">
+<meta name="theme-color" content="#0b0d12">
 <title>Blog Admin | Murali M</title>
 <style>
-:root{color-scheme:dark;--bg:#090d16;--panel:#131c2b;--line:rgba(255,255,255,.12);--text:#f2f5fa;--muted:#aab5c6;--gold:#e9bb74;--purple:#a38bff}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 90% 0,rgba(112,81,197,.2),transparent 38%),var(--bg);color:var(--text);font:15px/1.65 "DM Sans",system-ui,sans-serif}
-main{width:min(780px,calc(100% - 36px));margin:7vh auto;padding:clamp(22px,5vw,48px);border:1px solid var(--line);border-radius:18px;background:rgba(19,28,43,.92);box-shadow:0 22px 75px rgba(0,0,0,.3)}
-.eyebrow{color:var(--gold);font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}h1{margin:12px 0;font-size:clamp(34px,6vw,56px);line-height:1.02;letter-spacing:-.06em}h1 span{color:var(--purple)}p{color:var(--muted);font-size:14px}
-.steps{display:grid;gap:12px;margin:26px 0}.step{display:flex;gap:13px;padding:14px;border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.025)}.num{display:grid;place-items:center;flex:0 0 27px;height:27px;border-radius:50%;background:rgba(163,139,255,.16);color:#d7cbff;font-weight:900;font-size:12px}.step strong{color:var(--text);font-size:13px}.step small{display:block;color:#93a0b4;font-size:11px;line-height:1.6}
-a{color:#d6c8ff}.primary{display:inline-flex;align-items:center;justify-content:center;margin:8px 0 20px;padding:12px 17px;border-radius:7px;background:linear-gradient(100deg,#8b61ed,#3b9cd5);color:white;text-decoration:none;font-size:12px;font-weight:900}
-label{display:block;margin:16px 0 7px;color:#dce3ee;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}input{width:100%;padding:13px;border:1px solid var(--line);border-radius:7px;outline:0;background:#09111d;color:white;font:13px ui-monospace,monospace}input:focus{border-color:var(--purple)}button{margin-top:11px;padding:12px 16px;border:0;border-radius:7px;background:#e9bb74;color:#17110a;font-weight:900;font-size:12px;cursor:pointer}button:disabled{opacity:.5;cursor:wait}.note{margin:16px 0 0;padding:12px 14px;border-left:2px solid var(--gold);background:rgba(233,187,116,.06);font-size:11px}.error{color:#ffb4a8}.hidden{display:none!important}
-#cms-root{margin:0}body.cms-ready main{display:none}
+:root{color-scheme:dark;--bg:#0b0d12;--panel:#141922;--panel2:#10151e;--line:#2a3340;--text:#edf1f7;--muted:#a1adbc;--gold:#e8ba72;--purple:#a38bff;--green:#8ed5ae}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% 0,rgba(134,96,207,.15),transparent 35%),var(--bg);color:var(--text);font:15px/1.6 Inter,system-ui,-apple-system,sans-serif}
+header{width:min(1180px,calc(100% - 36px));margin:30px auto 22px;display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-size:11px;letter-spacing:.17em;font-weight:900;color:var(--gold)}.muted{color:var(--muted)}
+main{width:min(1180px,calc(100% - 36px));margin:0 auto 70px}.intro{margin:28px 0 24px}.eyebrow{font-size:10px;letter-spacing:.22em;color:var(--gold);font-weight:900}h1{font-size:clamp(35px,6vw,58px);line-height:1.02;letter-spacing:-.06em;margin:10px 0 12px}h1 span{color:var(--purple)}.intro p{max-width:720px;color:var(--muted);font-size:14px}
+.layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.7fr);gap:18px;align-items:start}.panel{background:rgba(20,25,34,.94);border:1px solid var(--line);border-radius:14px;padding:clamp(17px,3vw,26px)}.panel h2{font-size:15px;margin:0 0 17px;letter-spacing:.01em}
+label{display:block;margin:14px 0 6px;color:#c7d0dd;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+input,select,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:7px;background:#0d121a;color:var(--text);font:13px/1.5 inherit;outline:0}input:focus,select:focus,textarea:focus,.editor:focus{border-color:var(--purple)}textarea{min-height:80px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.editor-shell{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#0d121a}.toolbar{display:flex;gap:5px;flex-wrap:wrap;padding:8px;border-bottom:1px solid var(--line);background:#141a25}.toolbar button{min-width:31px;padding:6px 9px;border:1px solid #303b4c;background:#1a2230;color:#e6eaf0;border-radius:5px;font-size:11px}.toolbar button:hover{border-color:var(--gold)}.editor{min-height:320px;padding:16px;outline:0;font-size:15px;line-height:1.8}.editor:empty:before{content:attr(data-placeholder);color:#6f7c8e}.editor img{display:block;max-width:100%;height:auto;margin:16px auto;border-radius:7px}.editor h2,.editor h3{line-height:1.25}.editor blockquote{margin:18px 0;padding:8px 16px;border-left:2px solid var(--gold);color:#c9d1de}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 15px;border:1px solid var(--line);border-radius:7px;background:#1a2230;color:var(--text);text-decoration:none;font-size:11px;font-weight:900;cursor:pointer}.btn.primary{background:linear-gradient(100deg,#d7a85c,#eac98e);color:#19130b;border-color:transparent}.btn:hover{filter:brightness(1.1)}.btn:disabled{opacity:.5;cursor:wait}
+.side{display:grid;gap:16px}.upload{display:block;padding:15px;border:1px dashed #485469;border-radius:8px;background:#101722;color:var(--muted);font-size:12px;cursor:pointer}.upload b{display:block;color:var(--text);margin-bottom:3px}.upload input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.thumb{max-width:100%;max-height:190px;display:block;border-radius:7px;margin-top:12px;object-fit:cover}.status{margin-top:13px;padding:12px;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:11px;white-space:pre-line}.status.good{color:var(--green);border-color:rgba(142,213,174,.28)}.status.warn{color:#f3c889;border-color:rgba(243,200,137,.28)}.howto{padding:14px;border-radius:8px;background:#101722;border:1px solid var(--line);font-size:12px;color:var(--muted)}.howto strong{color:var(--text)}.howto ol{padding-left:18px;margin:8px 0}.howto li{margin:6px 0}.small{font-size:10px;color:#8794a6}.hidden{display:none!important}.toplink{color:#cfc2ff;text-decoration:none;font-size:11px;font-weight:800}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr}}@media(max-width:560px){header{margin-top:20px}.row,.side{grid-template-columns:1fr}.editor{min-height:260px}}
 </style>
 </head>
 <body>
-<main id="setup">
-  <p class="eyebrow">MURALI M · PRIVATE WRITING DESK</p>
-  <h1>Your stories.<br><span>Your publishing desk.</span></h1>
-  <p>Write Tamil or English blogs, add a featured image, insert photographs inside the article, preview, and publish directly to your portfolio. No personal access token is required.</p>
-  <div class="steps">
-    <div class="step"><span class="num">1</span><div><strong>Create your free Decap Turbo account</strong><small>Use the hosted CMS sign-in. The Free plan includes one site and one seat.</small></div></div>
-    <div class="step"><span class="num">2</span><div><strong>Connect your GitHub repository</strong><small>In Decap Turbo, open Git connection and install the Decap Turbo GitHub App. Select only <b>MuraliM-2210/PORTFOLIO</b>.</small></div></div>
-    <div class="step"><span class="num">3</span><div><strong>Create a site in Decap Turbo</strong><small>Repository: MuraliM-2210/PORTFOLIO · Branch: main · Config path: admin/config.yml · Admin URL: https://muralim-2210.github.io/PORTFOLIO/admin/</small></div></div>
-    <div class="step"><span class="num">4</span><div><strong>Paste the Site ID below</strong><small>Copy the Site ID from the Overview tab of the site you just created. This is an identifier, not a password or token.</small></div></div>
+<header><div class="brand">MURALI M <span style="color:#a38bff">/</span> WRITING DESK</div><a class="toplink" href="../blogs.html">VIEW PUBLIC BLOG ↗</a></header>
+<main>
+  <section class="intro"><div class="eyebrow">PRIVATE ADMIN · LOCAL EDITOR</div><h1>Write. Add visuals.<br><span>Prepare to publish.</span></h1><p>Create Tamil or English articles, add a cover photograph and images inside the story, and preview everything here. Your drafts stay in this browser. No external CMS, third-party publishing service or personal access token is used.</p></section>
+  <div class="layout">
+    <section class="panel">
+      <h2>01 / Your article</h2>
+      <label for="title">Blog title</label><input id="title" maxlength="180" placeholder="Enter your article title">
+      <div class="row">
+        <div><label for="slug">URL slug</label><input id="slug" maxlength="100" placeholder="my-new-article"></div>
+        <div><label for="category">Category</label><select id="category"><option>Travel</option><option>Photography</option><option>Media</option><option>Culture</option><option>Personal</option><option>Research</option><option>Opinion</option><option>Other</option></select></div>
+      </div>
+      <div class="row">
+        <div><label for="date">Publish date</label><input id="date" type="date"></div>
+        <div><label for="excerpt">Short introduction</label><input id="excerpt" maxlength="260" placeholder="A short summary for the blog listing"></div>
+      </div>
+      <label>Article content</label>
+      <div class="editor-shell">
+        <div class="toolbar">
+          <button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-block="h2">H2</button><button type="button" data-block="h3">H3</button><button type="button" data-cmd="insertUnorderedList">• List</button><button type="button" data-cmd="insertOrderedList">1. List</button><button type="button" data-cmd="formatBlock" data-value="blockquote">Quote</button><button type="button" id="addInlineImage">＋ Image</button>
+        </div>
+        <div id="body" class="editor" contenteditable="true" spellcheck="true" data-placeholder="Start writing your story here…"></div>
+      </div>
+      <input id="inlineImageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple class="hidden">
+      <div class="actions">
+        <button class="btn primary" id="package">Prepare publish package ↓</button>
+        <button class="btn" id="preview">Preview article</button>
+        <button class="btn" id="saveDraft">Save draft</button>
+        <button class="btn" id="clear">Clear editor</button>
+      </div>
+      <div id="status" class="status">Ready. Add your article details and images.</div>
+    </section>
+    <aside class="side">
+      <section class="panel">
+        <h2>02 / Featured image</h2>
+        <label class="upload"><b>＋ Choose cover image</b><span>JPG, PNG, WEBP or GIF. Original image quality is preserved.</span><input id="cover" type="file" accept="image/jpeg,image/png,image/webp,image/gif"></label>
+        <img id="coverPreview" class="thumb hidden" alt="Cover preview">
+        <button id="removeCover" class="btn hidden" type="button">Remove cover</button>
+        <p class="small">Inline images can be inserted anywhere in the article using the ＋ Image button.</p>
+      </section>
+      <section class="panel">
+        <h2>03 / Publish through GitHub</h2>
+        <div class="howto"><strong>No third-party service is connected.</strong><br>Your browser prepares a ZIP containing the updated <code>blogs.json</code> and all article images.<ol><li>Download and extract the ZIP.</li><li>Open your PORTFOLIO repository on GitHub and choose <strong>Add file → Upload files</strong>.</li><li>Upload the extracted <code>blogs.json</code> and <code>assets</code> folder, keeping the folder structure.</li><li>Commit the changes to <code>main</code>. The blog appears on your website after GitHub Pages updates.</li></ol></div>
+        <a class="btn" style="margin-top:12px" href="https://github.com/MuraliM-2210/PORTFOLIO/upload/main" target="_blank" rel="noopener">Open your GitHub upload page ↗</a>
+        <p class="small">GitHub login is required. The website cannot commit files automatically without GitHub authorization.</p>
+      </section>
+    </aside>
   </div>
-  <a class="primary" href="https://decapcms.org/turbo/" target="_blank" rel="noopener noreferrer">Open Decap Turbo ↗</a>
-  <label for="siteId">Decap Turbo Site ID</label>
-  <input id="siteId" autocomplete="off" spellcheck="false" placeholder="Paste the Site ID from your Decap Turbo site">
-  <button id="continue" type="button">Continue to my writing desk ↗</button>
-  <p id="status" class="note">The Site ID is saved only in this browser. The actual sign-in and publishing permissions are managed by Decap Turbo.</p>
+  <section id="previewPanel" class="panel hidden" style="margin-top:18px"><h2>Article preview</h2><div id="previewContent"></div></section>
 </main>
-<div id="cms-root"></div>
 <script>
-(async()=>{
-  const input=document.getElementById("siteId"),button=document.getElementById("continue"),status=document.getElementById("status");
-  const key="murali-decap-turbo-site-id";
-  const cached=localStorage.getItem(key)||"";
-  if(cached)input.value=cached;
-  const launch=async(siteId)=>{
-    if(!/^[0-9a-f]{8}-[0-9a-f-]{20,}$/i.test(siteId)){
-      status.textContent="Please paste the Site ID exactly as shown in your Decap Turbo site's Overview tab.";
-      status.classList.add("error");return;
+(()=> {
+  const $=id=>document.getElementById(id);
+  const fields=["title","slug","category","date","excerpt"];
+  let coverData="",allPosts=[];
+  const dbName="murali-native-blog-drafts";
+  const status=(message,kind="")=>{$("status").textContent=message;$("status").className="status "+kind;};
+  const readDataURL=file=>new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file);});
+  const today=new Date();$("date").value=[today.getFullYear(),String(today.getMonth()+1).padStart(2,"0"),String(today.getDate()).padStart(2,"0")].join("-");
+  const openDB=()=>new Promise((resolve,reject)=>{const req=indexedDB.open(dbName,1);req.onupgradeneeded=()=>req.result.createObjectStore("drafts");req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});
+  const dbPut=async(value)=>{const db=await openDB();return new Promise((resolve,reject)=>{const tx=db.transaction("drafts","readwrite");tx.objectStore("drafts").put(value,"current");tx.oncomplete=()=>{db.close();resolve();};tx.onerror=()=>{db.close();reject(tx.error);};});};
+  const dbGet=async()=>{const db=await openDB();return new Promise((resolve,reject)=>{const tx=db.transaction("drafts","readonly"),req=tx.objectStore("drafts").get("current");req.onsuccess=()=>{const v=req.result;db.close();resolve(v);};req.onerror=()=>{db.close();reject(req.error);};});};
+  const getForm=()=>({fields:Object.fromEntries(fields.map(id=>[id,$(id).value])),body:$("body").innerHTML,cover:coverData});
+  const setForm=d=>{if(!d)return;fields.forEach(id=>$(id).value=d.fields?.[id]??"");$("body").innerHTML=d.body||"";coverData=d.cover||"";if(coverData){$("coverPreview").src=coverData;$("coverPreview").classList.remove("hidden");$("removeCover").classList.remove("hidden");}};
+  let saveTimer;
+  const autosave=()=>{clearTimeout(saveTimer);saveTimer=setTimeout(()=>dbPut(getForm()).then(()=>status("Draft autosaved in this browser.","good")).catch(()=>status("Browser draft storage is unavailable. Export your publish package before closing this tab.","warn")),500);};
+  fields.forEach(id=>$(id).addEventListener("input",autosave));
+  $("body").addEventListener("input",autosave);
+  $("cover").addEventListener("change",async e=>{const f=e.target.files?.[0];if(!f)return;coverData=await readDataURL(f);$("coverPreview").src=coverData;$("coverPreview").classList.remove("hidden");$("removeCover").classList.remove("hidden");autosave();});
+  $("removeCover").addEventListener("click",()=>{coverData="";$("coverPreview").removeAttribute("src");$("coverPreview").classList.add("hidden");$("removeCover").classList.add("hidden");$("cover").value="";autosave();});
+  $("addInlineImage").addEventListener("click",()=>$("inlineImageInput").click());
+  $("inlineImageInput").addEventListener("change",async e=>{
+    for(const f of [...(e.target.files||[])]){if(!f.type.startsWith("image/"))continue;const data=await readDataURL(f);$("body").focus();document.execCommand("insertHTML",false,'<p><img src="'+data+'" alt="'+f.name.replace(/[&<>"']/g,"")+'" style="max-width:100%;height:auto"></p><p><br></p>');}
+    e.target.value="";autosave();
+  });
+  document.querySelector(".toolbar").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.cmd==="formatBlock")document.execCommand("formatBlock",false,b.dataset.value);else if(b.dataset.block)document.execCommand("formatBlock",false,b.dataset.block);else if(b.dataset.cmd)document.execCommand(b.dataset.cmd,false,null);$("body").focus();autosave();});
+  $("saveDraft").addEventListener("click",()=>dbPut(getForm()).then(()=>status("Draft saved in this browser.","good")).catch(()=>status("Could not save draft in this browser.","warn")));
+  $("clear").addEventListener("click",()=>{if(!confirm("Clear the current editor? Your saved browser draft will also be replaced."))return;fields.forEach(id=>$(id).value="");$("body").innerHTML="";coverData="";$("cover").value="";$("coverPreview").classList.add("hidden");$("removeCover").classList.add("hidden");dbPut(getForm());status("Editor cleared.");});
+  $("preview").addEventListener("click",()=>{const title=$("title").value||"Untitled story";$("previewContent").innerHTML='<p class="eyebrow">'+$("category").value+' · '+$("date").value+'</p><h1 style="font-size:clamp(30px,5vw,48px)">'+escapeHTML(title)+'</h1><p class="muted">'+escapeHTML($("excerpt").value)+'</p>'+(coverData?'<img style="max-width:100%;max-height:420px;object-fit:cover;border-radius:10px" src="'+coverData+'">':'')+'<div style="line-height:1.9;margin-top:20px">'+$("body").innerHTML+'</div>';$("previewPanel").classList.remove("hidden");$("previewPanel").scrollIntoView({behavior:"smooth"});});
+  function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+  function safeSlug(s){return s.normalize("NFC").toLowerCase().replace(/[^a-z0-9-]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80);}
+  function extFor(mime){return ({"image/jpeg":"jpg","image/png":"png","image/webp":"webp","image/gif":"gif"})[mime]||"jpg";}
+  function dataURLBytes(url){const m=String(url).match(/^data:(image\/(?:jpeg|png|webp|gif));base64,([a-z0-9+/=]+)$/i);if(!m)throw new Error("An image in the article is not a supported JPG, PNG, WEBP or GIF file.");const raw=atob(m[2]),out=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)out[i]=raw.charCodeAt(i);return {mime:m[1],bytes:out};}
+  function crc32(data){let c=0xffffffff;for(let i=0;i<data.length;i++){c^=data[i];for(let j=0;j<8;j++)c=(c>>>1)^((c&1)?0xedb88320:0);}return (c^0xffffffff)>>>0;}
+  function u16(v){return [v&255,(v>>>8)&255];}function u32(v){return [v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255];}
+  function makeZip(files){
+    const enc=new TextEncoder(),parts=[],central=[];let offset=0;
+    const date=new Date(),dosTime=(date.getHours()<<11)|(date.getMinutes()<<5)|(date.getSeconds()>>1),dosDate=((date.getFullYear()-1980)<<9)|((date.getMonth()+1)<<5)|date.getDate();
+    for(const file of files){const name=enc.encode(file.name),data=file.bytes,crc=crc32(data);
+      const local=new Uint8Array([0x50,0x4b,0x03,0x04,...u16(20),...u16(0),...u16(0),...u16(dosTime),...u16(dosDate),...u32(crc),...u32(data.length),...u32(data.length),...u16(name.length),...u16(0),...name]);
+      parts.push(local,data);
+      const cd=new Uint8Array([0x50,0x4b,0x01,0x02,...u16(20),...u16(20),...u16(0),...u16(0),...u16(dosTime),...u16(dosDate),...u32(crc),...u32(data.length),...u32(data.length),...u16(name.length),...u16(0),...u16(0),...u16(0),...u16(0),...u32(0),...u32(offset),...name]);
+      central.push(cd);offset+=local.length+data.length;
     }
-    button.disabled=true;status.textContent="Loading your private publishing desk…";status.classList.remove("error");
+    const cdSize=central.reduce((s,x)=>s+x.length,0),end=new Uint8Array([0x50,0x4b,0x05,0x06,...u16(0),...u16(0),...u16(files.length),...u16(files.length),...u32(cdSize),...u32(offset),...u16(0)]);
+    return new Blob([...parts,...central,end],{type:"application/zip"});
+  }
+  async function loadPosts(){try{const r=await fetch("../blogs.json?v="+Date.now());if(!r.ok)throw new Error("Could not load current posts.");const d=await r.json();allPosts=Array.isArray(d)?d:(Array.isArray(d.posts)?d.posts:[]);}catch(e){allPosts=[];status("Could not read existing blog list. Please refresh before preparing a package.","warn");}}
+  $("package").addEventListener("click",async()=>{
+    const title=$("title").value.trim();if(!title){status("Please enter a blog title first.","warn");$("title").focus();return;}if(!$("body").innerText.trim()){status("Please add the article content first.","warn");$("body").focus();return;}
+    const button=$("package");button.disabled=true;
     try{
-      const response=await fetch("config.yml?v="+Date.now());
-      if(!response.ok)throw new Error("Could not load admin/config.yml.");
-      let yaml=await response.text();
-      yaml=yaml.replace("YOUR_DECAP_TURBO_SITE_ID",siteId);
-      if(yaml.includes("YOUR_DECAP_TURBO_SITE_ID"))throw new Error("The CMS configuration placeholder is missing.");
-      localStorage.setItem(key,siteId);
-      const configBlob=new Blob([yaml],{type:"text/yaml"});
-      const configUrl=URL.createObjectURL(configBlob);
-      const link=document.createElement("link");
-      link.rel="cms-config-url";link.type="text/yaml";link.href=configUrl;document.head.appendChild(link);
-      document.body.classList.add("cms-ready");
-      const script=document.createElement("script");
-      script.src="https://cdn.jsdelivr.net/npm/decap-cms@3.17.0/dist/decap-cms.js";
-      script.onload=()=>{status.textContent="";};
-      script.onerror=()=>{document.body.classList.remove("cms-ready");status.textContent="Could not load the editor. Check your connection and refresh.";status.classList.add("error");button.disabled=false;};
-      document.body.appendChild(script);
-    }catch(error){
-      status.textContent=error.message||"Could not start the writing desk.";
-      status.classList.add("error");button.disabled=false;
-    }
-  };
-  button.addEventListener("click",()=>launch(input.value.trim()));
-  if(cached)launch(cached);
+      await loadPosts();
+      const slug=safeSlug($("slug").value)||("murali-blog-"+$("date").value+"-"+Date.now().toString().slice(-5));
+      const folder="assets/blogs/"+slug+"/";
+      const files=[],postCover="";
+      if(coverData){const item=dataURLBytes(coverData),path=folder+"cover."+extFor(item.mime);files.push({name:path,bytes:item.bytes});postCover=path;}
+      const clone=$("body").cloneNode(true);let imageNo=0;
+      for(const img of clone.querySelectorAll("img")){
+        const src=img.getAttribute("src")||"";
+        if(src.startsWith("data:image/")){const item=dataURLBytes(src),path=folder+"body-"+String(++imageNo).padStart(2,"0")+"."+extFor(item.mime);files.push({name:path,bytes:item.bytes});img.setAttribute("src",path);img.removeAttribute("style");}
+        else if(!/^(https:\/\/|assets\/blogs\/)/i.test(src))throw new Error("One article image has an unsupported source. Reinsert that image using the ＋ Image button.");
+      }
+      const textLength=$("body").innerText.trim().length;
+      const readTime=Math.max(1,Math.ceil(textLength/900));
+      const post={slug,title,category:$("category").value,date:$("date").value,excerpt:$("excerpt").value.trim(),cover:postCover,content:clone.innerHTML,readTime};
+      const updated=[post,...allPosts.filter(p=>p.slug!==slug)];
+      const json=JSON.stringify({posts:updated},null,2)+"\n";
+      files.unshift({name:"blogs.json",bytes:new TextEncoder().encode(json)});
+      const blob=makeZip(files),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="murali-blog-publish-"+slug+".zip";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+      status("Publish package created. It includes blogs.json and "+(files.length-1)+" image file(s). Extract it, then upload blogs.json and the assets folder to your PORTFOLIO repository on GitHub and commit to main.","good");
+    }catch(err){status(err.message||"Could not create publish package.","warn");}
+    finally{button.disabled=false;}
+  });
+  (async()=>{try{const draft=await dbGet();if(draft)setForm(draft);}catch(e){}await loadPosts();})();
 })();
 </script>
 </body></html>
