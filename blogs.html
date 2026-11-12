@@ -117,7 +117,7 @@
     render();
   });
   fetch("blogs.json?v="+Date.now()).then(r=>r.ok?r.json():[]).then(data=>{
-    publishedPosts=Array.isArray(data)?data:[];
+    publishedPosts=Array.isArray(data)?data:(Array.isArray(data?.posts)?data.posts:[]);
     render();
   }).catch(()=>{publishedPosts=[];render();});
 })();
