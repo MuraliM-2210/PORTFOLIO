@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#080a11">
+<title>Blog Admin | Murali M</title>
+<style>
+:root{color-scheme:dark;--bg:#090d16;--panel:#131c2b;--line:rgba(255,255,255,.12);--text:#f2f5fa;--muted:#aab5c6;--gold:#e9bb74;--purple:#a38bff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 90% 0,rgba(112,81,197,.2),transparent 38%),var(--bg);color:var(--text);font:15px/1.65 "DM Sans",system-ui,sans-serif}
+main{width:min(780px,calc(100% - 36px));margin:7vh auto;padding:clamp(22px,5vw,48px);border:1px solid var(--line);border-radius:18px;background:rgba(19,28,43,.92);box-shadow:0 22px 75px rgba(0,0,0,.3)}
+.eyebrow{color:var(--gold);font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}h1{margin:12px 0;font-size:clamp(34px,6vw,56px);line-height:1.02;letter-spacing:-.06em}h1 span{color:var(--purple)}p{color:var(--muted);font-size:14px}
+.steps{display:grid;gap:12px;margin:26px 0}.step{display:flex;gap:13px;padding:14px;border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.025)}.num{display:grid;place-items:center;flex:0 0 27px;height:27px;border-radius:50%;background:rgba(163,139,255,.16);color:#d7cbff;font-weight:900;font-size:12px}.step strong{color:var(--text);font-size:13px}.step small{display:block;color:#93a0b4;font-size:11px;line-height:1.6}
+a{color:#d6c8ff}.primary{display:inline-flex;align-items:center;justify-content:center;margin:8px 0 20px;padding:12px 17px;border-radius:7px;background:linear-gradient(100deg,#8b61ed,#3b9cd5);color:white;text-decoration:none;font-size:12px;font-weight:900}
+label{display:block;margin:16px 0 7px;color:#dce3ee;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}input{width:100%;padding:13px;border:1px solid var(--line);border-radius:7px;outline:0;background:#09111d;color:white;font:13px ui-monospace,monospace}input:focus{border-color:var(--purple)}button{margin-top:11px;padding:12px 16px;border:0;border-radius:7px;background:#e9bb74;color:#17110a;font-weight:900;font-size:12px;cursor:pointer}button:disabled{opacity:.5;cursor:wait}.note{margin:16px 0 0;padding:12px 14px;border-left:2px solid var(--gold);background:rgba(233,187,116,.06);font-size:11px}.error{color:#ffb4a8}.hidden{display:none!important}
+#cms-root{margin:0}body.cms-ready main{display:none}
+</style>
+</head>
+<body>
+<main id="setup">
+  <p class="eyebrow">MURALI M · PRIVATE WRITING DESK</p>
+  <h1>Your stories.<br><span>Your publishing desk.</span></h1>
+  <p>Write Tamil or English blogs, add a featured image, insert photographs inside the article, preview, and publish directly to your portfolio. No personal access token is required.</p>
+  <div class="steps">
+    <div class="step"><span class="num">1</span><div><strong>Create your free Decap Turbo account</strong><small>Use the hosted CMS sign-in. The Free plan includes one site and one seat.</small></div></div>
+    <div class="step"><span class="num">2</span><div><strong>Connect your GitHub repository</strong><small>In Decap Turbo, open Git connection and install the Decap Turbo GitHub App. Select only <b>MuraliM-2210/PORTFOLIO</b>.</small></div></div>
+    <div class="step"><span class="num">3</span><div><strong>Create a site in Decap Turbo</strong><small>Repository: MuraliM-2210/PORTFOLIO · Branch: main · Config path: admin/config.yml · Admin URL: https://muralim-2210.github.io/PORTFOLIO/admin/</small></div></div>
+    <div class="step"><span class="num">4</span><div><strong>Paste the Site ID below</strong><small>Copy the Site ID from the Overview tab of the site you just created. This is an identifier, not a password or token.</small></div></div>
+  </div>
+  <a class="primary" href="https://decapcms.org/turbo/" target="_blank" rel="noopener noreferrer">Open Decap Turbo ↗</a>
+  <label for="siteId">Decap Turbo Site ID</label>
+  <input id="siteId" autocomplete="off" spellcheck="false" placeholder="Paste the Site ID from your Decap Turbo site">
+  <button id="continue" type="button">Continue to my writing desk ↗</button>
+  <p id="status" class="note">The Site ID is saved only in this browser. The actual sign-in and publishing permissions are managed by Decap Turbo.</p>
+</main>
+<div id="cms-root"></div>
+<script>
+(async()=>{
+  const input=document.getElementById("siteId"),button=document.getElementById("continue"),status=document.getElementById("status");
+  const key="murali-decap-turbo-site-id";
+  const cached=localStorage.getItem(key)||"";
+  if(cached)input.value=cached;
+  const launch=async(siteId)=>{
+    if(!/^[0-9a-f]{8}-[0-9a-f-]{20,}$/i.test(siteId)){
+      status.textContent="Please paste the Site ID exactly as shown in your Decap Turbo site's Overview tab.";
+      status.classList.add("error");return;
+    }
+    button.disabled=true;status.textContent="Loading your private publishing desk…";status.classList.remove("error");
+    try{
+      const response=await fetch("config.yml?v="+Date.now());
+      if(!response.ok)throw new Error("Could not load admin/config.yml.");
+      let yaml=await response.text();
+      yaml=yaml.replace("YOUR_DECAP_TURBO_SITE_ID",siteId);
+      if(yaml.includes("YOUR_DECAP_TURBO_SITE_ID"))throw new Error("The CMS configuration placeholder is missing.");
+      localStorage.setItem(key,siteId);
+      const configBlob=new Blob([yaml],{type:"text/yaml"});
+      const configUrl=URL.createObjectURL(configBlob);
+      const link=document.createElement("link");
+      link.rel="cms-config-url";link.type="text/yaml";link.href=configUrl;document.head.appendChild(link);
+      document.body.classList.add("cms-ready");
+      const script=document.createElement("script");
+      script.src="https://cdn.jsdelivr.net/npm/decap-cms@3.17.0/dist/decap-cms.js";
+      script.onload=()=>{status.textContent="";};
+      script.onerror=()=>{document.body.classList.remove("cms-ready");status.textContent="Could not load the editor. Check your connection and refresh.";status.classList.add("error");button.disabled=false;};
+      document.body.appendChild(script);
+    }catch(error){
+      status.textContent=error.message||"Could not start the writing desk.";
+      status.classList.add("error");button.disabled=false;
+    }
+  };
+  button.addEventListener("click",()=>launch(input.value.trim()));
+  if(cached)launch(cached);
+})();
+</script>
+</body></html>
