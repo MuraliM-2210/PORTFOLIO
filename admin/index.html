@@ -125,7 +125,7 @@ input,select,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);
       await loadPosts();
       const slug=safeSlug($("slug").value)||("murali-blog-"+$("date").value+"-"+Date.now().toString().slice(-5));
       const folder="assets/blogs/"+slug+"/";
-      const files=[],postCover="";
+      const files=[];let postCover="";
       if(coverData){const item=dataURLBytes(coverData),path=folder+"cover."+extFor(item.mime);files.push({name:path,bytes:item.bytes});postCover=path;}
       const clone=$("body").cloneNode(true);let imageNo=0;
       for(const img of clone.querySelectorAll("img")){
