@@ -63,7 +63,7 @@
       </div>
     </div>
     <div id="postsGrid" class="posts-grid" aria-live="polite"><div class="empty-posts"><span class="empty-icon">✎</span><h3>Your writing space is ready.</h3><p>Your published blogs will appear here. Start with your first story.</p></div></div>
-    <p id="postCount" class="post-count">YOUR JOURNAL · 0 POSTS</p>
+    <p id="postCount" class="post-count">YOUR JOURNAL · 0 POSTS</p><p class="local-engagement-note">Engagement data is saved only in this browser. It is not shared with other visitors.</p>
   </section>
 
 
@@ -79,9 +79,7 @@
 </div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="assets/js/supabase-config.js?v=20261112-engagement"></script>
-<script src="assets/js/blog-engagement.js?v=20261112-engagement"></script>
+<script src="assets/js/blog-engagement.js?v=20261112-local-only"></script>
 <script>
 (() => {
   "use strict";
@@ -93,7 +91,7 @@
     const q=$("searchPosts").value.trim().toLowerCase();
     const shown=publishedPosts.filter(p=>(activeCategory==="All"||p.category===activeCategory)&&[p.title,p.excerpt,p.category].join(" ").toLowerCase().includes(q));
     $("postCount").textContent="YOUR JOURNAL · "+publishedPosts.length+" "+(publishedPosts.length===1?"POST":"POSTS");
-    $("postsGrid").innerHTML=shown.length?shown.map(p=>'<article class="post-card"><a class="post-cover" href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">'+(p.cover?'<img src="'+escapeHtml(p.cover)+'" alt="" loading="lazy">':'<span class="cover-placeholder">M<span>.</span></span>')+'<span class="cover-open">READ STORY ↗</span></a><div class="post-card-copy"><div class="post-meta"><span>'+escapeHtml(p.category||"Journal")+'</span><time>'+escapeHtml(p.date||"")+'</time></div><h3><a href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">'+escapeHtml(p.title)+'</a></h3><p>'+escapeHtml(p.excerpt||"")+'</p><div class="post-card-engagement" data-engagement-slug="'+escapeHtml(p.slug)+'"><span title="Likes">♡ <b data-like-count>—</b></span><span title="Unique views">◉ <b data-view-count>—</b></span><span title="Comments">▤ <b data-comment-count>—</b></span><button class="post-share" type="button" data-share-slug="'+escapeHtml(p.slug)+'">Share ↗</button></div><div class="post-card-actions"><a class="read-link" href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">Read story <span>↗</span></a><button class="post-translate" type="button" data-translate-slug="'+encodeURIComponent(p.slug)+'">Translate ↗</button></div></div></article>').join(""):'<div class="empty-posts"><span class="empty-icon">✎</span><h3>No stories published yet.</h3><p>New articles will appear here when they are published.</p></div>';
+    $("postsGrid").innerHTML=shown.length?shown.map(p=>'<article class="post-card"><a class="post-cover" href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">'+(p.cover?'<img src="'+escapeHtml(p.cover)+'" alt="" loading="lazy">':'<span class="cover-placeholder">M<span>.</span></span>')+'<span class="cover-open">READ STORY ↗</span></a><div class="post-card-copy"><div class="post-meta"><span>'+escapeHtml(p.category||"Journal")+'</span><time>'+escapeHtml(p.date||"")+'</time></div><h3><a href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">'+escapeHtml(p.title)+'</a></h3><p>'+escapeHtml(p.excerpt||"")+'</p><div class="post-card-engagement" data-engagement-slug="'+escapeHtml(p.slug)+'"><span title="Likes on this device">♡ <b data-like-count>—</b></span><span title="Unique views on this device">◉ <b data-view-count>—</b></span><span title="Comments on this device">▤ <b data-comment-count>—</b></span><button class="post-share" type="button" data-share-slug="'+escapeHtml(p.slug)+'">Share ↗</button></div><div class="post-card-actions"><a class="read-link" href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">Read story <span>↗</span></a><button class="post-translate" type="button" data-translate-slug="'+encodeURIComponent(p.slug)+'">Translate ↗</button></div></div></article>').join(""):'<div class="empty-posts"><span class="empty-icon">✎</span><h3>No stories published yet.</h3><p>New articles will appear here when they are published.</p></div>';
     if(window.MuraliBlogEngagement) window.MuraliBlogEngagement.loadCardStats(shown).catch(()=>{});
   };
   const openTranslatedPage=(articleUrl,targetLanguage)=>{

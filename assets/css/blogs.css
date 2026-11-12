@@ -175,3 +175,7 @@
  .comment-submit{width:100%;min-height:42px}
  .comments-heading{align-items:start}
 }
+
+
+/* Browser-local engagement disclaimer */
+.local-engagement-note{margin:7px 0 0;color:#778499;font-size:10px;line-height:1.6;letter-spacing:.01em}
