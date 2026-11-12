@@ -50,38 +50,18 @@
 (()=>{
 const slug=new URLSearchParams(location.search).get("slug");
 const root=document.getElementById("article");document.getElementById("year").textContent=new Date().getFullYear();
-const makeTranslatedUrl=target=>{
-  const translated=new URL(window.location.href);
-  if(!translated.hostname.endsWith(".translate.goog")){
-    translated.hostname=translated.hostname.replace(/[.]/g,"-")+".translate.goog";
-    translated.searchParams.set("_x_tr_sl","auto");
-    translated.searchParams.set("_x_tr_hl","en");
-    translated.searchParams.set("_x_tr_pto","wapp");
-  }
-  translated.searchParams.set("_x_tr_tl",target);
-  return translated.toString();
+const openTranslatedArticle=targetLanguage=>{
+  const translateUrl=new URL("https://translate.google.com/translate");
+  translateUrl.searchParams.set("sl","auto");
+  translateUrl.searchParams.set("tl",targetLanguage);
+  translateUrl.searchParams.set("u",window.location.href);
+  translateUrl.searchParams.set("op","translate");
+  const opened=window.open(translateUrl.toString(),"_blank","noopener,noreferrer");
+  if(!opened)window.location.href=translateUrl.toString();
 };
 document.getElementById("readerTranslateButton").addEventListener("click",()=>{
   const target=document.getElementById("readerTranslateLanguage").value||"en";
-  const url=makeTranslatedUrl(target);
-  window.open(url,"_blank","noopener,noreferrer");
-});
-const translatedPageUrl=target=>{
-  const page=new URL(window.location.href);
-  if(!page.hostname.endsWith(".translate.goog")){
-    page.hostname=page.hostname.replace(/[.]/g,"-")+".translate.goog";
-    page.searchParams.set("_x_tr_sl","auto");
-    page.searchParams.set("_x_tr_hl","en");
-    page.searchParams.set("_x_tr_pto","wapp");
-  }
-  page.searchParams.set("_x_tr_tl",target);
-  return page.toString();
-};
-document.getElementById("readerTranslateButton").addEventListener("click",()=>{
-  const target=document.getElementById("readerTranslateLanguage").value||"en";
-  const destination=translatedPageUrl(target);
-  const opened=window.open(destination,"_blank","noopener,noreferrer");
-  if(!opened)window.location.href=destination;
+  openTranslatedArticle(target);
 });
 const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safe=html=>{
