@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/blogs.css?v=20261112-direct-publish">
+<link rel="stylesheet" href="assets/css/blogs.css?v=20261112-direct-publish2">
 </head>
 <body>
 <header class="blog-header">
@@ -61,7 +61,7 @@
             <button class="disconnect-github-btn" id="disconnectGithub" type="button" hidden>Disconnect</button>
           </div>
           <p class="github-connection-status" id="githubConnectionStatus" role="status">Not connected. Connect your repository to publish.</p>
-          <a class="github-token-link" href="https://github.com/settings/personal-access-tokens/new?name=Murali%20Blog%20Publisher&description=Publish%20blog%20posts%20and%20images&target_name=MuraliM-2210&contents=write" target="_blank" rel="noopener noreferrer">Create a restricted GitHub token ↗</a>
+          <a class="github-token-link" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">Create a restricted GitHub token ↗</a>
           <small>Select only PORTFOLIO and grant Repository permissions → Contents: Read and write. The token is kept in this tab only and sent directly to GitHub.</small>
         </div>
         <div class="publish-help"><strong>How publishing works</strong><p>Export a ZIP containing your blog index and images. Upload its files to your GitHub repository to make the post public.</p><a href="https://github.com/MuraliM-2210/PORTFOLIO/upload/main" target="_blank" rel="noopener noreferrer">Open repository upload ↗</a></div>
@@ -357,7 +357,7 @@
     return btoa(binary);
   };
   const decodeGithubBase64=value=>{
-    const binary=atob(String(value||"").replace(/\\s/g,""));
+    const binary=atob(String(value||"").replace(/\s/g,""));
     const bytes=new Uint8Array(binary.length);
     for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
     return new TextDecoder("utf-8").decode(bytes);
@@ -450,7 +450,7 @@
       if(existingIndex>=0)posts[existingIndex]=built.post;
       else posts.unshift(built.post);
       posts.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
-      await putGithubFile("blogs.json",textToBase64(JSON.stringify(posts,null,2)+"\\n"),"Publish blog: "+draft.title);
+      await putGithubFile("blogs.json",textToBase64(JSON.stringify(posts,null,2)+"\n"),"Publish blog: "+draft.title);
       currentDraft={...currentDraft,...draft,publishedAt:new Date().toISOString()};
       if(db)await putDraft(currentDraft);
       await renderDraftList();
