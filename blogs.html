@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/blogs.css?v=20261112-translation">
+<link rel="stylesheet" href="assets/css/blogs.css?v=20261112-translate-reader">
 </head>
 <body>
 <header class="blog-header">
@@ -98,7 +98,9 @@
     translateUrl.searchParams.set("tl",targetLanguage);
     translateUrl.searchParams.set("u",articleUrl);
     translateUrl.searchParams.set("op","translate");
-    window.open(translateUrl.toString(),"_blank","noopener,noreferrer");
+    const opened=window.open(translateUrl.toString(),"_blank");
+    if(opened) opened.opener=null;
+    else window.location.assign(translateUrl.toString());
   };
   $("postsGrid").addEventListener("click",event=>{
     const button=event.target.closest("[data-translate-slug]");
