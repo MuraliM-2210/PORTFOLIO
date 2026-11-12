@@ -7,7 +7,7 @@
 <title>Blog | Murali M</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/blogs.css?v=20261112-translate-reader">
+<link rel="stylesheet" href="assets/css/blogs.css?v=20261112-captioned-galleries">
 </head>
 <body>
 <header class="blog-header"><a class="blog-brand" href="profile.html"><span class="brand-smiley">☺</span><span>Murali M's Portfolio</span></a><nav><a href="blogs.html">All blogs</a><a href="visuals.html">Visuals</a><a href="profile.html">Portfolio</a></nav></header>
@@ -68,8 +68,8 @@ document.getElementById("readerTranslateButton").addEventListener("click",()=>{
 const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safe=html=>{
 const d=new DOMParser().parseFromString("<div>"+(html||"")+"</div>","text/html"),r=d.body.firstElementChild;
-const ok=new Set(["P","BR","STRONG","B","EM","I","U","S","H2","H3","H4","UL","OL","LI","BLOCKQUOTE","A","IMG","FIGURE","FIGCAPTION","HR","CODE","PRE"]);
-const w=n=>[...n.childNodes].forEach(c=>{if(c.nodeType!==1){if(c.nodeType!==3)c.remove();return;}if(!ok.has(c.tagName)){const f=d.createDocumentFragment();while(c.firstChild)f.appendChild(c.firstChild);c.replaceWith(f);return;}[...c.attributes].forEach(a=>{const v=a.value;if(c.tagName==="A"&&a.name==="href"&&/^(https?:|mailto:)/i.test(v)){c.target="_blank";c.rel="noopener noreferrer";}else if(c.tagName==="IMG"&&a.name==="src"&&(v.startsWith("assets/blogs/")||v.startsWith("/PORTFOLIO/assets/blogs/")||v.startsWith("https://"))||c.tagName==="IMG"&&a.name==="alt"){}else c.removeAttribute(a.name);});w(c);});
+const ok=new Set(["P","BR","STRONG","B","EM","I","U","S","H2","H3","H4","UL","OL","LI","BLOCKQUOTE","A","IMG","DIV","FIGURE","FIGCAPTION","HR","CODE","PRE"]);
+const w=n=>[...n.childNodes].forEach(c=>{if(c.nodeType!==1){if(c.nodeType!==3)c.remove();return;}if(!ok.has(c.tagName)){const f=d.createDocumentFragment();while(c.firstChild)f.appendChild(c.firstChild);c.replaceWith(f);return;}[...c.attributes].forEach(a=>{const v=a.value;if(c.tagName==="A"&&a.name==="href"&&/^(https?:|mailto:)/i.test(v)){c.target="_blank";c.rel="noopener noreferrer";}else if(c.tagName==="IMG"&&a.name==="src"&&(v.startsWith("assets/blogs/")||v.startsWith("/PORTFOLIO/assets/blogs/")||v.startsWith("https://"))||c.tagName==="IMG"&&a.name==="alt"){}else if(c.tagName==="DIV"&&a.name==="class"&&v==="blog-image-gallery"){}else c.removeAttribute(a.name);});w(c);});
 w(r);return r.innerHTML;};
 fetch("blogs.json?v="+Date.now()).then(r=>r.ok?r.json():[]).then(data=>{
 const posts=Array.isArray(data)?data:(Array.isArray(data?.posts)?data.posts:[]);
