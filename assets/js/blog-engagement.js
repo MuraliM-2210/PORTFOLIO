@@ -120,13 +120,14 @@
       return;
     }
     const renderStats = stat => {
-      if (likeCount) likeCount.textContent = number(stat?.like_count);
-      if (viewCount) viewCount.textContent = number(stat?.view_count);
-      if (commentCount) commentCount.textContent = number(stat?.comment_count) + " comments";
-      if (likeButton) {
+      if (!stat) return;
+      if (likeCount && Object.prototype.hasOwnProperty.call(stat, "like_count")) likeCount.textContent = number(stat.like_count);
+      if (viewCount && Object.prototype.hasOwnProperty.call(stat, "view_count")) viewCount.textContent = number(stat.view_count);
+      if (commentCount && Object.prototype.hasOwnProperty.call(stat, "comment_count")) commentCount.textContent = number(stat.comment_count) + " comments";
+      if (likeButton && Object.prototype.hasOwnProperty.call(stat, "viewer_liked")) {
         likeButton.disabled = false;
-        likeButton.setAttribute("aria-pressed", stat?.viewer_liked ? "true" : "false");
-        likeButton.querySelector("span").textContent = stat?.viewer_liked ? "♥" : "♡";
+        likeButton.setAttribute("aria-pressed", stat.viewer_liked ? "true" : "false");
+        likeButton.querySelector("span").textContent = stat.viewer_liked ? "♥" : "♡";
       }
     };
     async function refreshStats() {
@@ -141,7 +142,6 @@
         .order("created_at", { ascending: false })
         .limit(50);
       if (error) throw error;
-      if (commentCount) commentCount.textContent = number(data?.length) + (data?.length === 1 ? " comment" : " comments");
       commentsList.innerHTML = data?.length ? data.map(comment => {
         const date = new Date(comment.created_at);
         const formatted = Number.isNaN(date.getTime()) ? "" : date.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
