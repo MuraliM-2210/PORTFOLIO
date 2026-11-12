@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/blogs.css?v=20261112-admin-fix">
+<link rel="stylesheet" href="assets/css/blogs.css?v=20261112-direct-publish">
 </head>
 <body>
 <header class="blog-header">
@@ -51,6 +51,19 @@
         <button class="new-draft-btn" id="newDraft" type="button">＋ New draft</button>
         <div class="draft-sidebar-label">YOUR DRAFTS <span id="draftCount">0</span></div>
         <div id="draftList" class="draft-list"><p class="draft-empty">No saved drafts yet.</p></div>
+        <div class="github-publish-card" id="githubPublishCard">
+          <div class="github-publish-heading"><strong>Direct publishing</strong><span class="github-live-dot">●</span></div>
+          <p>Connect GitHub once. Publishing uploads your story and its image files directly to the website repository.</p>
+          <label for="githubToken">Fine-grained GitHub token</label>
+          <input id="githubToken" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your GitHub token">
+          <div class="github-publish-buttons">
+            <button class="connect-github-btn" id="connectGithub" type="button">Connect GitHub</button>
+            <button class="disconnect-github-btn" id="disconnectGithub" type="button" hidden>Disconnect</button>
+          </div>
+          <p class="github-connection-status" id="githubConnectionStatus" role="status">Not connected. Connect your repository to publish.</p>
+          <a class="github-token-link" href="https://github.com/settings/personal-access-tokens/new?name=Murali%20Blog%20Publisher&description=Publish%20blog%20posts%20and%20images&target_name=MuraliM-2210&contents=write" target="_blank" rel="noopener noreferrer">Create a restricted GitHub token ↗</a>
+          <small>Select only PORTFOLIO and grant Repository permissions → Contents: Read and write. The token is kept in this tab only and sent directly to GitHub.</small>
+        </div>
         <div class="publish-help"><strong>How publishing works</strong><p>Export a ZIP containing your blog index and images. Upload its files to your GitHub repository to make the post public.</p><a href="https://github.com/MuraliM-2210/PORTFOLIO/upload/main" target="_blank" rel="noopener noreferrer">Open repository upload ↗</a></div>
       </aside>
       <div class="editor-main">
@@ -92,9 +105,10 @@
         <div class="editor-actions">
           <button class="secondary-btn" id="previewPost" type="button">Preview story ↗</button>
           <button class="secondary-btn" id="downloadBackup" type="button">Download draft</button>
-          <button class="primary-btn" id="exportPackage" type="button">Export publish package <span>↓</span></button>
+          <button class="primary-btn" id="publishDirect" type="button">Publish to website <span>↗</span></button>
         </div>
-        <p class="publish-note"><strong>Publishing note:</strong> The export creates a ZIP with the updated <code>blogs.json</code> and all image assets. Upload/replace these files in GitHub to publish. Your website does not store a GitHub password or access token.</p>
+        <div class="publish-result" id="publishResult" hidden></div>
+        <p class="publish-note"><strong>Publishing:</strong> Connect GitHub once, then click <strong>Publish to website</strong>. Image files are uploaded first and the blog index is updated last, so viewers do not receive broken image links.</p>
       </div>
     </div>
   </section>
@@ -280,6 +294,186 @@
       notify("Publish package downloaded. Upload its files to GitHub.");
     }catch(err){console.error(err);setStatus("Export failed",false);notify("Could not create the ZIP. Try downloading a draft backup.");}
   };
+
+  // Direct publisher: the token is held in sessionStorage for this browser tab only.
+  const githubRepo="MuraliM-2210/PORTFOLIO";
+  const githubBranch="main";
+  const githubTokenKey="murali-portfolio-blog-publisher-token";
+  let githubToken="";
+  const setGithubStatus=(message,connected=false)=>{
+    $("githubConnectionStatus").textContent=message;
+    $("githubPublishCard").classList.toggle("is-connected",connected);
+    $("disconnectGithub").hidden=!connected;
+    $("connectGithub").textContent=connected?"Reconnect GitHub":"Connect GitHub";
+  };
+  const githubHeaders=()=>({
+    "Accept":"application/vnd.github+json",
+    "Authorization":"Bearer "+githubToken,
+    "X-GitHub-Api-Version":"2022-11-28"
+  });
+  const githubApi=async(path,options={})=>{
+    const response=await fetch("https://api.github.com/repos/"+githubRepo+"/"+path,{
+      ...options,
+      headers:{...githubHeaders(),...(options.headers||{})}
+    });
+    const raw=await response.text();
+    let data={};
+    try{data=raw?JSON.parse(raw):{};}catch(e){data={message:raw||"Unexpected GitHub response"};}
+    if(!response.ok){
+      const error=new Error(data.message||("GitHub returned HTTP "+response.status));
+      error.status=response.status;
+      throw error;
+    }
+    return data;
+  };
+  const encodeRepoPath=path=>path.split("/").map(part=>encodeURIComponent(part)).join("/");
+  const getGithubFile=async path=>{
+    try{return await githubApi("contents/"+encodeRepoPath(path)+"?ref="+encodeURIComponent(githubBranch));}
+    catch(error){if(error.status===404)return null;throw error;}
+  };
+  const putGithubFile=async(path,base64,message)=>{
+    const existing=await getGithubFile(path);
+    const payload={message,content:base64,branch:githubBranch};
+    if(existing?.sha)payload.sha=existing.sha;
+    return await githubApi("contents/"+encodeRepoPath(path),{
+      method:"PUT",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload)
+    });
+  };
+  const blobToBase64=blob=>new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(String(reader.result).split(",")[1]||"");
+    reader.onerror=()=>reject(reader.error||new Error("Could not read image data"));
+    reader.readAsDataURL(blob);
+  });
+  const textToBase64=value=>{
+    const bytes=new TextEncoder().encode(value);
+    let binary="";
+    const step=0x8000;
+    for(let i=0;i<bytes.length;i+=step){
+      binary+=String.fromCharCode(...bytes.subarray(i,Math.min(i+step,bytes.length)));
+    }
+    return btoa(binary);
+  };
+  const decodeGithubBase64=value=>{
+    const binary=atob(String(value||"").replace(/\\s/g,""));
+    const bytes=new Uint8Array(binary.length);
+    for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+    return new TextDecoder("utf-8").decode(bytes);
+  };
+  const verifyGithubToken=async token=>{
+    const response=await fetch("https://api.github.com/repos/"+githubRepo,{
+      headers:{
+        "Accept":"application/vnd.github+json",
+        "Authorization":"Bearer "+token,
+        "X-GitHub-Api-Version":"2022-11-28"
+      }
+    });
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(response.status===401?"GitHub rejected this token. Check that it is correct and has not expired.":(data.message||"Could not access the PORTFOLIO repository."));
+    if(data.permissions&&data.permissions.push===false)throw new Error("This token cannot push to the repository. Grant Contents: Read and write.");
+    const contents=await fetch("https://api.github.com/repos/"+githubRepo+"/contents/blogs.json?ref="+githubBranch,{
+      headers:{
+        "Accept":"application/vnd.github+json",
+        "Authorization":"Bearer "+token,
+        "X-GitHub-Api-Version":"2022-11-28"
+      }
+    });
+    if(!contents.ok)throw new Error("Cannot read blogs.json. Grant Contents: Read and write.");
+    return true;
+  };
+  const connectGithub=async()=>{
+    const token=$("githubToken").value.trim();
+    if(!token){notify("Paste your fine-grained GitHub token first.");$("githubToken").focus();return;}
+    $("connectGithub").disabled=true;
+    setGithubStatus("Checking repository access…");
+    try{
+      await verifyGithubToken(token);
+      githubToken=token;
+      sessionStorage.setItem(githubTokenKey,token);
+      $("githubToken").value="";
+      setGithubStatus("Connected to "+githubRepo+". Ready to publish.",true);
+      notify("GitHub connected. You can publish directly.");
+    }catch(error){
+      githubToken="";
+      sessionStorage.removeItem(githubTokenKey);
+      setGithubStatus(error.message,false);
+      notify(error.message);
+    }finally{$("connectGithub").disabled=false;}
+  };
+  const disconnectGithub=()=>{
+    githubToken="";
+    sessionStorage.removeItem(githubTokenKey);
+    $("githubToken").value="";
+    setGithubStatus("Disconnected. Your session token has been cleared.",false);
+  };
+  const publishDirect=async()=>{
+    if(!githubToken){
+      setGithubStatus("Connect GitHub before publishing.",false);
+      $("githubToken").focus();
+      $("githubPublishCard").scrollIntoView({behavior:"smooth",block:"center"});
+      notify("Connect your GitHub account first.");
+      return;
+    }
+    const draft=collectPost();
+    if(!draft.title||!plainText(draft.content)){
+      notify("Add a title and write your story before publishing.");
+      return;
+    }
+    const button=$("publishDirect");
+    button.disabled=true;
+    button.innerHTML="Publishing…";
+    $("publishResult").hidden=true;
+    try{
+      clearTimeout(saveTimer);
+      currentDraft={...currentDraft,...draft};
+      if(db)await putDraft(currentDraft);
+      setStatus("Preparing article and images…",false);
+      const built=await convertImagesAndBuildPost(draft);
+      const maxImageBytes=60*1024*1024;
+      for(let i=0;i<built.files.length;i++){
+        const file=built.files[i];
+        if(file.blob.size>maxImageBytes)throw new Error(file.path+" is larger than 60 MB. Resize this image and try again.");
+        setStatus("Uploading image "+(i+1)+" of "+built.files.length+"…",false);
+        const base64=await blobToBase64(file.blob);
+        await putGithubFile(file.path,base64,"Publish blog image: "+draft.title);
+      }
+      setStatus("Updating published article list…",false);
+      const indexFile=await getGithubFile("blogs.json");
+      let posts=[];
+      if(indexFile?.content){
+        posts=JSON.parse(decodeGithubBase64(indexFile.content));
+        if(!Array.isArray(posts))throw new Error("blogs.json is not a valid list. No article was published.");
+      }
+      const existingIndex=posts.findIndex(post=>post.slug===built.post.slug);
+      if(existingIndex>=0)posts[existingIndex]=built.post;
+      else posts.unshift(built.post);
+      posts.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+      await putGithubFile("blogs.json",textToBase64(JSON.stringify(posts,null,2)+"\\n"),"Publish blog: "+draft.title);
+      currentDraft={...currentDraft,...draft,publishedAt:new Date().toISOString()};
+      if(db)await putDraft(currentDraft);
+      await renderDraftList();
+      publishedPosts=posts;
+      renderPosts();
+      setStatus("Published successfully · "+new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}));
+      const postUrl="blog-post.html?slug="+encodeURIComponent(built.post.slug);
+      $("publishResult").innerHTML='<strong>Published to GitHub.</strong> <a href="'+postUrl+'" target="_blank" rel="noopener noreferrer">View published article ↗</a><span>GitHub Pages must finish deploying before it appears to all visitors.</span>';
+      $("publishResult").hidden=false;
+      notify("Your article and "+built.files.length+" image file(s) were committed to GitHub.");
+    }catch(error){
+      console.error("Direct blog publish failed:",error);
+      setStatus("Publishing failed",false);
+      const reason=error.status===401?"GitHub rejected the token. Reconnect with a valid token.":error.status===403?"GitHub denied write access. Check Contents: Read and write permission and token approval.":error.status===409?"The main branch changed during publishing. Refresh the admin page and retry.":error.message||"Unknown publishing error.";
+      $("publishResult").textContent="Not published: "+reason;
+      $("publishResult").hidden=false;
+      notify("Publish failed: "+reason);
+    }finally{
+      button.disabled=false;
+      button.innerHTML='Publish to website <span>↗</span>';
+    }
+  };
+
   const backupDraft = () => {
     const draft=collectPost(),data=new Blob([JSON.stringify({...draft,cover:currentDraft?.cover||""},null,2)],{type:"application/json"});
     const url=URL.createObjectURL(data),a=document.createElement("a");a.href=url;a.download="murali-draft-"+(draft.slug||"untitled")+".json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);notify("Draft backup downloaded.");
@@ -303,11 +497,30 @@
   document.querySelector(".format-toolbar").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;$("postBody").focus();if(b.dataset.command)document.execCommand(b.dataset.command,false,null);if(b.dataset.block)document.execCommand("formatBlock",false,b.dataset.block);formToDraft();});
   $("previewPost").addEventListener("click",showPreview);
   $("downloadBackup").addEventListener("click",backupDraft);
-  $("exportPackage").addEventListener("click",exportPackage);
+  $("publishDirect").addEventListener("click",publishDirect);
+  $("connectGithub").addEventListener("click",connectGithub);
+  $("disconnectGithub").addEventListener("click",disconnectGithub);
   $("previewModal").addEventListener("click",e=>{if(e.target.closest("[data-close-preview]"))$("previewModal").hidden=true;});
   $("searchPosts").addEventListener("input",renderPosts);
   $("categoryFilters").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b)return;activeCategory=b.dataset.category;document.querySelectorAll(".filter-chip").forEach(x=>x.classList.toggle("active",x===b));renderPosts();});
   const init=async()=>{
+    try{
+      const savedToken=sessionStorage.getItem(githubTokenKey)||"";
+      if(savedToken){
+        githubToken=savedToken;
+        setGithubStatus("Checking saved GitHub connection…",true);
+        try{
+          await verifyGithubToken(savedToken);
+          setGithubStatus("Connected to "+githubRepo+". Ready to publish.",true);
+        }catch(error){
+          githubToken="";
+          sessionStorage.removeItem(githubTokenKey);
+          setGithubStatus("Saved token expired or permissions changed. Reconnect GitHub.",false);
+        }
+      }else{
+        setGithubStatus("Not connected. Connect your repository to publish.",false);
+      }
+    }catch(error){setGithubStatus("Session storage unavailable. Reconnect GitHub after enabling it.",false);}
     try{await openDB();const drafts=await getAllDrafts();await renderDraftList();if(drafts.length)clearForm(drafts[0]);}
     catch(e){console.warn("IndexedDB unavailable",e);setStatus("Draft storage unavailable",false);}
     try{const response=await fetch("blogs.json?v="+Date.now());publishedPosts=response.ok?await response.json():[];if(!Array.isArray(publishedPosts))publishedPosts=[];}
