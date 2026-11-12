@@ -116,3 +116,13 @@
 .publish-result a{color:#bce6cc;font-weight:900}
 .publish-result span{color:#99ad9f;font-size:10px}
 .github-publish-card [hidden]{display:none!important}
+
+/* Published article photo galleries with captions */
+.article-body .blog-image-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0;align-items:start}
+.article-body .blog-image-gallery figure{min-width:0;margin:0;padding:0;text-align:center}
+.article-body .blog-image-gallery img{display:block;width:100%;height:auto;max-height:560px;object-fit:cover;margin:0 auto;border-radius:8px}
+.article-body .blog-image-gallery figcaption{padding:9px 5px 0;color:#9aa6b7;font-size:11px;line-height:1.6;text-align:center}
+.article-body figure.blog-single-image{max-width:100%;margin:24px auto;text-align:center}
+.article-body figure.blog-single-image img{display:block;max-width:100%;height:auto;margin:0 auto}
+.article-body figure figcaption:empty{display:none}
+@media(max-width:600px){.article-body .blog-image-gallery{grid-template-columns:1fr;gap:19px;margin:23px 0}}
