@@ -18,6 +18,17 @@ input,select,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);
 .actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 15px;border:1px solid var(--line);border-radius:7px;background:#1a2230;color:var(--text);text-decoration:none;font-size:11px;font-weight:900;cursor:pointer}.btn.primary{background:linear-gradient(100deg,#d7a85c,#eac98e);color:#19130b;border-color:transparent}.btn:hover{filter:brightness(1.1)}.btn:disabled{opacity:.5;cursor:wait}
 .side{display:grid;gap:16px}.upload{display:block;padding:15px;border:1px dashed #485469;border-radius:8px;background:#101722;color:var(--muted);font-size:12px;cursor:pointer}.upload b{display:block;color:var(--text);margin-bottom:3px}.upload input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.thumb{max-width:100%;max-height:190px;display:block;border-radius:7px;margin-top:12px;object-fit:cover}.status{margin-top:13px;padding:12px;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:11px;white-space:pre-line}.status.good{color:var(--green);border-color:rgba(142,213,174,.28)}.status.warn{color:#f3c889;border-color:rgba(243,200,137,.28)}.howto{padding:14px;border-radius:8px;background:#101722;border:1px solid var(--line);font-size:12px;color:var(--muted)}.howto strong{color:var(--text)}.howto ol{padding-left:18px;margin:8px 0}.howto li{margin:6px 0}.small{font-size:10px;color:#8794a6}.hidden{display:none!important}.toplink{color:#cfc2ff;text-decoration:none;font-size:11px;font-weight:800}
 @media(max-width:850px){.layout{grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr}}@media(max-width:560px){header{margin-top:20px}.row,.side{grid-template-columns:1fr}.editor{min-height:260px}}
+
+/* Captioned multi-photo galleries in the writing desk */
+.editor .blog-image-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:24px 0;padding:12px;border:1px dashed #39465a;border-radius:9px}
+.editor .blog-image-gallery figure{min-width:0;margin:0;padding:7px;background:#111925;border-radius:7px}
+.editor .blog-image-gallery img{display:block;width:100%;height:auto;max-height:340px;object-fit:cover;margin:0;border-radius:5px}
+.editor .blog-image-gallery figcaption,.editor figure.blog-single-image figcaption{min-height:26px;padding:8px 4px 2px;color:#aeb9c9;font-size:11px;line-height:1.5;text-align:center;outline:none}
+.editor .blog-image-gallery figcaption:empty:before,.editor figure.blog-single-image figcaption:empty:before{content:"Click to add caption…";color:#758399;font-style:italic;pointer-events:none}
+.editor figure.blog-single-image{margin:22px auto;max-width:100%;text-align:center}
+.editor figure.blog-single-image img{display:block;max-width:100%;height:auto;margin:0 auto;border-radius:7px}
+@media(max-width:560px){.editor .blog-image-gallery{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -39,11 +50,12 @@ input,select,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);
       <label>Article content</label>
       <div class="editor-shell">
         <div class="toolbar">
-          <button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-block="h2">H2</button><button type="button" data-block="h3">H3</button><button type="button" data-cmd="insertUnorderedList">• List</button><button type="button" data-cmd="insertOrderedList">1. List</button><button type="button" data-cmd="formatBlock" data-value="blockquote">Quote</button><button type="button" id="addInlineImage">＋ Image</button>
+          <button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-block="h2">H2</button><button type="button" data-block="h3">H3</button><button type="button" data-cmd="insertUnorderedList">• List</button><button type="button" data-cmd="insertOrderedList">1. List</button><button type="button" data-cmd="formatBlock" data-value="blockquote">Quote</button><button type="button" id="addInlineImage">＋ Image</button><button type="button" id="addImageGallery">＋ Photo gallery</button>
         </div>
         <div id="body" class="editor" contenteditable="true" spellcheck="true" data-placeholder="Start writing your story here…"></div>
       </div>
       <input id="inlineImageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple class="hidden">
+      <input id="galleryImageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple class="hidden">
       <div class="actions">
         <button class="btn primary" id="package">Prepare publish package ↓</button>
         <button class="btn" id="preview">Preview article</button>
@@ -74,7 +86,7 @@ input,select,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);
 (()=> {
   const $=id=>document.getElementById(id);
   const fields=["title","slug","category","date","excerpt"];
-  let coverData="",allPosts=[];
+  let coverData="",allPosts=[],savedRange=null;
   const dbName="murali-native-blog-drafts";
   const status=(message,kind="")=>{$("status").textContent=message;$("status").className="status "+kind;};
   const readDataURL=file=>new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file);});
@@ -87,15 +99,43 @@ input,select,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);
   let saveTimer;
   const autosave=()=>{clearTimeout(saveTimer);saveTimer=setTimeout(()=>dbPut(getForm()).then(()=>status("Draft autosaved in this browser.","good")).catch(()=>status("Browser draft storage is unavailable. Export your publish package before closing this tab.","warn")),500);};
   fields.forEach(id=>$(id).addEventListener("input",autosave));
-  $("body").addEventListener("input",autosave);
+  const rememberRange=()=>{
+    const selection=window.getSelection();
+    if(selection&&selection.rangeCount&&$("body").contains(selection.anchorNode))savedRange=selection.getRangeAt(0).cloneRange();
+  };
+  ["keyup","mouseup"].forEach(name=>$("body").addEventListener(name,rememberRange));
+  document.addEventListener("selectionchange",rememberRange);
+  function insertAtSavedCursor(html){
+    const editor=$("body");editor.focus();
+    const selection=window.getSelection();
+    if(savedRange){selection.removeAllRanges();selection.addRange(savedRange);}
+    document.execCommand("insertHTML",false,html);
+    rememberRange();autosave();
+  }
+  $("body").addEventListener("input",()=>{rememberRange();autosave();});
   $("cover").addEventListener("change",async e=>{const f=e.target.files?.[0];if(!f)return;coverData=await readDataURL(f);$("coverPreview").src=coverData;$("coverPreview").classList.remove("hidden");$("removeCover").classList.remove("hidden");autosave();});
   $("removeCover").addEventListener("click",()=>{coverData="";$("coverPreview").removeAttribute("src");$("coverPreview").classList.add("hidden");$("removeCover").classList.add("hidden");$("cover").value="";autosave();});
+  $("addInlineImage").addEventListener("mousedown",rememberRange);
   $("addInlineImage").addEventListener("click",()=>$("inlineImageInput").click());
   $("inlineImageInput").addEventListener("change",async e=>{
-    for(const f of [...(e.target.files||[])]){if(!f.type.startsWith("image/"))continue;const data=await readDataURL(f);$("body").focus();document.execCommand("insertHTML",false,'<p><img src="'+data+'" alt="'+f.name.replace(/[&<>"']/g,"")+'" style="max-width:100%;height:auto"></p><p><br></p>');}
+    for(const f of [...(e.target.files||[])]){if(!f.type.startsWith("image/"))continue;const data=await readDataURL(f);insertAtSavedCursor('<figure class="blog-single-image"><img src="'+data+'" alt="'+escapeHTML(f.name)+'"><figcaption></figcaption></figure><p><br></p>');}
     e.target.value="";autosave();
   });
-  document.querySelector(".toolbar").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.cmd==="formatBlock")document.execCommand("formatBlock",false,b.dataset.value);else if(b.dataset.block)document.execCommand("formatBlock",false,b.dataset.block);else if(b.dataset.cmd)document.execCommand(b.dataset.cmd,false,null);$("body").focus();autosave();});
+  $("addImageGallery").addEventListener("mousedown",rememberRange);
+  $("addImageGallery").addEventListener("click",()=>$("galleryImageInput").click());
+  $("galleryImageInput").addEventListener("change",async e=>{
+    const selected=[...(e.target.files||[])].filter(file=>file.type.startsWith("image/"));
+    if(!selected.length){e.target.value="";return;}
+    const items=[];
+    for(const file of selected){
+      const data=await readDataURL(file);
+      items.push('<figure><img src="'+data+'" alt="'+escapeHTML(file.name)+'"><figcaption></figcaption></figure>');
+    }
+    insertAtSavedCursor('<div class="blog-image-gallery">'+items.join("")+'</div><p><br></p>');
+    status(selected.length+" photos inserted. Click each caption area under a photo to type its caption.","good");
+    e.target.value="";autosave();
+  });
+  document.querySelector(".toolbar").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.id==="addInlineImage"||b.id==="addImageGallery")return;if(b.dataset.cmd==="formatBlock")document.execCommand("formatBlock",false,b.dataset.value);else if(b.dataset.block)document.execCommand("formatBlock",false,b.dataset.block);else if(b.dataset.cmd)document.execCommand(b.dataset.cmd,false,null);$("body").focus();rememberRange();autosave();});
   $("saveDraft").addEventListener("click",()=>dbPut(getForm()).then(()=>status("Draft saved in this browser.","good")).catch(()=>status("Could not save draft in this browser.","warn")));
   $("clear").addEventListener("click",()=>{if(!confirm("Clear the current editor? Your saved browser draft will also be replaced."))return;fields.forEach(id=>$(id).value="");$("body").innerHTML="";coverData="";$("cover").value="";$("coverPreview").classList.add("hidden");$("removeCover").classList.add("hidden");dbPut(getForm());status("Editor cleared.");});
   $("preview").addEventListener("click",()=>{const title=$("title").value||"Untitled story";$("previewContent").innerHTML='<p class="eyebrow">'+$("category").value+' · '+$("date").value+'</p><h1 style="font-size:clamp(30px,5vw,48px)">'+escapeHTML(title)+'</h1><p class="muted">'+escapeHTML($("excerpt").value)+'</p>'+(coverData?'<img style="max-width:100%;max-height:420px;object-fit:cover;border-radius:10px" src="'+coverData+'">':'')+'<div style="line-height:1.9;margin-top:20px">'+$("body").innerHTML+'</div>';$("previewPanel").classList.remove("hidden");$("previewPanel").scrollIntoView({behavior:"smooth"});});
@@ -127,11 +167,20 @@ input,select,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);
       const folder="assets/blogs/"+slug+"/";
       const files=[];let postCover="";
       if(coverData){const item=dataURLBytes(coverData),path=folder+"cover."+extFor(item.mime);files.push({name:path,bytes:item.bytes});postCover=path;}
-      const clone=$("body").cloneNode(true);let imageNo=0;
-      for(const img of clone.querySelectorAll("img")){
+      const clone=$("body").cloneNode(true);let imageNo=0,galleryNo=0;
+      const saveArticleImage=(img,path)=>{
         const src=img.getAttribute("src")||"";
-        if(src.startsWith("data:image/")){const item=dataURLBytes(src),path=folder+"body-"+String(++imageNo).padStart(2,"0")+"."+extFor(item.mime);files.push({name:path,bytes:item.bytes});img.setAttribute("src",path);img.removeAttribute("style");}
-        else if(!/^(https:\/\/|assets\/blogs\/)/i.test(src))throw new Error("One article image has an unsupported source. Reinsert that image using the ＋ Image button.");
+        if(src.startsWith("data:image/")){const item=dataURLBytes(src);const finalPath=path+"."+extFor(item.mime);files.push({name:finalPath,bytes:item.bytes});img.setAttribute("src",finalPath);img.removeAttribute("style");}
+        else if(!/^(https:\/\/|assets\/blogs\/)/i.test(src))throw new Error("One article image has an unsupported source. Reinsert that image using the ＋ Image or ＋ Photo gallery button.");
+      };
+      for(const gallery of clone.querySelectorAll(".blog-image-gallery")){
+        const galleryFolder=folder+"gallery-"+String(++galleryNo).padStart(2,"0")+"/";
+        let galleryImageNo=0;
+        for(const img of gallery.querySelectorAll("img"))saveArticleImage(img,galleryFolder+"image-"+String(++galleryImageNo).padStart(2,"0"));
+      }
+      for(const img of clone.querySelectorAll("img")){
+        if(img.closest(".blog-image-gallery"))continue;
+        saveArticleImage(img,folder+"image-"+String(++imageNo).padStart(2,"0"));
       }
       const textLength=$("body").innerText.trim().length;
       const readTime=Math.max(1,Math.ceil(textLength/900));
