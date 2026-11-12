@@ -92,24 +92,20 @@
     $("postCount").textContent="YOUR JOURNAL · "+publishedPosts.length+" "+(publishedPosts.length===1?"POST":"POSTS");
     $("postsGrid").innerHTML=shown.length?shown.map(p=>'<article class="post-card"><a class="post-cover" href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">'+(p.cover?'<img src="'+escapeHtml(p.cover)+'" alt="" loading="lazy">':'<span class="cover-placeholder">M<span>.</span></span>')+'<span class="cover-open">READ STORY ↗</span></a><div class="post-card-copy"><div class="post-meta"><span>'+escapeHtml(p.category||"Journal")+'</span><time>'+escapeHtml(p.date||"")+'</time></div><h3><a href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">'+escapeHtml(p.title)+'</a></h3><p>'+escapeHtml(p.excerpt||"")+'</p><div class="post-card-actions"><a class="read-link" href="blog-post.html?slug='+encodeURIComponent(p.slug)+'">Read story <span>↗</span></a><button class="post-translate" type="button" data-translate-slug="'+encodeURIComponent(p.slug)+'">Translate ↗</button></div></div></article>').join(""):'<div class="empty-posts"><span class="empty-icon">✎</span><h3>No stories published yet.</h3><p>New articles will appear here when they are published.</p></div>';
   };
-  const makeTranslatedUrl=(url,target)=>{
-    const translated=new URL(url,window.location.href);
-    if(!translated.hostname.endsWith(".translate.goog")){
-      translated.hostname=translated.hostname.replace(/[.]/g,"-")+".translate.goog";
-      translated.searchParams.set("_x_tr_sl","auto");
-      translated.searchParams.set("_x_tr_hl","en");
-      translated.searchParams.set("_x_tr_pto","wapp");
-    }
-    translated.searchParams.set("_x_tr_tl",target);
-    return translated.toString();
+  const openTranslatedPage=(articleUrl,targetLanguage)=>{
+    const translateUrl=new URL("https://translate.google.com/translate");
+    translateUrl.searchParams.set("sl","auto");
+    translateUrl.searchParams.set("tl",targetLanguage);
+    translateUrl.searchParams.set("u",articleUrl);
+    translateUrl.searchParams.set("op","translate");
+    window.open(translateUrl.toString(),"_blank","noopener,noreferrer");
   };
   $("postsGrid").addEventListener("click",event=>{
     const button=event.target.closest("[data-translate-slug]");
     if(!button)return;
     const language=$("blogTargetLanguage").value||"en";
     const article=new URL("blog-post.html?slug="+encodeURIComponent(button.dataset.translateSlug),window.location.href);
-    const translatedUrl=makeTranslatedUrl(article.toString(),language);
-    window.open(translatedUrl,"_blank","noopener,noreferrer");
+    openTranslatedPage(article.toString(),language);
   });
   $("searchPosts").addEventListener("input",render);
   $("categoryFilters").addEventListener("click",e=>{
