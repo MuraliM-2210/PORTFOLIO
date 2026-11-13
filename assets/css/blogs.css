@@ -179,3 +179,34 @@
 
 /* Browser-local engagement disclaimer */
 .local-engagement-note{margin:7px 0 0;color:#778499;font-size:10px;line-height:1.6;letter-spacing:.01em}
+
+
+/* Visible totals panel for the current browser's saved blog activity */
+.blog-engagement-summary{
+  margin:25px 0 28px;padding:21px 22px 16px;
+  border:1px solid rgba(156,128,255,.2);border-radius:12px;
+  background:linear-gradient(135deg,rgba(33,42,65,.88),rgba(15,22,35,.96));
+  box-shadow:0 16px 38px rgba(0,0,0,.18);
+}
+.engagement-summary-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:16px}
+.engagement-summary-heading .eyebrow{margin:0 0 5px;font-size:9px;letter-spacing:.16em}
+.engagement-summary-heading h3{margin:0;color:#f3f5fa;font-size:clamp(19px,2vw,24px);letter-spacing:-.04em}
+.engagement-summary-heading h3 span{color:var(--gold)}
+.local-only-pill{flex:none;padding:6px 9px;border:1px solid rgba(237,187,103,.28);border-radius:30px;background:rgba(237,187,103,.07);color:#e6c889;font-size:8px;font-weight:900;letter-spacing:.1em}
+.engagement-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.engagement-summary-card{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;align-items:center;column-gap:10px;padding:13px 15px;border:1px solid rgba(255,255,255,.09);border-radius:8px;background:rgba(4,9,17,.45)}
+.engagement-summary-card .summary-icon{grid-row:1/3;display:grid;place-items:center;width:37px;height:37px;border-radius:9px;font-size:21px;font-weight:900}
+.summary-heart{background:rgba(255,119,149,.12);color:#ff93ab}
+.summary-eye{background:rgba(95,167,255,.12);color:#83b9ff}
+.summary-comments{background:rgba(174,143,255,.14);color:#bca3ff}
+.engagement-summary-card strong{color:#fff;font-size:clamp(21px,3vw,29px);line-height:1.1;font-variant-numeric:tabular-nums}
+.engagement-summary-card>span:last-child{margin-top:3px;color:#9ba8ba;font-size:9px;font-weight:800;letter-spacing:.02em}
+.engagement-summary-note{margin:12px 0 0;color:#7f8ca0;font-size:9px;line-height:1.6}
+@media(max-width:650px){
+ .blog-engagement-summary{margin:19px 0 23px;padding:16px}
+ .engagement-summary-grid{grid-template-columns:1fr;gap:8px}
+ .engagement-summary-card{grid-template-columns:36px 1fr auto;grid-template-rows:auto;column-gap:10px;padding:10px 12px}
+ .engagement-summary-card .summary-icon{grid-row:1;width:34px;height:34px}
+ .engagement-summary-card strong{grid-column:3;grid-row:1}
+ .engagement-summary-card>span:last-child{grid-column:2;grid-row:1;margin:0}
+}

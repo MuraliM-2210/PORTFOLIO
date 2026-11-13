@@ -76,6 +76,22 @@
     }
   }
 
+  function getSummary(posts) {
+    const store = readStore();
+    const allowed = new Set((posts || []).map(post => post?.slug).filter(validSlug));
+    let likes = 0;
+    let views = 0;
+    let comments = 0;
+    allowed.forEach(slug => {
+      const post = store.posts[slug];
+      if (!post || typeof post !== "object") return;
+      if (post.liked === true) likes += 1;
+      if (post.viewed === true) views += 1;
+      if (Array.isArray(post.comments)) comments += post.comments.length;
+    });
+    return { likes, views, comments };
+  }
+
   async function loadCardStats(posts) {
     const store = readStore();
     document.querySelectorAll("[data-engagement-slug]").forEach(card => {
@@ -203,5 +219,5 @@
     if (formStatus) formStatus.textContent = "Comments are saved only in this browser and are not sent to a server.";
   }
 
-  window.MuraliBlogEngagement = Object.freeze({ loadCardStats, mountReader, sharePost });
+  window.MuraliBlogEngagement = Object.freeze({ loadCardStats, mountReader, sharePost, getSummary });
 })();
